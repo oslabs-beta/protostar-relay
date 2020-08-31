@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Protostar-Relay",
+  "description": "Debugging tools for Relay.",
+  "version": "1.0.0",
+
+  "icons": {
+    "16": "icons/enabled16.png",
+    "32": "icons/enabled32.png",
+    "48": "icons/enabled48.png",
+    "128": "icons/enabled128.png"
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/disabled16.png",
+      "32": "icons/disabled32.png",
+      "48": "icons/disabled48.png",
+      "128": "icons/disabled128.png"
+    },
+
+    "default_popup": "popups/disabled.html"
+  },
+
+  "devtools_page": "./devtool.html",
+
+  "background": {
+    "scripts": ["build/background.js"],
+    "persistent": false
+  }
+}
