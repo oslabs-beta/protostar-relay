@@ -1,3 +1,4 @@
 /** @format */
-
-chrome.devtools.panels.create("Proto*", null, "./dist/index.html", null);
+chrome.devtools.panels.create('Proto*', 'assets/search.png', './dist/index.html', (panel) => {
+  console.log('hi!');
+});
