@@ -8,8 +8,6 @@ import App from "./App.jsx";
 import styles from "./styles.scss";
 
 render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+    <App />,
   document.getElementById("root")
 );

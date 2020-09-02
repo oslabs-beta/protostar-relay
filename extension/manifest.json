@@ -4,13 +4,12 @@
   "description": "Debugging tools for Relay.",
   "version": "1.0.0",
   "permissions": [
-    "tabs"
+    "activeTab",
+    "<all_urls>"
   ],
   "background": {
-    "scripts": [
-      "./dist/bundle.js"
-    ],
-    "persistent": true
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "icons": {
     "16": "assets/cut-scissor.png",
@@ -21,7 +20,7 @@
   "browser_action": {
     "default_popup": "popups/disabled.html"
   },
+  "web_accessible_resources": ["hook.js"],
   "devtools_page": "devtool.html",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
-
 }
