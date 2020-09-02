@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 
 const Navbar = () => {
     return (
-        <div>
-            <button>Store</button>
-            <button>Network</button>
+        <div className="is-grouped">
+            {/* These a html links could also be buttons */}
+            <a class="button mx-1">Store</a>
+            <a class="button mx-1">Network</a>
+            <p>testing</p>
         </div>
     )
 }

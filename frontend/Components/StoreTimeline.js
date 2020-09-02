@@ -7,22 +7,19 @@ function StoreTimeline() {
 
     return (
         <div>
-            <div>
-                <code>
-                    <p>insert code here...</p>
-                    {/* <pre>
-                        type Query {
-                            getMessage(id: ID!): Message
-                        }
-                    </pre> */}
-                </code>
+            <div className="display-box">
+                {/* {
+                    type Query {
+                        getMessage(id: ID!): Message
+                    }
+                } */}
+                code goes here....
             </div>
             <div>
                 <p>addUser 1</p>
                 <p>addUser 2</p>
             </div>
             <div>
-                {/* Need to research what slider to use */}
                 <Slider
                     axis="x"
                     xstep={0.1}
@@ -31,6 +28,7 @@ function StoreTimeline() {
                     x={state.x}
                     onChange={({ x }) => setState({ x: parseFloat(x.toFixed(2)) })}
                 />
+                <h2 className="slider-textcolor">Store Timeline</h2>
             </div>
         </div>
     )

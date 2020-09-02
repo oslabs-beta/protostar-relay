@@ -9,11 +9,12 @@ const children = components.map(el => <p>{el}</p>);
 
 const ComponentsRenderer = () => {
     return (
-        <div>
+        <div><div className="rightContainer">
             <h1>Parent</h1>
             <div className="childrenComponents">
                 {children}
-                </div>
+            </div>
+        </div>
         </div>
     )
 }
