@@ -22,7 +22,7 @@ const App = () => {
     
   }, []);
 
-
+// installHook()
 
   // // parsing information for history tab
   // useEffect(() => {
@@ -47,6 +47,7 @@ const App = () => {
     <div id="main-container">
       <p>Loaded</p>
       <p>RUSH is amazing!</p>
+      <p>RUSH is seriously amazing!</p>
     </div>
   );
 };
