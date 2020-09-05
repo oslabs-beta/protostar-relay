@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
 import prettyPrintJson from 'pretty-print-json';
+import beautify from 'json-beautify';
 
 
 // onst insertCode = prettyPrintJson.toHtml(displayData);
 
-function StoreID(props) {
-
-    // for (let key in props.data[1]) {
-    //     console.log(`key: ${key}, value: ${props.data[1][key]}`);
-    // }
+function Record(props) {
+    console.log(props.value);
     return (
-        <div>
-
-        </div>
-    )
+      <div>
+        <p>Start Object================</p>
+        {typeof props.value === "object" ? (
+          beautify(props.value, null, 2, 80)
+        ) : (
+          <ol>
+            <li>key: {props.uniquekey} : {props.value}</li>
+          </ol>
+        )}
+      </div>
+    );
 }
 
-export default StoreID;
+export default Record;
 
 
     //function here to loop through the props.data at index 1

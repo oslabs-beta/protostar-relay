@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "bulma": "^0.9.0",
+    "json-beautify": "^1.1.1",
     "pretty-print-json": "^0.2.2",
     "react": "^16.13.1",
     "react-bulma-components": "^3.4.0",

@@ -10,9 +10,9 @@ import StoreDisplayer from './StoreDisplayer'
 const App = () => {
   return (
     <div className="columns">
-      <div className="column">
+      {/* <div className="column">
         <ComponentsRender />
-      </ div>
+      </ div> */}
       <div className="column border">
         <StoreDisplayer />
       </div>
