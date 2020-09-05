@@ -8,18 +8,13 @@
     "packages/*"
   ],
   "scripts": {
-    "build:demo": "cd ./shells/dev && cross-env NODE_ENV=development cross-env TARGET=remote webpack --config webpack.config.js",
-    "build:extension": "cross-env NODE_ENV=production yarn run build:extension:chrome && yarn run build:extension:firefox",
     "build:extension:dev": "cross-env NODE_ENV=development yarn run build:extension:chrome && yarn run build:extension:firefox",
-    "build:extension:chrome": "cross-env NODE_ENV=production node ./shells/browser/chrome/build",
-    "build:extension:chrome:crx": "cross-env NODE_ENV=production node ./shells/browser/chrome/build --crx",
-    "build:extension:chrome:dev": "cross-env NODE_ENV=development node ./shells/browser/chrome/build",
-    "build:standalone": "cd packages/relay-devtools-core && yarn run build",
+    "build": "cross-env NODE_ENV=production node ./shells/browser/chrome/build",
     "start": "cd ./shells/dev && cross-env NODE_ENV=development cross-env TARGET=local webpack-dev-server --open",
     "start:core:backend": "cd ./packages/relay-devtools-core && yarn start:backend",
     "start:prod": "cd ./shells/dev && cross-env NODE_ENV=production cross-env TARGET=local webpack-dev-server --open",
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "test:chrome": "node ./shells/browser/chrome/test",
+    "test": "node ./shells/browser/chrome/test",
     "relay": "relay-compiler",
     "watch:chrome:frontend": "cross-env NODE_ENV=development node ./shells/browser/chrome/watch"
   },

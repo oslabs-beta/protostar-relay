@@ -1,5 +1,7 @@
 /** @format */
 import React, { useEffect, useState } from "react";
+
+
 const port = chrome.runtime.connect({ name: "test" });
 
 const App = () => {
