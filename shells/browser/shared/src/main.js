@@ -7,11 +7,11 @@
 
 /* global chrome */
 
-import { unstable_createRoot as createRoot, flushSync } from 'react-dom';
-import Bridge from 'src/bridge';
-import Store from 'src/devtools/store';
-import inject from './inject';
-import { createViewElementSource } from './utils';
+import { unstable_createRoot as createRoot, flushSync } from "react-dom";
+import Bridge from "src/bridge";
+import Store from "src/devtools/store";
+import inject from "./inject";
+import { createViewElementSource } from "./utils";
 
 let panelCreated = false;
 
@@ -21,7 +21,7 @@ function createPanelIfReactLoaded() {
   }
 
   chrome.devtools.inspectedWindow.eval(
-    'window.__RELAY_DEVTOOLS_HOOK__ && window.__RELAY_DEVTOOLS_HOOK__.environments.size > 0',
+    "window.__RELAY_DEVTOOLS_HOOK__ && window.__RELAY_DEVTOOLS_HOOK__.environments.size > 0",
     (pageHasRelay, error) => {
       if (!pageHasRelay || panelCreated) {
         return;
@@ -43,14 +43,14 @@ function createPanelIfReactLoaded() {
 
       function initBridgeAndStore() {
         const port = chrome.runtime.connect({
-          name: '' + tabId,
+          name: "" + tabId,
         });
         // Looks like `port.onDisconnect` does not trigger on in-tab navigation like new URL or back/forward navigation,
         // so it makes no sense to handle it here.
 
         bridge = new Bridge({
           listen(fn) {
-            const listener = message => fn(message);
+            const listener = (message) => fn(message);
             // Store the reference so that we unsubscribe from the same object.
             const portOnMessage = port.onMessage;
             portOnMessage.addListener(listener);
@@ -67,7 +67,7 @@ function createPanelIfReactLoaded() {
 
         // Initialize the backend only once the Store has been initialized.
         // Otherwise the Store may miss important initial tree op codes.
-        inject(chrome.runtime.getURL('build/backend.js'));
+        inject(chrome.runtime.getURL("build/backend.js"));
 
         const viewElementSourceFunction = createViewElementSource(
           bridge,
@@ -81,9 +81,9 @@ function createPanelIfReactLoaded() {
 
       cloneStyleTags = () => {
         const linkTags = [];
-        for (const linkTag of document.getElementsByTagName('link')) {
-          if (linkTag.rel === 'stylesheet') {
-            const newLinkTag = document.createElement('link');
+        for (const linkTag of document.getElementsByTagName("link")) {
+          if (linkTag.rel === "stylesheet") {
+            const newLinkTag = document.createElement("link");
             for (const attribute of linkTag.attributes) {
               newLinkTag.setAttribute(attribute.nodeName, attribute.nodeValue);
             }
@@ -99,28 +99,33 @@ function createPanelIfReactLoaded() {
         if (container._hasInitialHTMLBeenCleared) {
           return;
         }
-        container.innerHTML = '';
+        container.innerHTML = "";
         container._hasInitialHTMLBeenCleared = true;
       }
 
-      chrome.devtools.panels.create('Relay', '', 'panel.html', panel => {
-        panel.onShown.addListener(listenPanel => {
-          if (currentPanel === listenPanel) {
-            return;
-          }
-          currentPanel = listenPanel;
+      chrome.devtools.panels.create(
+        "Proto*",
+        "",
+        "index.html",
+        (panel) => {
+          panel.onShown.addListener((listenPanel) => {
+            if (currentPanel === listenPanel) {
+              return;
+            }
+            currentPanel = listenPanel;
 
-          if (listenPanel.container != null) {
-            listenPanel.injectStyles(cloneStyleTags);
-            ensureInitialHTMLIsCleared(listenPanel.container);
-            root = createRoot(listenPanel.container);
-            render();
-          }
-        });
-        panel.onHidden.addListener(() => {
-          // TODO: Stop highlighting and stuff.
-        });
-      });
+            if (listenPanel.container != null) {
+              listenPanel.injectStyles(cloneStyleTags);
+              ensureInitialHTMLIsCleared(listenPanel.container);
+              root = createRoot(listenPanel.container);
+              render();
+            }
+          });
+          panel.onHidden.addListener(() => {
+            // TODO: Stop highlighting and stuff.
+          });
+        }
+      );
 
       chrome.devtools.network.onNavigated.removeListener(checkPageForReact);
 

@@ -8,11 +8,7 @@
 
   "minimum_chrome_version": "78",
 
-
-
   "browser_action": {
-
-
     "default_popup": "popups/disabled.html"
   },
 
