@@ -14,7 +14,7 @@ function Record(props) {
           beautify(props.value, null, 2, 80)
         ) : (
           <ol>
-            <li>key: {props.uniquekey} : {props.value}</li>
+            <li>key: {props.uniquekey} : value: {props.value}</li>
           </ol>
         )}
       </div>
