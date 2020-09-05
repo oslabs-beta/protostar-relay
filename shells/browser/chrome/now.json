@@ -1,0 +1,5 @@
+{
+  "name": "relay-devtools-experimental-chrome",
+  "alias": ["relay-devtools-experimental-chrome"],
+  "files": ["index.html", "RelayDevTools.zip"]
+}

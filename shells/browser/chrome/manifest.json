@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "Relay Developer Tools",
+  "description": "Adds Relay debugging tools to the Chrome Developer Tools.",
+  "version": "0.9.8",
+  "version_name": "0.9.8",
+  "update_url": "https://our.intern.facebook.com/intern/browser_extensions/chrome/update.xml",
+
+  "minimum_chrome_version": "78",
+
+  "browser_action": {
+    "default_popup": "popups/disabled.html"
+  },
+
+  "devtools_page": "main.html",
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "main.html",
+    "build/backend.js",
+    "build/renderer.js"
+  ],
+
+  "background": {
+    "scripts": ["build/background.js"],
+    "persistent": false
+  },
+
+  "permissions": ["file:///*", "http://*/*", "https://*/*", "webNavigation"],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["build/injectGlobalHook.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
