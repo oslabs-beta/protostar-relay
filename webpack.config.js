@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     background: './extension/backend/background.js',
     bundle: './extension/frontend/view/index.js',
-    hook: './extension/backend/hook.ts',
+    hook: './extension/backend/hook.js',
   },
   output: {
     path: path.resolve(__dirname, 'build/extension'),
