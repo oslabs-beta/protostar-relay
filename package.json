@@ -97,6 +97,9 @@
     "yargs": "^14.2.0"
   },
   "dependencies": {
+    "bulma": "^0.9.0",
+    "json-beautify": "^1.1.1",
+    "react-input-slider": "^6.0.0",
     "sass": "^1.26.10"
   }
 }

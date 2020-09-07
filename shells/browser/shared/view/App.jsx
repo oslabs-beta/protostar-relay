@@ -1,6 +1,8 @@
 /** @format */
 import React, { useEffect, useState } from "react";
-
+import RightContainer from './RightContainer';
+import StoreDisplayer from './StoreDisplayer';
+import ComponentsRenderer from './ComponentsRenderer';
 
 const port = chrome.runtime.connect({ name: "test" });
 
@@ -47,12 +49,21 @@ const App = () => {
   // const test = logger('hi marc')
 
   return (
+
     <div id="main-container">
-      <p>Loaded</p>
-      <p>RUSH is amazing!</p>
-      <p>RUSH is seriously amazing!</p>
+      <div className="columns">
+        {/* <div className="column">
+          <ComponentsRender />
+        </ div> */}
+        <div className="column border">
+          <StoreDisplayer />
+        </div>
+        <div className="column">
+          <RightContainer />
+        </div>
+      </div>
     </div>
-  );
+  );  
 };
 
 export default App;
