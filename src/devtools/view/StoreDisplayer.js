@@ -28,15 +28,16 @@ const organizeData = (object) => {
     return output;
 }
 
-const StoreDisplayer = () => {
+const StoreDisplayer = (props) => {
     // const displayData = organizeData(dataObj);
+    console.log("storedisplayer props", props)
 
     return (
         <div className="middleContainer">
             <h1>Store Display Here</h1>
             <div className="display-box">
                 <ul>
-                    <Record {...dataObj}/>
+                    <Record {...props.store}/>
                 </ul>
             </div>
         </div>
