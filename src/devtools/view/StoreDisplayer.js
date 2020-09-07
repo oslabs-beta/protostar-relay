@@ -29,13 +29,14 @@ const organizeData = (object) => {
 }
 
 const StoreDisplayer = () => {
-    const displayData = organizeData(dataObj);
+    // const displayData = organizeData(dataObj);
+
     return (
         <div className="middleContainer">
             <h1>Store Display Here</h1>
             <div className="display-box">
                 <ul>
-                    {displayData}
+                    <Record {...dataObj}/>
                 </ul>
             </div>
         </div>
