@@ -114,15 +114,12 @@ export default function DevTools({
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 
-  console.log("store.getAllRecords", store.getAllRecords());
-
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-        <p>Loaded context</p>
         {/* {allRecords} */}
-        <div className="column border">
-          <StoreDisplayer store={store.getAllRecords()[0]} />
+        <div className="columns">
+            <StoreDisplayer store={store.getAllRecords()[0]} />
         </div>
       </StoreContext.Provider>
     </BridgeContext.Provider>

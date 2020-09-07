@@ -45,9 +45,7 @@ const App = () => {
   // }, [tree]);
   // const test = logger('hi marc')
 
-  return (
-    <p>App.jsx is loaded</p>
-  );  
+  return (<div> </div>);  
 };
 
 export default App;

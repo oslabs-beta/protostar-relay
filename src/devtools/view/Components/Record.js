@@ -5,8 +5,6 @@ import beautify from 'json-beautify';
 // onst insertCode = prettyPrintJson.toHtml(displayData);
 //          beautify(props.value, null, 2, 80)
 function Record(props) {
-    console.log("props:", props);
-
     const records = Object.keys(props).map(key => {
       return typeof props[key] === "object" ? (
         <div className="nestedObject">
@@ -20,7 +18,6 @@ function Record(props) {
         </div>
       );
     })
-    console.log("records:",records)
 
     return (
       <div className="records">

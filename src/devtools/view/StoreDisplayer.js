@@ -1,47 +1,109 @@
-import React, { useState } from 'react';
-import dataObj from './sampleData'
+import React, { useState, useEffect } from 'react';
+// import dataObj from './sampleData'
 import Record from './Components/Record';
 
 
-const organizeData = (object) => {
-    let i = 0;
-    let j = 100000000;
+const organizeData = (store, typename, id) => {
+    //if no filter parameters are passed then no filtering necessary
 
-    const output = [];
-    for (let key in object) {
-        if (typeof object[key] === 'object') {
-            let nestedObj = object[key];
-            for (let element in nestedObj) {
-                output.push( 
-                    <Record key={i} uniquekey={element} value={nestedObj[element]}/> 
-                );
-                i++;
-            }
-        }
-        output.push(
-            <div>
-                <Record key={j} uniquekey={key} value={object[key]} /> 
-            </div>
-        );
-        j++;
-    }
-    return output;
+    //take store and convert top level to a sorted array
+    const newRecordsList = Object.keys(store)
+      .map((key) => store[key])
+      .sort((a, b) => a.__typename - b.__typename);
+
+    return newRecordsList;
 }
 
 const StoreDisplayer = (props) => {
+    const [store, setStore] = useState(props.store);
+    const [recordsList, setRecordsList] = useState([]);
+
+    useEffect(() => {
+    //   setRecordsList(organizeData(store));
+    }, [store]);
+
     // const displayData = organizeData(dataObj);
-    console.log("storedisplayer props", props)
+    //https://www.artsy.net/artwork/yayoi-kusama-pumpkin-2248
+    console.log("storedisplayer props", props);
+    console.log("recordsList", recordsList);
+
 
     return (
-        <div className="middleContainer">
-            <h1>Store Display Here</h1>
-            <div className="display-box">
+        <React.Fragment>
+        <div className="column">
+            <aside className="menu">
+            <p className="menu-label">
+                General
+            </p>
+            <ul className="menu-list">
+                <li>
+                <a>Dashboard</a>
+                </li>
+                <li>
+                <a>Customers</a>
+                </li>
+            </ul>
+            <p className="menu-label">
+                Administration
+            </p>
+            <ul className="menu-list">
+                <li>
+                <a>Team Settings</a>
+                </li>
+                <li>
+                <a className="is-active">
+                    Manage Your Team
+                </a>
                 <ul>
-                    <Record {...props.store}/>
+                    <li>
+                    <a>Members</a>
+                    </li>
+                    <li>
+                    <a>Plugins</a>
+                    </li>
+                    <li>
+                    <a>Add a member</a>
+                    </li>
                 </ul>
+                </li>
+                <li>
+                <a>Invitations</a>
+                </li>
+                <li>
+                <a>
+                    Cloud Storage Environment
+                    Settings
+                </a>
+                </li>
+                <li>
+                <a>Authentication</a>
+                </li>
+            </ul>
+            <p className="menu-label">
+                Transactions
+            </p>
+            <ul className="menu-list">
+                <li>
+                <a>Payments</a>
+                </li>
+                <li>
+                <a>Transfers</a>
+                </li>
+                <li>
+                <a>Balance</a>
+                </li>
+            </ul>
+            </aside>
+        </div>
+        <div className="column">
+            <div className="display-box">
+            <ul>
+                <Record {...props.store} />
+            </ul>
             </div>
         </div>
-    )
+        </React.Fragment>
+    );
 }
 
 export default StoreDisplayer;
