@@ -23,8 +23,6 @@ const App = () => {
         setTree(message);
       }
     });
-
-    
   }, []);
 
 // installHook()
@@ -56,7 +54,7 @@ const App = () => {
           <ComponentsRender />
         </ div> */}
         <div className="column border">
-          <StoreDisplayer />
+          {/* <StoreDisplayer /> */}
         </div>
         <div className="column">
           <RightContainer />

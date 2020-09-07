@@ -68,27 +68,22 @@ const tabs = [networkTab, storeInspectorTab];
 
 export default function DevTools({
   bridge,
-  // defaultTab = 'store-inspector',
   rootContainer,
   networkPortalContainer,
   storeInspectorPortalContainer,
-  // overrideTab,
   settingsPortalContainer,
-  // showTabBar = false,
   store,
   viewElementSourceFunction,
   viewElementSourceRequiresFileLocation = false,
 }: Props) {
-  // const [tab, setTab] = useState(defaultTab);
-  // if (overrideTab != null && overrideTab !== tab) {
-  //   setTab(overrideTab);
-  // }
 
   const [environmentIDs, setEnvironmentIDs] = useState(
     store.getEnvironmentIDs()
   );
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
-  const allRecords = JSON.stringify(store.getAllRecords());
+  // const [timeline, setTimeline] = useState([]); //if we start with an array... do we want to just update each new idx with an obj
+  // const timelineArray = [];
+  
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
 
@@ -99,22 +94,23 @@ export default function DevTools({
     setEnvironmentIDs(ids);
   }, [store, currentEnvID]);
 
+
   useEffect(() => {
     store.addListener('environmentInitialized', setEnv);
     return () => {
       store.removeListener('environmentInitialized', setEnv);
     };
   }, [store, setEnv]);
-
+  
+  // const testRecords = store.getRecords(store.currentEnvId); 
   const environmentChange = useCallback(e => {
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
-
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
         <p>Loaded context</p>
-        {allRecords}
+
       </StoreContext.Provider>
     </BridgeContext.Provider>
   );
