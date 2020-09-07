@@ -16,6 +16,10 @@ import React, { useState, useCallback, useEffect } from 'react';
 import type { FrontendBridge } from 'src/bridge';
 import Store from './store';
 import { BridgeContext, StoreContext } from './context';
+
+import RightContainer from './view/RightContainer';
+import StoreDisplayer from './view/StoreDisplayer';
+// import ComponentsRenderer from './ComponentsRenderer';
 // import Network from './Network/Network';
 // import StoreInspector from './StoreInspector/StoreInspector';
 // import TabBar from './TabBar';
@@ -113,10 +117,20 @@ export default function DevTools({
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-        <p>Loaded context</p>
-        {allRecords}
+        {/* {allRecords} */}
+        <div className="columns">
+            <StoreDisplayer store={store.getAllRecords()[0]} />
+        </div>
       </StoreContext.Provider>
     </BridgeContext.Provider>
   );
 }
 
+        // <div id="main-container">
+        //   <div className="columns">
+
+        //     <div className="column">
+        //       <RightContainer />
+        //     </div>
+        //   </div>
+        // </div>;
