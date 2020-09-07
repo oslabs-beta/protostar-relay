@@ -1,8 +1,5 @@
 /** @format */
 import React, { useEffect, useState } from "react";
-import RightContainer from './RightContainer';
-import StoreDisplayer from './StoreDisplayer';
-import ComponentsRenderer from './ComponentsRenderer';
 
 const port = chrome.runtime.connect({ name: "test" });
 
@@ -23,6 +20,8 @@ const App = () => {
         setTree(message);
       }
     });
+
+    
   }, []);
 
 // installHook()
@@ -46,22 +45,7 @@ const App = () => {
   // }, [tree]);
   // const test = logger('hi marc')
 
-  return (
-
-    <div id="main-container">
-      <div className="columns">
-        {/* <div className="column">
-          <ComponentsRender />
-        </ div> */}
-        <div className="column border">
-          {/* <StoreDisplayer /> */}
-        </div>
-        <div className="column">
-          <RightContainer />
-        </div>
-      </div>
-    </div>
-  );  
-};
+  return (<div> </div>);  
+}
 
 export default App;

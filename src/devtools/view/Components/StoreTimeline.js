@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Slider from 'react-input-slider';
-import store from '../../../../../src/devtools/DevTools';
 
 
-const StoreTimeline = () => {
+const StoreTimeline = ({store}) => {
   const [state, setState] = useState({ x: 0.3 });
   const [timeline, setTimeline] = useState([]);
   const [timelineLabel, setTimelineLabel] = useState('');
@@ -12,19 +11,12 @@ const StoreTimeline = () => {
     e.preventDefault();
     const timelineInsert = {};
     const timeStamp = Date.now();
-    const newStore = store.getAllRecords();
-    timelineInsert[label] = timelineLabel;
-    timelineInsert[date] = timeStamp;
-    timelineInsert[thestore] = newStore;
+    const newStore = store;
+    timelineInsert.label = timelineLabel;
+    timelineInsert.date = timeStamp;
+    timelineInsert.store = newStore;
     setTimeline([...timeline, timelineInsert]);
   }
-
-  // let loopedArr = timeline.map(changes => {
-  //   return (<div>{JSON.stringify(changes)}</div>)
-  // }); 
-
-   //[{label: name, snapshot: our info here, date: date}] array[0].label.
-
 
     return (
         <div>
@@ -37,7 +29,7 @@ const StoreTimeline = () => {
                 } */}
                 code goes here....
                 <input type="text" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} ></input>
-                <a className="button mx-1" onClick={handleClick}>Timeline snapshot</a>
+                <a className="button mx-1" onClick={(e) => handleClick(e)}>Timeline snapshot</a>
               <div>{timeline.length}</div>
               <div>{timelineLabel}</div>
             </div>

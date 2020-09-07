@@ -16,6 +16,10 @@ import React, { useState, useCallback, useEffect } from 'react';
 import type { FrontendBridge } from 'src/bridge';
 import Store from './store';
 import { BridgeContext, StoreContext } from './context';
+
+import RightContainer from './view/RightContainer';
+import StoreDisplayer from './view/StoreDisplayer';
+// import ComponentsRenderer from './ComponentsRenderer';
 // import Network from './Network/Network';
 // import StoreInspector from './StoreInspector/StoreInspector';
 // import TabBar from './TabBar';
@@ -68,22 +72,27 @@ const tabs = [networkTab, storeInspectorTab];
 
 export default function DevTools({
   bridge,
+  // defaultTab = 'store-inspector',
   rootContainer,
   networkPortalContainer,
   storeInspectorPortalContainer,
+  // overrideTab,
   settingsPortalContainer,
+  // showTabBar = false,
   store,
   viewElementSourceFunction,
   viewElementSourceRequiresFileLocation = false,
 }: Props) {
+  // const [tab, setTab] = useState(defaultTab);
+  // if (overrideTab != null && overrideTab !== tab) {
+  //   setTab(overrideTab);
+  // }
 
   const [environmentIDs, setEnvironmentIDs] = useState(
     store.getEnvironmentIDs()
   );
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
-  // const [timeline, setTimeline] = useState([]); //if we start with an array... do we want to just update each new idx with an obj
-  // const timelineArray = [];
-  
+  const allRecords = JSON.stringify(store.getAllRecords());
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
 
@@ -94,25 +103,25 @@ export default function DevTools({
     setEnvironmentIDs(ids);
   }, [store, currentEnvID]);
 
-
   useEffect(() => {
     store.addListener('environmentInitialized', setEnv);
     return () => {
       store.removeListener('environmentInitialized', setEnv);
     };
   }, [store, setEnv]);
-  
-  // const testRecords = store.getRecords(store.currentEnvId); 
+
   const environmentChange = useCallback(e => {
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
+
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-        <p>Loaded context</p>
-
+        {/* {allRecords} */}
+        <div className="columns">
+            <StoreDisplayer store={store.getAllRecords()[0]} />
+        </div>
       </StoreContext.Provider>
     </BridgeContext.Provider>
   );
 }
-
