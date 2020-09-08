@@ -3,30 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Record from './Components/Record';
 import StoreTimeline from './Components/StoreTimeline'
 
-
-const organizeData = (store, typename, id) => {
-    //if no filter parameters are passed then no filtering necessary
-
-    //take store and convert top level to a sorted array
-    const newRecordsList = Object.keys(store)
-        .map((key) => store[key])
-        .sort((a, b)=>{ 
-            if (a.__typename.toLowerCase() > b.__typename.toLowerCase()) return -1;
-            else return 1;
-        });
-    return newRecordsList;
-}
-
-
 const StoreDisplayer = (props) => {
     const [store, setStore] = useState(props.store);
     const [recordsList, setRecordsList] = useState(store);
     const [selection, setSelection] = useState("");
-
-    // useEffect(() => {
-    //   setRecordsList(organizeData(store));
-    // }, [store]);
-    console.log("document", document)
 
     //handle type menu click events
      function handleTypeClick(e, type) {
@@ -54,19 +34,13 @@ const StoreDisplayer = (props) => {
         );
     }
 
+    //shows you the entire store
     function handleReset(e) {
         //remove selection
         setSelection("");
         //reset back to original store
         setRecordsList(store);
     }
-
-    // const displayData = organizeData(dataObj);
-    //https://www.artsy.net/artwork/yayoi-kusama-pumpkin-2248
-    console.log("storedisplayer props", props);
-    console.log("recordsList", recordsList);
-    console.log("recordsList keys", Object.keys(recordsList));
-    console.log("selection", selection)
 
     //create menu list of all types
     const menuList = {}
@@ -75,11 +49,10 @@ const StoreDisplayer = (props) => {
         menuList[record.__typename] ? menuList[record.__typename].push(record.__id) : menuList[record.__typename] = [record.__id];
     }
 
-    console.log("menuList", menuList);
-
-    //loop through each type and generate new link
+    //loop through each type and generate menu item
     const typeList = [];
     for (let type in menuList) {
+        //creates an array of elements for all ids belonging to a given type
         const idList = menuList[type].map(id => {
             return (
                 <li>
@@ -87,10 +60,10 @@ const StoreDisplayer = (props) => {
                 </li>
             )
         })
-
+        //pushes the new type element with child ids to the typeList component array
         typeList.push(
           <li>
-                <a id={"type-" + type} className={(selection === ("type-"+type)) && "is-active"} onClick={(e) => {handleTypeClick(e, type)}}>
+            <a id={"type-" + type} className={(selection === ("type-"+type)) && "is-active"} onClick={(e) => {handleTypeClick(e, type)}}>
               {type}
             </a>
             <ul>{idList}</ul>
@@ -100,26 +73,25 @@ const StoreDisplayer = (props) => {
 
     return (
         <React.Fragment>
-        <div className="column">
-            <button className="button is-small is-link" onClick={(e)=>{handleReset(e)}}>Reset</button>
-            <aside className="menu">
-            <p className="menu-label">
-                Record List
-            </p>
-            <ul className="menu-list" id="menu">
-                {typeList}
-            </ul>
-            </aside>
-        </div>
-        <div className="column">
-            <div className="display-box">
-                <Record {...recordsList} />
+            <div className="column">
+                <button className="button is-small is-link" onClick={(e)=>{handleReset(e)}}>Reset</button>
+                <aside className="menu">
+                <p className="menu-label">
+                    Record List
+                </p>
+                <ul className="menu-list" id="menu">
+                    {typeList}
+                </ul>
+                </aside>
             </div>
-        </div>
-        <div className="column">
-          <StoreTimeline store={props.store} />
-        </div>
-        
+            <div className="column">
+                <div className="display-box">
+                    <Record {...recordsList} />
+                </div>
+            </div>
+            <div className="column">
+                <StoreTimeline store={props.store} />
+            </div>
         </React.Fragment>
     );
 }
