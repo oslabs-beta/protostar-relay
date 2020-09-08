@@ -125,12 +125,3 @@ export default function DevTools({
     </BridgeContext.Provider>
   );
 }
-
-        // <div id="main-container">
-        //   <div className="columns">
-
-        //     <div className="column">
-        //       <RightContainer />
-        //     </div>
-        //   </div>
-        // </div>;

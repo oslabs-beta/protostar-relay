@@ -46,6 +46,6 @@ const App = () => {
   // const test = logger('hi marc')
 
   return (<div> </div>);  
-};
+}
 
 export default App;

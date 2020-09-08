@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import dataObj from './sampleData'
 import Record from './Components/Record';
+import StoreTimeline from './Components/StoreTimeline'
 
 
 const organizeData = (store, typename, id) => {
@@ -102,6 +103,10 @@ const StoreDisplayer = (props) => {
             </ul>
             </div>
         </div>
+        <div className="column">
+          <StoreTimeline store={props.store} />
+        </div>
+        
         </React.Fragment>
     );
 }
