@@ -5,10 +5,9 @@ import StoreTimeline from './Components/StoreTimeline';
 
 function RightContainer() {
     return (
-        <div>
-            <Navbar />
+        <>
             <StoreTimeline />
-        </div>
+        </>
     )
 }
 
