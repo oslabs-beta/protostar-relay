@@ -1,25 +1,11 @@
 /** @format */
 
+//***********************************
+//**********   GENERAL   ************
+//***********************************
+
 body {
   color: black;
-}
-
-// .border {
-//   border: 1px solid black;
-// }
-
-.display-box {
-  border-radius: 5px;
-  width: 100%;
-  font-size: 10px;
-}
-
-.records:first-child {
-  margin-left: 0em;
-}
-
-.menu-list {
-  width: 100%;
 }
 
 .button {
@@ -28,6 +14,10 @@ body {
   border-width: 3px;
 }
 
+//***********************************
+//**********    STORE    ************
+//***********************************
+
 .column {
   height: 100vh;
   border: 1px grey solid;
@@ -35,13 +25,25 @@ body {
   overflow-y: scroll;
 }
 
+
+
+//TIMELINE
+
 .slider-textcolor {
   color: #5E72E4;
   font-weight: bold;
 }
+//MENU
+.menu {
+  font-size: 10px;
+}
 
-.objectProperty {
+.type {
+  background: lightblue;
+}
 
+.menu-list {
+  width: 100%;
 }
 
 .records {
@@ -49,8 +51,15 @@ body {
   margin-left: 2em;
 }
 
-.type {
-  background: lightblue;
+.records:first-child {
+  margin-left: 0em;
+}
+
+//STORE DISPLAY
+.display-box {
+  border-radius: 5px;
+  width: 100%;
+  font-size: 10px;
 }
 
 .key {
@@ -58,10 +67,16 @@ body {
   word-wrap: break-word;
 }
 
-.menu {
-  font-size: 10px;
-}
-
 .value {
   word-wrap: break-word;
 }
+
+//***********************************
+//**********   NETWORK   ************
+//***********************************
+
+
+
+
+
+
