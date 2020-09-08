@@ -20,25 +20,53 @@ const organizeData = (store, typename, id) => {
 
 const StoreDisplayer = (props) => {
     const [store, setStore] = useState(props.store);
-    const [recordsList, setRecordsList] = useState([]);
+    const [recordsList, setRecordsList] = useState(store);
+    const [selection, setSelection] = useState("");
 
-    useEffect(() => {
-      setRecordsList(organizeData(store));
-    }, [store]);
+    // useEffect(() => {
+    //   setRecordsList(organizeData(store));
+    // }, [store]);
+    console.log("document", document)
 
     //handle type menu click events
      function handleTypeClick(e, type) {
-        console.log(type);
+         //set new selection
+        setSelection("type-"+type);
+        //update record list to current selection
+         setRecordsList(
+             Object.keys(store).reduce((newRL, key) => {
+               if (store[key].__typename === type)
+                   newRL[key] = store[key];
+             return newRL;
+           }, {})
+         );
     }
     //handle type menu click events
     function handleIdClick(e, id) {
-        console.log(id);
+        //set new selection
+        setSelection("id-"+id);
+        //update record list to current selection
+        setRecordsList(
+          Object.keys(store).reduce((newRL, key) => {
+              if (store[key].__id === id) newRL[key] = store[key];
+            return newRL;
+          }, {})
+        );
+    }
+
+    function handleReset(e) {
+        //remove selection
+        setSelection("");
+        //reset back to original store
+        setRecordsList(store);
     }
 
     // const displayData = organizeData(dataObj);
     //https://www.artsy.net/artwork/yayoi-kusama-pumpkin-2248
     console.log("storedisplayer props", props);
     console.log("recordsList", recordsList);
+    console.log("recordsList keys", Object.keys(recordsList));
+    console.log("selection", selection)
 
     //create menu list of all types
     const menuList = {}
@@ -55,14 +83,14 @@ const StoreDisplayer = (props) => {
         const idList = menuList[type].map(id => {
             return (
                 <li>
-                    <a onClick={(e) => {handleIdClick(e, id)}}>{id}</a>
+                    <a id={"id-" + id} className={(selection === ("id-"+id)) && "is-active"} onClick={(e) => {handleIdClick(e, id)}}>{id}</a>
                 </li>
             )
         })
 
         typeList.push(
           <li>
-            <a onClick={(e) => {handleTypeClick(e, type)}}>
+                <a id={"type-" + type} className={(selection === ("type-"+type)) && "is-active"} onClick={(e) => {handleTypeClick(e, type)}}>
               {type}
             </a>
             <ul>{idList}</ul>
@@ -73,11 +101,12 @@ const StoreDisplayer = (props) => {
     return (
         <React.Fragment>
         <div className="column">
+            <button className="button is-link" onClick={(e)=>{handleReset(e)}}>Reset</button>
             <aside className="menu">
             <p className="menu-label">
                 Record List
             </p>
-            <ul className="menu-list">
+            <ul className="menu-list" id="menu">
                 {typeList}
             </ul>
             </aside>
@@ -85,7 +114,7 @@ const StoreDisplayer = (props) => {
         <div className="column">
             <div className="display-box">
             <ul>
-                <Record {...props.store} />
+                <Record {...recordsList} />
             </ul>
             </div>
         </div>
