@@ -4,13 +4,21 @@ body {
   color: black;
 }
 
-.border {
-  border: 1px solid black;
-}
+// .border {
+//   border: 1px solid black;
+// }
 
 .display-box {
-  background-color: gray;
   border-radius: 5px;
+  width: 100%;
+  font-size: 10px;
+}
+
+.records:first-child {
+  margin-left: 0em;
+}
+
+.menu-list {
   width: 100%;
 }
 
@@ -22,6 +30,9 @@ body {
 
 .column {
   height: 100vh;
+  border: 1px grey solid;
+  width: 33%;
+  overflow-y: scroll;
 }
 
 .slider-textcolor {
@@ -29,18 +40,28 @@ body {
   font-weight: bold;
 }
 
-.nestedObject {
-  border: 1px solid black;
+.objectProperty {
+
 }
 
 .records {
-  margin-left: 1em;
-}
-
-.column {
-  width: 100px;
+  width: 100%;
+  margin-left: 2em;
 }
 
 .type {
   background: lightblue;
+}
+
+.key {
+  font-weight: bold;
+  word-wrap: break-word;
+}
+
+.menu {
+  font-size: 10px;
+}
+
+.value {
+  word-wrap: break-word;
 }

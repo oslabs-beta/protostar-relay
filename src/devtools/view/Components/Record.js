@@ -8,13 +8,13 @@ function Record(props) {
     const records = Object.keys(props).map(key => {
       return typeof props[key] === "object" ? (
         <div className="nestedObject">
-          <span>{key}: </span>
+          <span className="key">{key}: </span>
           <Record {...props[key]} />
         </div>
       ) : (
         <div className="objectProperty">
-          <span>{key}: </span>
-          <span>{props[key]}</span>
+          <span className="key">{key}: </span>
+          <span className="value">{props[key]}</span>
         </div>
       );
     })

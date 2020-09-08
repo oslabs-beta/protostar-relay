@@ -101,7 +101,7 @@ const StoreDisplayer = (props) => {
     return (
         <React.Fragment>
         <div className="column">
-            <button className="button is-link" onClick={(e)=>{handleReset(e)}}>Reset</button>
+            <button className="button is-small is-link" onClick={(e)=>{handleReset(e)}}>Reset</button>
             <aside className="menu">
             <p className="menu-label">
                 Record List
@@ -113,9 +113,7 @@ const StoreDisplayer = (props) => {
         </div>
         <div className="column">
             <div className="display-box">
-            <ul>
                 <Record {...recordsList} />
-            </ul>
             </div>
         </div>
         <div className="column">
