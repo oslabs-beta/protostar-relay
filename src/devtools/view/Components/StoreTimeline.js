@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import InputRange from 'react-input-range';
+import { BridgeContext, StoreContext } from '../../context';
 
 
 
-const StoreTimeline = ({store}) => {
+const StoreTimeline = (props) => {
   const [sendStore, setSendStore] = useState(store);
   const [snapshot, setSnapshot] = useState(0);
-  const [timeline, setTimeline] = useState([]);
+  const [, forceUpdate] = useState({});
+  const [timeline, setTimeline] = useState([{
+    label: "current",
+    date: Date.now(),
+    storage: store,
+  }]);
   const [timelineLabel, setTimelineLabel] = useState('');
+  const store = useContext(StoreContext);
+  const bridge = useContext(BridgeContext);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -19,18 +27,51 @@ const StoreTimeline = ({store}) => {
     timelineInsert.storage = newStore;
     setTimeline([...timeline, timelineInsert]);
   }
+  // let timelineStatusDisplay;
+  
+  // const timelineStatus = (str) => {
+  //   console.log('inside line 29');
+  //     if (str === 'default') {
+  //       console.log('if on line 31')
+  //       return (<div>...loading store</div>);
+  //   }  console.log('inside line 33');
+  //   return (<div>
+  //     <div>...loading snapshot, 
+  //     {/* {timeline[snapshot].date, timeline[snapshot - 1].label},  */}
+  //      {/* {timeline[snapshot].storage} */}
+  //    </div> 
+     
+  //   </div>);
+  // }
+  useEffect(() => {
+    const refreshEvents = () => {
+      console.log('updated store!')
+      forceUpdate({});
+    };
+    store.addListener('storeDataReceived', refreshEvents);
+    store.addListener('allEventsReceived', refreshEvents);
+    return () => {
+      store.removeListener('storeDataReceived', refreshEvents);
+      store.removeListener('allEventsReceived', refreshEvents);
+    };
+  }, [store]);
 
   useEffect(() => {
-    console.log(timeline.length)
-    if (snapshot === 0) {
-      console.log('...loading store')
-      setSendStore(store);
-    } else {
-      console.log('...loading snapshot')
-      console.log(timeline[snapshot - 1].date, timeline[snapshot - 1].label)
-      setSendStore(timeline[snapshot - 1].storage);
+      console.log('timeline length', timeline.length)
+      console.log('snapshot number', snapshot)
+      if (snapshot === 0) {
+        console.log('loading current...');
+        // timelineStatusDisplay = Object.entries(timelineStatus('default'));
+        console.log(JSON.stringify(store))
+        setSendStore(store);
+      } else {
+        console.log(timeline[snapshot].date, timeline[snapshot].label);
+        console.log(JSON.stringify(timeline[snapshot]));
+    //  timelineStatusDisplay = Object.entries(timelineStatus('secondary'));
+        setSendStore(timeline[snapshot].storage);
     }
-  }, [snapshot]);
+    // console.log(timelineStatusDisplay, 'ln 53 timelinestatusdisplay')
+    }, [snapshot]);
 
   return (
     <div>
@@ -43,15 +84,27 @@ const StoreTimeline = ({store}) => {
       <div className="snapshots">
         <h2 className="slider-textcolor">Store Timeline</h2>
         <InputRange
-          maxValue={timeline.length}
+          maxValue={timeline.length - 1}
           minValue={0}
           value={snapshot}
           onChange={value => setSnapshot(value)} />
           <div className="snapshot-nav">
             <a onClick={() => setSnapshot(snapshot + 1)}>forward</a>
-            <a onClick={() => setSendStore(store)}>current</a>
+            <a onClick={() => setSnapshot(0)}>current</a>
             <a onClick={() => setSnapshot(snapshot - 1)}>backward</a>
           </div>
+        <div className="snapshot-info">
+               {/* {timelineStatusDisplay} */}
+        {/* {
+          if(snapshot === 0){
+           return <p>...is loading</p>
+          } else{
+            return <p>{JSON.stringify(timeline[snapshot])} </p>
+          }
+        }
+      
+           */}
+        </div>
       </div>
     </div>
   )

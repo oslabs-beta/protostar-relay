@@ -92,7 +92,9 @@ export default function DevTools({
     store.getEnvironmentIDs()
   );
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
+
   const allRecords = JSON.stringify(store.getAllRecords());
+  
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
 
@@ -117,9 +119,8 @@ export default function DevTools({
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-        {/* {allRecords} */}
         <div className="columns">
-            <StoreDisplayer store={store.getAllRecords()[0]} />
+            <StoreDisplayer currentEnvId={currentEnvID} portalContainer={storeInspectorPortalContainer} store={store.getAllRecords()[0]} />
         </div>
       </StoreContext.Provider>
     </BridgeContext.Provider>
