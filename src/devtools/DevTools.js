@@ -19,6 +19,7 @@ import { BridgeContext, StoreContext } from './context';
 
 import RightContainer from './view/RightContainer';
 import StoreDisplayer from './view/StoreDisplayer';
+import NetworkDisplayer from './view/NetworkDisplayer';
 // import ComponentsRenderer from './ComponentsRenderer';
 // import Network from './Network/Network';
 // import StoreInspector from './StoreInspector/StoreInspector';
@@ -93,6 +94,7 @@ export default function DevTools({
   );
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
 
+  const [selector, setSelector] = useState("Store");
   const allRecords = JSON.stringify(store.getAllRecords());
   
   const setEnv = useCallback(() => {
@@ -112,6 +114,11 @@ export default function DevTools({
     };
   }, [store, setEnv]);
 
+  function handleTabClick (e, tab) {
+    console.log(tab);
+    setSelector(tab);
+  }
+
   const environmentChange = useCallback(e => {
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
@@ -120,7 +127,35 @@ export default function DevTools({
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
         <div className="columns">
-            <StoreDisplayer currentEnvId={currentEnvID} portalContainer={storeInspectorPortalContainer} store={store.getAllRecords()[0]} />
+        <div className="tabs is-toggle">
+          <ul>
+            <li className={selector === "Store" && "is-active"}>
+              <a onClick={(e) => handleTabClick(e, "Store")}>
+                <span className="icon is-small">
+                  <i className="fas fa-database"></i>
+                </span>
+                <span>Store</span>
+              </a>
+            </li>
+            <li className={selector === "Network" && "is-active"}>
+              <a
+                onClick={(e) => {
+                  handleTabClick(e, "Network");
+                }}
+              >
+                <span className="icon is-small">
+                  <i className="fas fa-network-wired"></i>
+                </span>
+                <span>Network</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className={selector === "Store" ? "columns" : "is-hidden"}>
+        <StoreDisplayer currentEnvId={currentEnvID} portalContainer={storeInspectorPortalContainer} store={store.getAllRecords()[0]} />
+        </div>
+        <div className={selector === "Network" ? "columns" : "is-hidden"}>
+          <NetworkDisplayer />
         </div>
       </StoreContext.Provider>
     </BridgeContext.Provider>
