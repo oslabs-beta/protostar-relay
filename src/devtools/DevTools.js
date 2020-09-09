@@ -126,7 +126,6 @@ export default function DevTools({
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-        <div className="columns">
         <div className="tabs is-toggle">
           <ul>
             <li className={selector === "Store" && "is-active"}>

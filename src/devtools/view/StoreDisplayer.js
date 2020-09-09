@@ -90,11 +90,8 @@ const StoreDisplayer = (props) => {
                 </div>
             </div>
             <div className="column">
-                <StoreTimeline store={props.store} />
+              <StoreTimeline currentEnvId={props.currentEnvID}/>
             </div>
-        <div className="column">
-          <StoreTimeline currentEnvId={props.currentEnvID}/>
-        </div>
         </React.Fragment>
     );
 }

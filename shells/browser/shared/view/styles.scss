@@ -30,31 +30,47 @@ body {
 //TIMELINE
 
 .slider-textcolor {
-  color: #5e72e4;
+  color: #5E72E4;
   font-weight: bold;
-  display: block;
-  margin: 20px 0;
 }
 //MENU
 .menu {
   font-size: 10px;
 }
 
-.snapshot-nav {
-  margin-top: 25px;
-  a {
-    margin-right: 5px;
-  }
+.type {
+  background: lightblue;
 }
 
-
-.nestedObject {
-  border: 1px solid black;
+.menu-list {
+  width: 100%;
 }
 
 .records {
-  margin-left: 1em;
+  width: 100%;
+  margin-left: 2em;
 }
+
+.records:first-child {
+  margin-left: 0em;
+}
+
+//STORE DISPLAY
+.display-box {
+  border-radius: 5px;
+  width: 100%;
+  font-size: 10px;
+}
+
+.key {
+  font-weight: bold;
+  word-wrap: break-word;
+}
+
+.value {
+  word-wrap: break-word;
+}
+
 
 .snapshots {
   padding: 0 10px;
