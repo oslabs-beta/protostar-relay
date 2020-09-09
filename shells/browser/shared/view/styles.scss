@@ -1,17 +1,11 @@
 /** @format */
 
+//***********************************
+//**********   GENERAL   ************
+//***********************************
+
 body {
   color: black;
-}
-
-.border {
-  border: 1px solid black;
-}
-
-.display-box {
-  background-color: gray;
-  border-radius: 5px;
-  width: 100%;
 }
 
 .button {
@@ -20,19 +14,69 @@ body {
   border-width: 3px;
 }
 
+//***********************************
+//**********    STORE    ************
+//***********************************
+
 .column {
   height: 100vh;
+  border: 1px grey solid;
+  width: 33%;
+  overflow-y: scroll;
 }
+
+
+
+//TIMELINE
 
 .slider-textcolor {
   color: #5E72E4;
   font-weight: bold;
 }
+//MENU
+.menu {
+  font-size: 10px;
+}
 
-.nestedObject {
-  border: 1px solid black;
+.type {
+  background: lightblue;
+}
+
+.menu-list {
+  width: 100%;
 }
 
 .records {
-  margin-left: 1em;
+  width: 100%;
+  margin-left: 2em;
 }
+
+.records:first-child {
+  margin-left: 0em;
+}
+
+//STORE DISPLAY
+.display-box {
+  border-radius: 5px;
+  width: 100%;
+  font-size: 10px;
+}
+
+.key {
+  font-weight: bold;
+  word-wrap: break-word;
+}
+
+.value {
+  word-wrap: break-word;
+}
+
+//***********************************
+//**********   NETWORK   ************
+//***********************************
+
+
+
+
+
+

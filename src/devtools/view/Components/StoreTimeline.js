@@ -37,17 +37,7 @@ const StoreTimeline = ({store}) => {
                 <p>addUser 1</p>
                 <p>addUser 2</p>
             </div>
-            <div>
-                <Slider
-                    axis="x"
-                    xstep={0.1}
-                    xmin={0}
-                    xmax={1}
-                    x={state.x}
-                    onChange={({ x }) => setState({ x: parseFloat(x.toFixed(2)) })}
-                />
-                <h2 className="slider-textcolor">Store Timeline</h2>
-            </div>
+            <h2 className="slider-textcolor">Store Timeline</h2>
         </div>
     )
 }
