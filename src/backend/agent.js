@@ -43,6 +43,7 @@ export default class Agent extends EventEmitter<{|
   };
 
   refreshStore = (id: EnvironmentID) => {
+    console.log('hi from refreshStore in agent')
     const wrapper = this._environmentWrappers[id];
     wrapper.sendStoreRecords();
   };
@@ -59,10 +60,12 @@ export default class Agent extends EventEmitter<{|
   };
 
   onStoreData = (data: mixed) => {
+    console.log('onstoredata line 62 agent js')
     this._bridge.send('storeRecords', [data]);
   };
 
   onEnvironmentEvent = (data: mixed) => {
+    console.log('hello from onEnvEvent in agent')
     this._bridge.send('events', [data]);
   };
 }

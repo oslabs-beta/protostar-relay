@@ -23,29 +23,7 @@ const App = () => {
 
     
   }, []);
-
-// installHook()
-
-  // // parsing information for history tab
-  // useEffect(() => {
-  //   let lastHistory;
-  //   let stringTree = tree ? JSON.stringify(tree[1].atomVal) : null;
-  //   if (history.length) {
-  //     lastHistory = JSON.stringify(history[history.length - 1].tree[1].atomVal);
-  //   }
-  //   if (lastHistory == stringTree) return;
-  //   if (history.length === 10) {
-  //     const historyCopy = [...history];
-  //     historyCopy.shift();
-  //     setHistory([...historyCopy, { count, tree }]);
-  //   } else {
-  //     setHistory([...history, { count, tree }]);
-  //   }
-  //   setCount(count + 1);
-  // }, [tree]);
-  // const test = logger('hi marc')
-
   return (<div> </div>);  
-}
+};
 
 export default App;
