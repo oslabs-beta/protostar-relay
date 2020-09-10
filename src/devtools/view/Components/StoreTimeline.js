@@ -22,38 +22,21 @@ const StoreTimeline = (props) => {
     e.preventDefault();
     const timelineInsert = {};
     const timeStamp = Date.now();
-    // const newStore = liveStore;
     timelineInsert.label = timelineLabel;
     timelineInsert.date = timeStamp;
     timelineInsert.storage = liveStore;
     setTimeline([...timeline, timelineInsert]);
   }
-  // let timelineStatusDisplay;
-  
-  // const timelineStatus = (str) => {
-  //   console.log('inside line 29');
-  //     if (str === 'default') {
-  //       console.log('if on line 31')
-  //       return (<div>...loading store</div>);
-  //   }  console.log('inside line 33');
-  //   return (<div>
-  //     <div>...loading snapshot, 
-  //     {/* {timeline[snapshot].date, timeline[snapshot - 1].label},  */}
-  //      {/* {timeline[snapshot].storage} */}
-  //    </div> 
-     
-  //   </div>);
-  // }
+
   useEffect(() => {
-    console.log(props, 'props in storetimeline')
     const refreshStore = () => {
       const allRecords = store.getRecords(props.currentEnvID);
       setLiveStore(allRecords);
-      forceUpdate({});
+      // forceUpdate({});
     };
-    store.addListener('mutated', refreshStore);
+    store.addListener('mutationComplete', refreshStore);
     return () => {
-      store.removeListener('mutated', refreshStore);
+      store.removeListener('mutationComplete', refreshStore);
     };
   }, [store, liveStore]);
 
@@ -75,10 +58,12 @@ const StoreTimeline = (props) => {
   return (
     <div>
       <div className="display-box">
-            <input type="text" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} ></input>
-            <a className="button mx-1" onClick={(e) => handleClick(e)}>Timeline snapshot</a>
-          <div>{timeline.length}</div>
-          <div>{timelineLabel}</div>
+            <div className="snapshot-wrapper is-flex">
+              <input type="text" className="input is-small snapshot-btn" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} placeholder="take a store snapshot"></input>
+              <button className="button is-small is-link" onClick={(e) => handleClick(e)}>Snapshot</button>
+            </div>
+            {/* <a className="button mx-1" onClick={(e) => handleClick(e)}>Timeline snapshot</a> */}
+          {/* <div>{timelineLabel}</div> */}
       </div>
       <div className="snapshots">
         <h2 className="slider-textcolor">Store Timeline</h2>
@@ -88,9 +73,9 @@ const StoreTimeline = (props) => {
           value={snapshot}
           onChange={value => setSnapshot(value)} />
           <div className="snapshot-nav">
-            <a onClick={() => setSnapshot(snapshot + 1)}>forward</a>
-            <a onClick={() => setSnapshot(0)}>current</a>
-            <a onClick={() => setSnapshot(snapshot - 1)}>backward</a>
+          <button class="button is-small" onClick={() => {if (snapshot !== 0) setSnapshot(snapshot - 1)}}>Backward</button>
+          <button class="button is-small" onClick={() => setSnapshot(0)}>Current</button>
+          <button class="button is-small" onClick={() => {if (snapshot !== timeline.length - 1) setSnapshot(snapshot + 1)}}>Forward</button>
           </div>
         <div className="snapshot-info">
                {/* {timelineStatusDisplay} */}

@@ -73,7 +73,7 @@ export default class Store extends EventEmitter<{|
     bridge.addListener('shutdown', this.onBridgeShutdown);
     bridge.addListener('environmentInitialized', this.onBridgeEnvironmentInit);
     bridge.addListener('storeRecords', this.onBridgeStoreSnapshot);
-    bridge.addListener('mutated', this.setEnvironmentEvents);
+    bridge.addListener('mutationComplete', this.setEnvironmentEvents);
   }
 
   getAllEventsArray(): $ReadOnlyArray<LogEvent> {
@@ -278,6 +278,10 @@ export default class Store extends EventEmitter<{|
       this._environmentEventsMap.set(id, [data]);
     }
     this.emit('mutated');
+    if (data.name === 'execute.complete') {
+      console.log('wow mutation is complete!!!')
+      this.emit('mutationComplete')
+    }
   };
 
   appendInformationToRequest = (id: number, data: LogEvent) => {
