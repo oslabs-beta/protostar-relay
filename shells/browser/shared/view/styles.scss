@@ -9,16 +9,15 @@
 //**********   GENERAL   ************
 //***********************************
 
-body {
-  color: black;
-}
 
 .button {
   border-radius: 5px;
   border-color: gray;
   border-width: 3px;
 }
-
+.snapshot-nav button {
+  margin-right: 12px;
+}
 //***********************************
 //**********    STORE    ************
 //***********************************
@@ -35,6 +34,9 @@ body {
 .slider-textcolor {
   color: #5E72E4;
   font-weight: bold;
+}
+#container {
+  padding: 10px;
 }
 
 //***** MENU *****
@@ -57,6 +59,7 @@ body {
 
 .records:first-child {
   margin-left: 0em;
+  border-bottom: 1px grey solid;
 }
 
 //***** STORE DISPLAY *****
@@ -75,17 +78,19 @@ body {
   word-wrap: break-word;
 }
 
-
 .snapshots {
   padding: 0 10px;
 }
 .snapshot-nav {
   margin-top: 30px;
 }
+.input-range {
+  margin: 35px 0px;
+}
 .input-range__slider {
   appearance: none;
-  background: #3f51b5;
-  border: 1px solid #3f51b5;
+  background: #00d1b2;
+  border: 1px solid #0bc3a8;
   border-radius: 100%;
   cursor: pointer;
   display: block;

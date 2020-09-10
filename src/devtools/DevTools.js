@@ -17,9 +17,9 @@ import type { FrontendBridge } from 'src/bridge';
 import Store from './store';
 import { BridgeContext, StoreContext } from './context';
 
-import RightContainer from './view/RightContainer';
 import StoreDisplayer from './view/StoreDisplayer';
 import NetworkDisplayer from './view/NetworkDisplayer';
+import StoreTimeline from './view/StoreTimeline';
 // import ComponentsRenderer from './ComponentsRenderer';
 // import Network from './Network/Network';
 // import StoreInspector from './StoreInspector/StoreInspector';
@@ -151,7 +151,8 @@ export default function DevTools({
           </ul>
         </div>
         <div className={selector === "Store" ? "columns" : "is-hidden"}>
-        <StoreDisplayer currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer} store={store.getAllRecords()[0]} />
+          <StoreTimeline currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer}/>
+        {/* <StoreDisplayer currentEnvID={currentEnvID}  store={store.getAllRecords()[0]} /> */}
         </div>
         <div className={selector === "Network" ? "columns" : "is-hidden"}>
           <NetworkDisplayer />
