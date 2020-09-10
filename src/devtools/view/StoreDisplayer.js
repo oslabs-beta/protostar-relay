@@ -1,45 +1,67 @@
 import React, { useState, useEffect } from 'react';
-// import dataObj from './sampleData'
 import Record from './Components/Record';
-import StoreTimeline from './Components/StoreTimeline'
 
-const StoreDisplayer = (props) => {
-    const [store, setStore] = useState(props.store);
-    const [recordsList, setRecordsList] = useState(store);
+const StoreDisplayer = ({store}) => {
+    const [recordsList, setRecordsList] = useState({});
     const [selection, setSelection] = useState("");
 
-    //handle type menu click events
-     function handleTypeClick(e, type) {
-         //set new selection
-        setSelection("type-"+type);
-        //update record list to current selection
-         setRecordsList(
-             Object.keys(store).reduce((newRL, key) => {
-               if (store[key].__typename === type)
-                   newRL[key] = store[key];
-             return newRL;
-           }, {})
-         );
+  //update record list to current selection
+  function updateRecords (selection) {
+    console.log("selection", selection)
+    if (selection === "") {
+      setRecordsList(store);
+    //id selected - filter out everything except selected id
+    } else if (selection[0] === "i") {
+      const id = selection.slice(3)
+      setRecordsList(
+        Object.keys(store).reduce((newRL, key) => {
+          if (store[key].__id === id) newRL[key] = store[key];
+          return newRL;
+        }, {})
+      );
+      //type selected - filter out everything except selected type
+    } else {
+      const type = selection.slice(5);
+      setRecordsList(
+        Object.keys(store).reduce((newRL, key) => {
+          if (store[key].__typename === type) newRL[key] = store[key];
+          return newRL;
+        }, {})
+      );
     }
-    //handle type menu click events
-    function handleIdClick(e, id) {
-        //set new selection
-        setSelection("id-"+id);
-        //update record list to current selection
-        setRecordsList(
-          Object.keys(store).reduce((newRL, key) => {
-              if (store[key].__id === id) newRL[key] = store[key];
-            return newRL;
-          }, {})
-        );
+  }
+
+  useEffect(() => {
+    //initialize store
+    updateRecords("");
+  }, [store]);
+
+    //handle menu click events
+     function handleMenuClick(e, selection) {
+      //set new selection
+      setSelection(selection);
+      //update display with current selection
+      updateRecords(selection);
     }
+    // //handle type menu click events
+    // function handleIdClick(e, id) {
+    //     //set new selection
+    //     setSelection("id-"+id);
+    //     //update record list to current selection
+    //     setRecordsList(
+    //       Object.keys(store).reduce((newRL, key) => {
+    //           if (store[key].__id === id) newRL[key] = store[key];
+    //         return newRL;
+    //       }, {})
+    //     );
+    // }
 
     //shows you the entire store
     function handleReset(e) {
         //remove selection
         setSelection("");
         //reset back to original store
-        setRecordsList(store);
+        updateRecords("");
     }
 
     //create menu list of all types
@@ -56,21 +78,20 @@ const StoreDisplayer = (props) => {
         const idList = menuList[type].map(id => {
             return (
                 <li>
-                    <a id={"id-" + id} className={(selection === ("id-"+id)) && "is-active"} onClick={(e) => {handleIdClick(e, id)}}>{id}</a>
+                    <a id={"id-" + id} className={(selection === ("id-"+id)) && "is-active"} onClick={(e) => {handleMenuClick(e, ("id-" + id))}}>{id}</a>
                 </li>
             )
         })
         //pushes the new type element with child ids to the typeList component array
         typeList.push(
           <li>
-            <a id={"type-" + type} className={(selection === ("type-"+type)) && "is-active"} onClick={(e) => {handleTypeClick(e, type)}}>
+            <a id={"type-" + type} className={(selection === ("type-"+type)) && "is-active"} onClick={(e) => {handleMenuClick(e, ("type-" + type))}}>
               {type}
             </a>
             <ul>{idList}</ul>
           </li>
         );
     }
-    console.log('envid', props.currentEnvID)
     return (
         <React.Fragment>
             <div className="column">
@@ -88,10 +109,7 @@ const StoreDisplayer = (props) => {
                 <div className="display-box">
                     <Record {...recordsList} />
                 </div>
-            </div>
-            <div className="column">
-              <StoreTimeline currentEnvID={props.currentEnvID}/>
-            </div>
+          </div>
         </React.Fragment>
     );
 }
