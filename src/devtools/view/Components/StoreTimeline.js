@@ -7,7 +7,6 @@ import { BridgeContext, StoreContext } from '../../context';
 const StoreTimeline = (props) => {
   const [sendStore, setSendStore] = useState(store);
   const [snapshot, setSnapshot] = useState(0);
-  const [, forceUpdate] = useState({});
   const [timelineLabel, setTimelineLabel] = useState('');
   const store = useContext(StoreContext);
   const bridge = useContext(BridgeContext);
@@ -73,9 +72,9 @@ const StoreTimeline = (props) => {
           value={snapshot}
           onChange={value => setSnapshot(value)} />
           <div className="snapshot-nav">
-          <button class="button is-small" onClick={() => {if (snapshot !== 0) setSnapshot(snapshot - 1)}}>Backward</button>
-          <button class="button is-small" onClick={() => setSnapshot(0)}>Current</button>
-          <button class="button is-small" onClick={() => {if (snapshot !== timeline.length - 1) setSnapshot(snapshot + 1)}}>Forward</button>
+            <button class="button is-small" onClick={() => {if (snapshot !== 0) setSnapshot(snapshot - 1)}}>Backward</button>
+            <button class="button is-small" onClick={() => setSnapshot(0)}>Current</button>
+            <button class="button is-small" onClick={() => {if (snapshot !== timeline.length - 1) setSnapshot(snapshot + 1)}}>Forward</button>
           </div>
         <div className="snapshot-info">
                {/* {timelineStatusDisplay} */}
