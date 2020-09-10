@@ -93,8 +93,10 @@ export default function DevTools({
     store.getEnvironmentIDs()
   );
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
+
   const [selector, setSelector] = useState("Store");
   const allRecords = JSON.stringify(store.getAllRecords());
+  
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
 
@@ -149,7 +151,7 @@ export default function DevTools({
           </ul>
         </div>
         <div className={selector === "Store" ? "columns" : "is-hidden"}>
-          <StoreDisplayer store={store.getAllRecords()[0]} />
+        <StoreDisplayer currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer} store={store.getAllRecords()[0]} />
         </div>
         <div className={selector === "Network" ? "columns" : "is-hidden"}>
           <NetworkDisplayer />

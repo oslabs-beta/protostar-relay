@@ -79,6 +79,7 @@ export function attach(
   }
 
   function sendStoreRecords() {
+    console.log('hi... sendStoreRecords from envWrapper')
     const records = store.getSource().toJSON();
     hook.emit('environment.store', {
       name: 'refresh.store',

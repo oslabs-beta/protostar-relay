@@ -4,9 +4,9 @@ import StoreTimeline from './Components/StoreTimeline';
 
 function RightContainer() {
     return (
-        <div>
+        <>
             <StoreTimeline />
-        </div>
+        </>
     )
 }
 

@@ -20,24 +20,10 @@ export default function StoreInspector(props: {|
   const [, forceUpdate] = useState({});
   const [envSnapshotList, setEnvSnapshotList] = useState({});
   const [envSnapshotListByType, setEnvSnapshotListByType] = useState({});
-  const [isRecording, setIsRecording] = useState(false);
   const [checked, setChecked] = useState({
     networkEvents: true,
     storeEvents: true,
   });
-  const stopAndClearRecording = useCallback(() => {
-    setIsRecording(false);
-    store.stopRecording();
-    store.clearAllEvents();
-  }, [store, setIsRecording]);
-  const stopRecording = useCallback(() => {
-    setIsRecording(false);
-    store.stopRecording();
-  }, [store, setIsRecording]);
-  const startRecording = useCallback(() => {
-    setIsRecording(true);
-    store.startRecording();
-  }, [store, setIsRecording]);
 
   useEffect(() => {
     const refreshEvents = () => {
@@ -69,7 +55,8 @@ export default function StoreInspector(props: {|
       });
       bridge.send('refreshStore', currEnvID);
     }
-  }, [
+  }, [  //this array are the dependencies for ^^. Conceptionally represent arguments to the callback. 
+    //Every val referenced should appear in this array.
     props,
     bridge,
     records,

@@ -73,9 +73,12 @@ export default class Store extends EventEmitter<{|
     bridge.addListener('shutdown', this.onBridgeShutdown);
     bridge.addListener('environmentInitialized', this.onBridgeEnvironmentInit);
     bridge.addListener('storeRecords', this.onBridgeStoreSnapshot);
+    bridge.addListener('mutationComplete', this.setEnvironmentEvents);
   }
 
   getAllEventsArray(): $ReadOnlyArray<LogEvent> {
+    console.log('wow geteventsarray')
+
     const allEvents = [];
     this._environmentAllEvents.forEach((value, _) => allEvents.push(...value));
     return allEvents;
@@ -84,6 +87,8 @@ export default class Store extends EventEmitter<{|
   setAllEventsMap(environmentID: number, events: Array<LogEvent>) {
     this._environmentAllEvents.set(environmentID, events);
     this.emit('allEventsReceived');
+    console.log('hi events')
+
   }
 
   getAllEventsMap(): Map<number, Array<LogEvent>> {
@@ -91,10 +96,14 @@ export default class Store extends EventEmitter<{|
   }
 
   getEvents(environmentID: number): ?$ReadOnlyArray<LogEvent> {
+    console.log('wow getevents')
+
     return this._environmentAllEvents.get(environmentID);
   }
 
   getAllEnvironmentEvents(): $ReadOnlyArray<LogEvent> {
+    console.log('wow getallenvevents')
+
     const allEnvironmentEvents = [];
     this._environmentEventsMap.forEach((value, _) =>
       allEnvironmentEvents.push(...value)
@@ -124,15 +133,20 @@ export default class Store extends EventEmitter<{|
   }
 
   getRecords(environmentID: number): ?StoreRecords {
+    console.log('getrecords from storejs')
     return this._environmentStoreData.get(environmentID);
   }
 
   getRecordIDs(environmentID: number): ?$ReadOnlyArray<string> {
+    console.log('wow getrecordids')
+
     const storeRecords = this._environmentStoreData.get(environmentID);
     return storeRecords ? Object.keys(storeRecords) : null;
   }
 
   removeRecord(environmentID: number, recordID: string) {
+    console.log('wow removedreocrd')
+
     const storeRecords = this._environmentStoreData.get(environmentID);
     if (storeRecords != null) {
       delete storeRecords[recordID];
@@ -140,6 +154,7 @@ export default class Store extends EventEmitter<{|
   }
 
   getAllRecords(): ?$ReadOnlyArray<StoreRecords> {
+    console.log('wow getallrecords')
     return Array.from(this._environmentStoreData.values());
   }
 
@@ -148,6 +163,7 @@ export default class Store extends EventEmitter<{|
   }
 
   mergeRecords(id: number, newRecords: ?StoreRecords) {
+    console.log('merging records')
     if (newRecords == null) {
       return;
     }
@@ -224,6 +240,7 @@ export default class Store extends EventEmitter<{|
   }
 
   onBridgeStoreSnapshot = (data: Array<StoreData>) => {
+    console.log('onBridgeStoreSnapshot... in store')
     for (const { id, records } of data) {
       this._environmentStoreData.set(id, records);
       this.emit('storeDataReceived');
@@ -231,6 +248,7 @@ export default class Store extends EventEmitter<{|
   };
 
   setStoreEvents = (id: number, data: LogEvent) => {
+    console.log('setstoreevents in store js... ', id, data.name)
     switch (data.name) {
       case 'store.publish':
         this.mergeRecords(id, data.source);
@@ -251,6 +269,8 @@ export default class Store extends EventEmitter<{|
   };
 
   setEnvironmentEvents = (id: number, data: LogEvent) => {
+    console.log('wow setevnevents in storejs')
+
     const arr = this._environmentEventsMap.get(id);
     if (arr) {
       arr.push(data);
@@ -258,9 +278,14 @@ export default class Store extends EventEmitter<{|
       this._environmentEventsMap.set(id, [data]);
     }
     this.emit('mutated');
+    if (data.name === 'execute.complete') {
+      console.log('wow mutation is complete!!!')
+      this.emit('mutationComplete')
+    }
   };
 
   appendInformationToRequest = (id: number, data: LogEvent) => {
+    console.log('appendinfotorequest')
     switch (data.name) {
       case 'execute.start':
         const requestArr = this._recordedRequests.get(id);
@@ -292,15 +317,19 @@ export default class Store extends EventEmitter<{|
   };
 
   startRecording = () => {
+    console.log('recoring')
     this._isRecording = true;
     this.clearAllEvents();
   };
 
   stopRecording = () => {
+    console.log('wow stop recordign')
+
     this._isRecording = false;
   };
 
   onBridgeEvents = (events: Array<EventData>) => {
+    console.log('onbrdigeevents', events)
     for (const { id, data, eventType } of events) {
       if (this._isRecording) {
         const allEvents = this._environmentAllEvents.get(id);
@@ -339,10 +368,12 @@ export default class Store extends EventEmitter<{|
           this._environmentAllEvents.set(id, [data]);
         }
         this.emit('allEventsReceived');
+        console.log('hi bob')
       }
       if (eventType === 'store') {
         this.setStoreEvents(id, data);
       } else if (eventType === 'environment') {
+        console.log('line 370')
         this.setEnvironmentEvents(id, data);
       }
     }
