@@ -7,7 +7,6 @@ const StoreDisplayer = ({store}) => {
 
   //update record list to current selection
   function updateRecords (selection) {
-    console.log("selection", selection)
     if (selection === "") {
       setRecordsList(store);
     //id selected - filter out everything except selected id
@@ -43,18 +42,6 @@ const StoreDisplayer = ({store}) => {
       //update display with current selection
       updateRecords(selection);
     }
-    // //handle type menu click events
-    // function handleIdClick(e, id) {
-    //     //set new selection
-    //     setSelection("id-"+id);
-    //     //update record list to current selection
-    //     setRecordsList(
-    //       Object.keys(store).reduce((newRL, key) => {
-    //           if (store[key].__id === id) newRL[key] = store[key];
-    //         return newRL;
-    //       }, {})
-    //     );
-    // }
 
     //shows you the entire store
     function handleReset(e) {
@@ -95,7 +82,7 @@ const StoreDisplayer = ({store}) => {
     return (
         <React.Fragment>
             <div className="column">
-                <button className="button is-small is-link" onClick={(e)=>{handleReset(e)}}>Reset</button>
+                <button className="button is-small is-primary" onClick={(e)=>{handleReset(e)}}>Reset</button>
                 <aside className="menu">
                 <p className="menu-label">
                     Record List

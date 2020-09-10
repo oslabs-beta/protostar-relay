@@ -69,8 +69,8 @@ const StoreTimeline = (props) => {
       <div className="column">
         <div className="display-box">
               <div className="snapshot-wrapper is-flex">
-                <input type="text" className="input is-small snapshot-btn is-primary" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} placeholder="take a store snapshot"></input>
-                <button className="button is-small is-link" onClick={(e) => handleClick(e)}>Snapshot</button>
+                <input type="text" className="input is-small snapshot-btn" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} placeholder="take a store snapshot"></input>
+                <button className="button is-small is-primary" onClick={(e) => handleClick(e)}>Snapshot</button>
               </div>
         </div>
         <div className="snapshots">
@@ -81,9 +81,9 @@ const StoreTimeline = (props) => {
             value={snapshot}
             onChange={value => setSnapshot(value)} />
             <div className="snapshot-nav">
-              <button class="button is-small" onClick={() => {if (snapshot !== 0) setSnapshot(snapshot - 1)}}>Backward</button>
-              <button class="button is-small" onClick={() => setSnapshot(0)}>Current</button>
-              <button class="button is-small" onClick={() => {if (snapshot !== timeline.length - 1) setSnapshot(snapshot + 1)}}>Forward</button>
+              <button class="button is-small is-primary" onClick={() => {if (snapshot !== 0) setSnapshot(snapshot - 1)}}>Backward</button>
+              <button class="button is-small is-primary" onClick={() => setSnapshot(0)}>Current</button>
+              <button class="button is-small is-primary" onClick={() => {if (snapshot !== timeline.length - 1) setSnapshot(snapshot + 1)}}>Forward</button>
             </div>
         </div>
       </div>

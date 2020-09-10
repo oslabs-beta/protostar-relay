@@ -128,9 +128,9 @@ export default function DevTools({
       <StoreContext.Provider value={store}>
         <div className="tabs is-toggle">
           <ul>
-            <li className={selector === "Store" && "is-active"}>
+            <li className={selector === "Store" && "is-active is-primary"}>
               <a onClick={(e) => handleTabClick(e, "Store")}>
-                <span className="icon is-small">
+                <span className="icon is-small is-primary">
                   <i className="fas fa-database"></i>
                 </span>
                 <span>Store</span>
