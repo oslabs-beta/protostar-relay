@@ -8,23 +8,24 @@ const StoreTimeline = (props) => {
   const [sendStore, setSendStore] = useState(store);
   const [snapshot, setSnapshot] = useState(0);
   const [, forceUpdate] = useState({});
-  const [timeline, setTimeline] = useState([{
-    label: "current",
-    date: Date.now(),
-    storage: store,
-  }]);
   const [timelineLabel, setTimelineLabel] = useState('');
   const store = useContext(StoreContext);
   const bridge = useContext(BridgeContext);
+  const [liveStore, setLiveStore] = useState(store.getRecords(props.currentEnvID));
+  const [timeline, setTimeline] = useState([{
+    label: "current",
+    date: Date.now(),
+    storage: liveStore,
+  }]);
 
   const handleClick = (e) => {
     e.preventDefault();
     const timelineInsert = {};
     const timeStamp = Date.now();
-    const newStore = store;
+    // const newStore = liveStore;
     timelineInsert.label = timelineLabel;
     timelineInsert.date = timeStamp;
-    timelineInsert.storage = newStore;
+    timelineInsert.storage = liveStore;
     setTimeline([...timeline, timelineInsert]);
   }
   // let timelineStatusDisplay;
@@ -44,17 +45,17 @@ const StoreTimeline = (props) => {
   //   </div>);
   // }
   useEffect(() => {
-    const refreshEvents = () => {
-      console.log('updated store!')
+    console.log(props, 'props in storetimeline')
+    const refreshStore = () => {
+      const allRecords = store.getRecords(props.currentEnvID);
+      setLiveStore(allRecords);
       forceUpdate({});
     };
-    store.addListener('storeDataReceived', refreshEvents);
-    store.addListener('allEventsReceived', refreshEvents);
+    store.addListener('mutated', refreshStore);
     return () => {
-      store.removeListener('storeDataReceived', refreshEvents);
-      store.removeListener('allEventsReceived', refreshEvents);
+      store.removeListener('mutated', refreshStore);
     };
-  }, [store]);
+  }, [store, liveStore]);
 
   useEffect(() => {
       console.log('timeline length', timeline.length)
@@ -62,8 +63,7 @@ const StoreTimeline = (props) => {
       if (snapshot === 0) {
         console.log('loading current...');
         // timelineStatusDisplay = Object.entries(timelineStatus('default'));
-        console.log(JSON.stringify(store))
-        setSendStore(store);
+        setSendStore(liveStore);
       } else {
         console.log(timeline[snapshot].date, timeline[snapshot].label);
         console.log(JSON.stringify(timeline[snapshot]));
@@ -72,7 +72,6 @@ const StoreTimeline = (props) => {
     }
     // console.log(timelineStatusDisplay, 'ln 53 timelinestatusdisplay')
     }, [snapshot]);
-
   return (
     <div>
       <div className="display-box">

@@ -151,7 +151,7 @@ export default function DevTools({
           </ul>
         </div>
         <div className={selector === "Store" ? "columns" : "is-hidden"}>
-        <StoreDisplayer currentEnvId={currentEnvID} portalContainer={storeInspectorPortalContainer} store={store.getAllRecords()[0]} />
+        <StoreDisplayer currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer} store={store.getAllRecords()[0]} />
         </div>
         <div className={selector === "Network" ? "columns" : "is-hidden"}>
           <NetworkDisplayer />

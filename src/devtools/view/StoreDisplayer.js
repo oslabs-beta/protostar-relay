@@ -70,7 +70,7 @@ const StoreDisplayer = (props) => {
           </li>
         );
     }
-
+    console.log('envid', props.currentEnvID)
     return (
         <React.Fragment>
             <div className="column">
@@ -90,7 +90,7 @@ const StoreDisplayer = (props) => {
                 </div>
             </div>
             <div className="column">
-              <StoreTimeline currentEnvId={props.currentEnvID}/>
+              <StoreTimeline currentEnvID={props.currentEnvID}/>
             </div>
         </React.Fragment>
     );

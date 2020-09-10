@@ -73,6 +73,7 @@ export default class Store extends EventEmitter<{|
     bridge.addListener('shutdown', this.onBridgeShutdown);
     bridge.addListener('environmentInitialized', this.onBridgeEnvironmentInit);
     bridge.addListener('storeRecords', this.onBridgeStoreSnapshot);
+    bridge.addListener('mutated', this.setEnvironmentEvents);
   }
 
   getAllEventsArray(): $ReadOnlyArray<LogEvent> {
@@ -86,6 +87,8 @@ export default class Store extends EventEmitter<{|
   setAllEventsMap(environmentID: number, events: Array<LogEvent>) {
     this._environmentAllEvents.set(environmentID, events);
     this.emit('allEventsReceived');
+    console.log('hi events')
+
   }
 
   getAllEventsMap(): Map<number, Array<LogEvent>> {
@@ -361,10 +364,12 @@ export default class Store extends EventEmitter<{|
           this._environmentAllEvents.set(id, [data]);
         }
         this.emit('allEventsReceived');
+        console.log('hi bob')
       }
       if (eventType === 'store') {
         this.setStoreEvents(id, data);
       } else if (eventType === 'environment') {
+        console.log('line 370')
         this.setEnvironmentEvents(id, data);
       }
     }
