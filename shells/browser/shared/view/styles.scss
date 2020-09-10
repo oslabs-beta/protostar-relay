@@ -40,16 +40,13 @@
 }
 
 //***** MENU *****
-.menu {
-  font-size: 10px;
-}
-
 .type {
   background: lightblue;
 }
 
 .menu-list {
   width: 100%;
+  font-size: 10px;
 }
 
 .records {
@@ -174,6 +171,10 @@
 
 .menu-list {
   width: 100%;
+}
+
+.record-line {
+  border-bottom: 1px grey solid;
 }
 
 .records {
