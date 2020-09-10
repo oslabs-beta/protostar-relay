@@ -14,7 +14,26 @@ const NetworkDisplayer = (props) => {
       forceUpdate({});
     };
     store.addListener('mutated', onMutated);
+    //******** */
+    const events = store._environmentEventsMap.get(1) || [];
+    const eventMenu = [];
+    const eventsList = []
 
+    //for each event - add to menu list
+    events.forEach(event => {
+      const id = uuidv4();
+      eventMenu.push(
+          <li>
+            <a id={id} className={(selection === (id)) && "is-active"} onClick={(e) => {handleIdClick(e, id)}}>{event.name}</a>
+        </li>
+      );
+        eventsList.push(
+          <div id={id} className={((selection !== (id)) && selection !== "") && "is-hidden"}>
+            <Record {...event} />
+          </div>
+        );
+    })
+//******** */
     return () => {
       store.removeListener('mutated', onMutated);
     };
@@ -34,24 +53,7 @@ const NetworkDisplayer = (props) => {
 
     console.log("store",store)
 
-    const events = store._environmentEventsMap.get(1) || [];
-    const eventMenu = [];
-    const eventsList = []
 
-    //for each event - add to menu list
-    events.forEach(event => {
-      const id = uuidv4();
-      eventMenu.push(
-          <li>
-            <a id={id} className={(selection === (id)) && "is-active"} onClick={(e) => {handleIdClick(e, id)}}>{event.name}</a>
-        </li>
-      );
-        eventsList.push(
-          <div id={id} className={((selection !== (id)) && selection !== "") && "is-hidden"}>
-            <Record {...event} />
-          </div>
-        );
-    })
 
     console.log("events", events)
 
