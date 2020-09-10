@@ -8,53 +8,37 @@ const StoreTimeline = (props) => {
   const [sendStore, setSendStore] = useState(store);
   const [snapshot, setSnapshot] = useState(0);
   const [, forceUpdate] = useState({});
-  const [timeline, setTimeline] = useState([{
-    label: "current",
-    date: Date.now(),
-    storage: store,
-  }]);
   const [timelineLabel, setTimelineLabel] = useState('');
   const store = useContext(StoreContext);
   const bridge = useContext(BridgeContext);
+  const [liveStore, setLiveStore] = useState(store.getRecords(props.currentEnvID));
+  const [timeline, setTimeline] = useState([{
+    label: "current",
+    date: Date.now(),
+    storage: liveStore,
+  }]);
 
   const handleClick = (e) => {
     e.preventDefault();
     const timelineInsert = {};
     const timeStamp = Date.now();
-    const newStore = store;
     timelineInsert.label = timelineLabel;
     timelineInsert.date = timeStamp;
-    timelineInsert.storage = newStore;
+    timelineInsert.storage = liveStore;
     setTimeline([...timeline, timelineInsert]);
   }
-  // let timelineStatusDisplay;
-  
-  // const timelineStatus = (str) => {
-  //   console.log('inside line 29');
-  //     if (str === 'default') {
-  //       console.log('if on line 31')
-  //       return (<div>...loading store</div>);
-  //   }  console.log('inside line 33');
-  //   return (<div>
-  //     <div>...loading snapshot, 
-  //     {/* {timeline[snapshot].date, timeline[snapshot - 1].label},  */}
-  //      {/* {timeline[snapshot].storage} */}
-  //    </div> 
-     
-  //   </div>);
-  // }
+
   useEffect(() => {
-    const refreshEvents = () => {
-      console.log('updated store!')
-      forceUpdate({});
+    const refreshStore = () => {
+      const allRecords = store.getRecords(props.currentEnvID);
+      setLiveStore(allRecords);
+      // forceUpdate({});
     };
-    store.addListener('storeDataReceived', refreshEvents);
-    store.addListener('allEventsReceived', refreshEvents);
+    store.addListener('mutationComplete', refreshStore);
     return () => {
-      store.removeListener('storeDataReceived', refreshEvents);
-      store.removeListener('allEventsReceived', refreshEvents);
+      store.removeListener('mutationComplete', refreshStore);
     };
-  }, [store]);
+  }, [store, liveStore]);
 
   useEffect(() => {
       console.log('timeline length', timeline.length)
@@ -62,8 +46,7 @@ const StoreTimeline = (props) => {
       if (snapshot === 0) {
         console.log('loading current...');
         // timelineStatusDisplay = Object.entries(timelineStatus('default'));
-        console.log(JSON.stringify(store))
-        setSendStore(store);
+        setSendStore(liveStore);
       } else {
         console.log(timeline[snapshot].date, timeline[snapshot].label);
         console.log(JSON.stringify(timeline[snapshot]));
@@ -72,14 +55,15 @@ const StoreTimeline = (props) => {
     }
     // console.log(timelineStatusDisplay, 'ln 53 timelinestatusdisplay')
     }, [snapshot]);
-
   return (
     <div>
       <div className="display-box">
-            <input type="text" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} ></input>
-            <a className="button mx-1" onClick={(e) => handleClick(e)}>Timeline snapshot</a>
-          <div>{timeline.length}</div>
-          <div>{timelineLabel}</div>
+            <div className="snapshot-wrapper is-flex">
+              <input type="text" className="input is-small snapshot-btn" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} placeholder="take a store snapshot"></input>
+              <button className="button is-small is-link" onClick={(e) => handleClick(e)}>Snapshot</button>
+            </div>
+            {/* <a className="button mx-1" onClick={(e) => handleClick(e)}>Timeline snapshot</a> */}
+          {/* <div>{timelineLabel}</div> */}
       </div>
       <div className="snapshots">
         <h2 className="slider-textcolor">Store Timeline</h2>
@@ -89,9 +73,9 @@ const StoreTimeline = (props) => {
           value={snapshot}
           onChange={value => setSnapshot(value)} />
           <div className="snapshot-nav">
-            <a onClick={() => setSnapshot(snapshot + 1)}>forward</a>
-            <a onClick={() => setSnapshot(0)}>current</a>
-            <a onClick={() => setSnapshot(snapshot - 1)}>backward</a>
+          <button class="button is-small" onClick={() => {if (snapshot !== 0) setSnapshot(snapshot - 1)}}>Backward</button>
+          <button class="button is-small" onClick={() => setSnapshot(0)}>Current</button>
+          <button class="button is-small" onClick={() => {if (snapshot !== timeline.length - 1) setSnapshot(snapshot + 1)}}>Forward</button>
           </div>
         <div className="snapshot-info">
                {/* {timelineStatusDisplay} */}
