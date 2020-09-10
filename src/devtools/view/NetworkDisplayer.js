@@ -82,7 +82,7 @@ const NetworkDisplayer = (props) => {
         </button>
         <aside className="menu">
           <p className="menu-label">Event List</p>
-          <ul className="menu-list" id="menu">
+          <ul className="menu-list">
             {eventMenu}
           </ul>
         </aside>

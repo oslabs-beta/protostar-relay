@@ -79,7 +79,7 @@ const StoreDisplayer = (props) => {
                 <p className="menu-label">
                     Record List
                 </p>
-                <ul className="menu-list" id="menu">
+                <ul className="menu-list">
                     {typeList}
                 </ul>
                 </aside>
