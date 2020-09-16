@@ -13,23 +13,23 @@ const StoreTimeline = ({ currentEnvID }) => {
   const [liveStore, setLiveStore] = useState(store.getRecords(currentEnvID));
   const [timeline, setTimeline] = useState({
     [currentEnvID]: [{
-      label: "current",
+      label: "at startup",
       date: Date.now(),
       storage: liveStore,
     }]
   });
 
   const handleClick = (e) => {
-    console.log('BAAAAAAAA!!!!')
     e.preventDefault();
     const timelineInsert = {};
     const timeStamp = Date.now();
     timelineInsert.label = timelineLabel;
     timelineInsert.date = timeStamp;
     timelineInsert.storage = liveStore;
-    const newTimeline = [timelineInsert].concat(timeline[currentEnvID])
+    const newTimeline = timeline[currentEnvID].concat([timelineInsert])
     setTimeline({ ...timeline, [currentEnvID]: newTimeline });
-    e.target.value = "";
+    setTimelineLabel('');
+    setSnapshotIndex(newTimeline.length)
   }
 
   const updateStoreHelper = (storeObj) => {
@@ -53,19 +53,22 @@ const StoreTimeline = ({ currentEnvID }) => {
 
   useEffect(() => {
     console.log("AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH")
-    setLiveStore(store.getRecords(currentEnvID));
+    const allRecords = store.getRecords(currentEnvID);
+    setLiveStore(allRecords);
 
     if (!timeline[currentEnvID]) {
       const newTimeline = {
         ...timeline, [currentEnvID]: [{
           label: "current",
           date: Date.now(),
-          storage: liveStore,
+          storage: allRecords,
         }]
       }
       setTimeline(newTimeline);
+      setSnapshotIndex(1)
+    } else {
+      setSnapshotIndex(timeline[currentEnvID].length)
     }
-
   }, [currentEnvID]);
 
   console.log('currenttimeilne', timeline)
@@ -82,18 +85,18 @@ const StoreTimeline = ({ currentEnvID }) => {
         <div className="snapshots">
           <h2 className="slider-textcolor">Store Timeline</h2>
           <InputRange
-            maxValue={timeline[currentEnvID] ? timeline[currentEnvID].length - 1 : 0}
+            maxValue={timeline[currentEnvID] ? timeline[currentEnvID].length : 0}
             minValue={0}
             value={snapshotIndex}
             onChange={value => setSnapshotIndex(value)} />
           <div className="snapshot-nav">
             <button class="button is-small" onClick={() => { if (snapshotIndex !== 0) setSnapshotIndex(snapshotIndex - 1) }}>Backward</button>
-            <button class="button is-small" onClick={() => setSnapshotIndex(0)}>Current</button>
-            <button class="button is-small" onClick={() => { if (snapshotIndex !== timeline[currentEnvID].length - 1) setSnapshotIndex(snapshotIndex + 1) }}>Forward</button>
+            <button class="button is-small" onClick={() => setSnapshotIndex(timeline[currentEnvID].length)}>Current</button>
+            <button class="button is-small" onClick={() => { if (snapshotIndex !== timeline[currentEnvID].length) setSnapshotIndex(snapshotIndex + 1) }}>Forward</button>
           </div>
         </div>
       </div>
-      <StoreDisplayer store={snapshotIndex === 0 ? liveStore : timeline[currentEnvID][snapshotIndex].storage} />
+      <StoreDisplayer store={(!timeline[currentEnvID] || !timeline[currentEnvID][snapshotIndex] || snapshotIndex === timeline[currentEnvID].length) ? liveStore : timeline[currentEnvID][snapshotIndex].storage} />
     </React.Fragment>
   )
 }
