@@ -2,30 +2,34 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import InputRange from 'react-input-range';
 import { BridgeContext, StoreContext } from '../context';
 import StoreDisplayer from "./StoreDisplayer";
+// import { detailedDiff } from 'deep-object-diff';
 
 
-
-const StoreTimeline = (props) => {
-  // const [sendStore, setSendStore] = useState(store.getRecords(props.currentEnvID));
-  const [snapshot, setSnapshot] = useState(0);
-  const [timelineLabel, setTimelineLabel] = useState('');
+const StoreTimeline = ({ currentEnvID }) => {
   const store = useContext(StoreContext);
   const bridge = useContext(BridgeContext);
-  const [liveStore, setLiveStore] = useState(store.getRecords(props.currentEnvID));
-  const [timeline, setTimeline] = useState([{
-    label: "current",
-    date: Date.now(),
-    storage: liveStore,
-  }]);
+  const [snapshotIndex, setSnapshotIndex] = useState(0);
+  const [timelineLabel, setTimelineLabel] = useState('');
+  const [liveStore, setLiveStore] = useState(store.getRecords(currentEnvID));
+  const [timeline, setTimeline] = useState({
+    [currentEnvID]: [{
+      label: "current",
+      date: Date.now(),
+      storage: liveStore,
+    }]
+  });
 
   const handleClick = (e) => {
+    console.log('BAAAAAAAA!!!!')
     e.preventDefault();
     const timelineInsert = {};
     const timeStamp = Date.now();
     timelineInsert.label = timelineLabel;
     timelineInsert.date = timeStamp;
     timelineInsert.storage = liveStore;
-    setTimeline([...timeline, timelineInsert]);
+    const newTimeline = [timelineInsert].concat(timeline[currentEnvID])
+    setTimeline({ ...timeline, [currentEnvID]: newTimeline });
+    e.target.value = "";
   }
 
   const updateStoreHelper = (storeObj) => {
@@ -33,16 +37,13 @@ const StoreTimeline = (props) => {
   }
 
   useEffect(() => {
-
     const refreshLiveStore = () => {
-      bridge.send('refreshStore', props.currentEnvID);
+      bridge.send('refreshStore', currentEnvID);
       setTimeout(() => {
-        const allRecords = store.getRecords(props.currentEnvID);
-        console.log('REFRESH INVOKED!!!!!?$%%@#$%')
-        // console.log('new store', allRecords);
-        // console.log('old store', liveStore);
+        const allRecords = store.getRecords(currentEnvID);
+        console.log('REFRESH INVOKED! currentEnvID:', currentEnvID)
         updateStoreHelper(allRecords);
-      },400)
+      }, 400)
     };
     store.addListener('mutationComplete', refreshLiveStore);
     return () => {
@@ -51,43 +52,48 @@ const StoreTimeline = (props) => {
   }, [store]);
 
   useEffect(() => {
-      console.log('timeline length', liveStore)
-      console.log('snapshot number', snapshot)
-      if (snapshot === 0) {
-        console.log('loading current... AND SETTING STORE TO ALL RECORDS');
-        console.log(props.currentEnvID)
-        setLiveStore(liveStore);
-      } else {
-        console.log('inside the snapshot useeffet else')
-        setLiveStore(timeline[snapshot].storage);
-        console.log(timeline[snapshot].date, timeline[snapshot].label);
-        console.log(timeline[snapshot].storage);
+    console.log("AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH")
+    setLiveStore(store.getRecords(currentEnvID));
+
+    if (!timeline[currentEnvID]) {
+      const newTimeline = {
+        ...timeline, [currentEnvID]: [{
+          label: "current",
+          date: Date.now(),
+          storage: liveStore,
+        }]
+      }
+      setTimeline(newTimeline);
     }
-    }, [snapshot]);
+
+  }, [currentEnvID]);
+
+  console.log('currenttimeilne', timeline)
+
   return (
     <React.Fragment>
       <div className="column">
         <div className="display-box">
-              <div className="snapshot-wrapper is-flex">
-                <input type="text" className="input is-small snapshot-btn is-primary" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} placeholder="take a store snapshot"></input>
-                <button className="button is-small is-link" onClick={(e) => handleClick(e)}>Snapshot</button>
-              </div>
+          <div className="snapshot-wrapper is-flex">
+            <input type="text" className="input is-small snapshot-btn is-primary" value={timelineLabel} onChange={(e) => setTimelineLabel(e.target.value)} placeholder="take a store snapshot"></input>
+            <button className="button is-small is-link" onClick={(e) => handleClick(e)}>Snapshot</button>
+          </div>
         </div>
         <div className="snapshots">
           <h2 className="slider-textcolor">Store Timeline</h2>
           <InputRange
-            maxValue={timeline.length - 1}
+            maxValue={timeline[currentEnvID] ? timeline[currentEnvID].length - 1 : 0}
             minValue={0}
-            value={snapshot}
-            onChange={value => setSnapshot(value)} />
-            <div className="snapshot-nav">
-              <button class="button is-small" onClick={() => {if (snapshot !== 0) setSnapshot(snapshot - 1)}}>Backward</button>
-              <button class="button is-small" onClick={() => setSnapshot(0)}>Current</button>
-              <button class="button is-small" onClick={() => {if (snapshot !== timeline.length - 1) setSnapshot(snapshot + 1)}}>Forward</button>
-            </div>
+            value={snapshotIndex}
+            onChange={value => setSnapshotIndex(value)} />
+          <div className="snapshot-nav">
+            <button class="button is-small" onClick={() => { if (snapshotIndex !== 0) setSnapshotIndex(snapshotIndex - 1) }}>Backward</button>
+            <button class="button is-small" onClick={() => setSnapshotIndex(0)}>Current</button>
+            <button class="button is-small" onClick={() => { if (snapshotIndex !== timeline[currentEnvID].length - 1) setSnapshotIndex(snapshotIndex + 1) }}>Forward</button>
+          </div>
         </div>
       </div>
-      <StoreDisplayer store={liveStore}/>
+      <StoreDisplayer store={snapshotIndex === 0 ? liveStore : timeline[currentEnvID][snapshotIndex].storage} />
     </React.Fragment>
   )
 }

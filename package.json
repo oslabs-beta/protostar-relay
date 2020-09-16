@@ -99,6 +99,7 @@
   "dependencies": {
     "bulma": "^0.9.0",
     "bulma-components": "0.0.5",
+    "deep-object-diff": "^1.1.0",
     "json-beautify": "^1.1.1",
     "node-sass": "^4.14.1",
     "react-input-range": "^1.3.0",
