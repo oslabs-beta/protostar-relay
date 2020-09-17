@@ -40,13 +40,13 @@ const StoreDisplayer = ({ store }) => {
     updateRecords("");
   }, [store]);
 
-  //handle menu click events
-  function handleMenuClick(e, selection) {
-    //set new selection
-    setSelection(selection);
-    //update display with current selection
-    updateRecords(selection);
-  }
+    //handle menu click events
+     function handleMenuClick(e, selection) {
+      //set new selection
+      setSelection(selection);
+      //update display with current selection
+      updateRecords(selection);
+    }
 
   //shows you the entire store
   function handleReset(e) {

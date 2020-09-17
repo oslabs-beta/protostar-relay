@@ -124,7 +124,6 @@ export default function DevTools({
   }
 
   const handleChange = useCallback(e => {
-    console.log("handleChange currentEnvID", currentEnvID)
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 

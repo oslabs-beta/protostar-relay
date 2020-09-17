@@ -74,6 +74,7 @@ constructor(bridge: FrontendBridge) {
   bridge.addListener('environmentInitialized', this.onBridgeEnvironmentInit);
   bridge.addListener('storeRecords', this.onBridgeStoreSnapshot);
   bridge.addListener('mutationComplete', this.setEnvironmentEvents);
+  bridge.addListener('all', this.setEnvironmentEvents);
 }
 
 getAllEventsArray(): $ReadOnlyArray < LogEvent > {
@@ -367,8 +368,8 @@ onBridgeEvents = (events: Array<EventData>) => {
       } else {
         this._environmentAllEvents.set(id, [data]);
       }
-      this.emit('allEventsReceived');
       console.log('hi bob')
+      this.emit('allEventsReceived');
     }
     if (eventType === 'store') {
       this.setStoreEvents(id, data);
