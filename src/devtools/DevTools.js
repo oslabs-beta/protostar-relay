@@ -34,26 +34,26 @@ export type ViewElementSource = (id: number) => void;
 
 export type Props = {|
   bridge: FrontendBridge,
-  // defaultTab?: TabID,
-  // showTabBar?: boolean,
-  store: Store,
-  viewElementSourceFunction?: ?ViewElementSource,
-  viewElementSourceRequiresFileLocation?: boolean,
+    // defaultTab?: TabID,
+    // showTabBar?: boolean,
+    store: Store,
+      viewElementSourceFunction ?: ? ViewElementSource,
+      viewElementSourceRequiresFileLocation ?: boolean,
 
-  // This property is used only by the web extension target.
-  // The built-in tab UI is hidden in that case, in favor of the browser's own panel tabs.
-  // This is done to save space within the app.
-  // Because of this, the extension needs to be able to change which tab is active/rendered.
-  // overrideTab?: TabID,
+      // This property is used only by the web extension target.
+      // The built-in tab UI is hidden in that case, in favor of the browser's own panel tabs.
+      // This is done to save space within the app.
+      // Because of this, the extension needs to be able to change which tab is active/rendered.
+      // overrideTab?: TabID,
 
-  // TODO: Cleanup multi-tabs in webextensions
-  // To avoid potential multi-root trickiness, the web extension uses portals to render tabs.
-  // The root <DevTools> app is rendered in the top-level extension window,
-  // but individual tabs (e.g. Components, Profiling) can be rendered into portals within their browser panels.
-  rootContainer?: Element,
-  // networkPortalContainer?: Element,
-  settingsPortalContainer?: Element,
-  storeInspectorPortalContainer?: Element,
+      // TODO: Cleanup multi-tabs in webextensions
+      // To avoid potential multi-root trickiness, the web extension uses portals to render tabs.
+      // The root <DevTools> app is rendered in the top-level extension window,
+      // but individual tabs (e.g. Components, Profiling) can be rendered into portals within their browser panels.
+      rootContainer ?: Element,
+      // networkPortalContainer?: Element,
+      settingsPortalContainer ?: Element,
+      storeInspectorPortalContainer ?: Element,
 |};
 
 const networkTab = {
@@ -95,8 +95,7 @@ export default function DevTools({
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
 
   const [selector, setSelector] = useState("Store");
-  const allRecords = JSON.stringify(store.getAllRecords());
-  
+
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
 
@@ -108,24 +107,34 @@ export default function DevTools({
   }, [store, currentEnvID]);
 
   useEffect(() => {
+    setEnv();
+    const testRefresh = () => {
+      console.log('hi marc... shuttin \'er down')
+    }
     store.addListener('environmentInitialized', setEnv);
+    store.addListener('shutdown', testRefresh);
     return () => {
       store.removeListener('environmentInitialized', setEnv);
+      store.removeListener('shutdown', testRefresh);
     };
   }, [store, setEnv]);
 
-  function handleTabClick (e, tab) {
-    console.log(tab);
+  function handleTabClick(e, tab) {
     setSelector(tab);
   }
 
-  const environmentChange = useCallback(e => {
+  const handleChange = useCallback(e => {
+    console.log("handleChange currentEnvID", currentEnvID)
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
+
+  console.log("Rendering DevTools")
+  console.log("currentEnvID", currentEnvID)
 
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
+<<<<<<< HEAD
         <div className="tabs is-toggle">
           <ul>
             <li className={selector === "Store" && "is-active is-primary"}>
@@ -149,15 +158,50 @@ export default function DevTools({
               </a>
             </li>
           </ul>
+=======
+        <div className="navigation">
+          <form className="env-select">
+            <select className="env-select" onChange={handleChange}>
+              {environmentIDs.map(id => {
+                return (
+                  <option key={id} value={id}>{store.getEnvironmentName(id) || id}</option>
+                );
+              })}
+            </select>
+          </form>
+          <div className="tabs is-toggle">
+            <ul>
+              <li className={selector === "Store" && "is-active"}>
+                <a onClick={(e) => handleTabClick(e, "Store")}>
+                  <span className="icon is-small">
+                    <i className="fas fa-database"></i>
+                  </span>
+                  <span>Store</span>
+                </a>
+              </li>
+              <li className={selector === "Network" && "is-active"}>
+                <a
+                  onClick={(e) => {
+                    handleTabClick(e, "Network");
+                  }}
+                >
+                  <span className="icon is-small">
+                    <i className="fas fa-network-wired"></i>
+                  </span>
+                  <span>Network</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+>>>>>>> master
         </div>
         <div className={selector === "Store" ? "columns" : "is-hidden"}>
-          <StoreTimeline currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer}/>
-        {/* <StoreDisplayer currentEnvID={currentEnvID}  store={store.getAllRecords()[0]} test /> */}
+          <StoreTimeline currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer} />
         </div>
         <div className={selector === "Network" ? "columns" : "is-hidden"}>
           <NetworkDisplayer />
         </div>
       </StoreContext.Provider>
-    </BridgeContext.Provider>
+    </BridgeContext.Provider >
   );
 }
