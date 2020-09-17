@@ -1,0 +1,11 @@
+version: '3.0'
+services:
+  test:
+    image: 'protorelay/protostar'
+    container_name: 'protostar-test'
+    volumes: 
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    command: npm run test
+volumes:
+  node_modules: {}
