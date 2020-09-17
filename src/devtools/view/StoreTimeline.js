@@ -10,7 +10,7 @@ const StoreTimeline = ({ currentEnvID }) => {
   const bridge = useContext(BridgeContext);
   const [snapshotIndex, setSnapshotIndex] = useState(0);
   const [timelineLabel, setTimelineLabel] = useState('');
-  const [liveStore, setLiveStore] = useState(store.getRecords(currentEnvID));
+  const [liveStore, setLiveStore] = useState({});
   const [timeline, setTimeline] = useState({
     [currentEnvID]: [{
       label: "at startup",
@@ -35,15 +35,14 @@ const StoreTimeline = ({ currentEnvID }) => {
   const updateStoreHelper = (storeObj) => {
     setLiveStore(storeObj);
   }
-
+  // testing sans set timeout... maybe put back
   useEffect(() => {
     const refreshLiveStore = () => {
+      console.log("mutation triggered refr")
       bridge.send('refreshStore', currentEnvID);
-      setTimeout(() => {
-        const allRecords = store.getRecords(currentEnvID);
-        console.log('REFRESH INVOKED! currentEnvID:', currentEnvID)
-        updateStoreHelper(allRecords);
-      }, 400)
+      const allRecords = store.getRecords(currentEnvID);
+      console.log('REFRESH INVOKED! currentEnvID:', currentEnvID)
+      updateStoreHelper(allRecords);
     };
     store.addListener('mutationComplete', refreshLiveStore);
     return () => {
@@ -52,7 +51,6 @@ const StoreTimeline = ({ currentEnvID }) => {
   }, [store]);
 
   useEffect(() => {
-    console.log("AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH")
     const allRecords = store.getRecords(currentEnvID);
     setLiveStore(allRecords);
 
@@ -71,7 +69,8 @@ const StoreTimeline = ({ currentEnvID }) => {
     }
   }, [currentEnvID]);
 
-  console.log('currenttimeilne', timeline)
+  console.log("Rendering StoreTimeline")
+  console.log("livestore", liveStore)
 
   return (
     <React.Fragment>
@@ -93,6 +92,8 @@ const StoreTimeline = ({ currentEnvID }) => {
             <button class="button is-small" onClick={() => { if (snapshotIndex !== 0) setSnapshotIndex(snapshotIndex - 1) }}>Backward</button>
             <button class="button is-small" onClick={() => setSnapshotIndex(timeline[currentEnvID].length)}>Current</button>
             <button class="button is-small" onClick={() => { if (snapshotIndex !== timeline[currentEnvID].length) setSnapshotIndex(snapshotIndex + 1) }}>Forward</button>
+          </div>
+          <div className="snapshot-info">
           </div>
         </div>
       </div>

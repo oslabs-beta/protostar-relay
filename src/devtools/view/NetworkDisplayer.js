@@ -39,6 +39,7 @@ const NetworkDisplayer = (props) => {
 
   useEffect(() => {
     const onMutated = () => {
+      console.log("mutation triggered onMutated in Network Displayer")
       setEvents(combineEvents(store._environmentEventsMap.get(1) || []));
     };
     store.addListener('mutated', onMutated);
@@ -102,7 +103,7 @@ const NetworkDisplayer = (props) => {
     );
   }
 
-
+  console.log("Rendering NetworkDisplayer")
 
   return (
     <React.Fragment>
