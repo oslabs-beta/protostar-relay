@@ -108,23 +108,28 @@ export default function DevTools({
 
   useEffect(() => {
     setEnv();
+    const testRefresh = () => {
+      console.log('hi marc... shuttin \'er down')
+    }
     store.addListener('environmentInitialized', setEnv);
+    store.addListener('shutdown', testRefresh);
     return () => {
       store.removeListener('environmentInitialized', setEnv);
+      store.removeListener('shutdown', testRefresh);
     };
   }, [store, setEnv]);
 
   function handleTabClick(e, tab) {
-    console.log(tab);
     setSelector(tab);
   }
 
   const handleChange = useCallback(e => {
-    console.log(parseInt(e.target.value));
+    console.log("handleChange currentEnvID", currentEnvID)
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 
   console.log("Rendering DevTools")
+  console.log("currentEnvID", currentEnvID)
 
   return (
     <BridgeContext.Provider value={bridge}>
