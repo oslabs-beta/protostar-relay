@@ -124,7 +124,6 @@ export default function DevTools({
   }
 
   const handleChange = useCallback(e => {
-    console.log("handleChange currentEnvID", currentEnvID)
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 
@@ -134,31 +133,6 @@ export default function DevTools({
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-<<<<<<< HEAD
-        <div className="tabs is-toggle">
-          <ul>
-            <li className={selector === "Store" && "is-active is-primary"}>
-              <a onClick={(e) => handleTabClick(e, "Store")}>
-                <span className="icon is-small is-primary">
-                  <i className="fas fa-database"></i>
-                </span>
-                <span>Store</span>
-              </a>
-            </li>
-            <li className={selector === "Network" && "is-active"}>
-              <a
-                onClick={(e) => {
-                  handleTabClick(e, "Network");
-                }}
-              >
-                <span className="icon is-small">
-                  <i className="fas fa-network-wired"></i>
-                </span>
-                <span>Network</span>
-              </a>
-            </li>
-          </ul>
-=======
         <div className="navigation">
           <form className="env-select">
             <select className="env-select" onChange={handleChange}>
@@ -193,7 +167,6 @@ export default function DevTools({
               </li>
             </ul>
           </div>
->>>>>>> master
         </div>
         <div className={selector === "Store" ? "columns" : "is-hidden"}>
           <StoreTimeline currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer} />
