@@ -101,6 +101,7 @@ const StoreDisplayer = ({ store }) => {
     }
 
   }
+
   return (
     <React.Fragment>
       <div className="column">

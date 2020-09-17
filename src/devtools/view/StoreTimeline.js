@@ -10,7 +10,7 @@ const StoreTimeline = ({ currentEnvID }) => {
   const bridge = useContext(BridgeContext);
   const [snapshotIndex, setSnapshotIndex] = useState(0);
   const [timelineLabel, setTimelineLabel] = useState('');
-  const [liveStore, setLiveStore] = useState(store.getRecords(currentEnvID));
+  const [liveStore, setLiveStore] = useState({});
   const [timeline, setTimeline] = useState({
     [currentEnvID]: [{
       label: "at startup",
@@ -37,7 +37,9 @@ const StoreTimeline = ({ currentEnvID }) => {
   }
 
   useEffect(() => {
+
     const refreshLiveStore = () => {
+      console.log("mutation triggered refr")
       bridge.send('refreshStore', currentEnvID);
       setTimeout(() => {
         const allRecords = store.getRecords(currentEnvID);
@@ -52,7 +54,6 @@ const StoreTimeline = ({ currentEnvID }) => {
   }, [store]);
 
   useEffect(() => {
-    console.log("AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH")
     const allRecords = store.getRecords(currentEnvID);
     setLiveStore(allRecords);
 
@@ -72,6 +73,8 @@ const StoreTimeline = ({ currentEnvID }) => {
   }, [currentEnvID]);
 
   console.log('currenttimeilne', timeline)
+
+  console.log("Rendering StoreTimeline")
 
   return (
     <React.Fragment>

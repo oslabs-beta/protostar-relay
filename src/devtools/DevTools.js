@@ -124,6 +124,8 @@ export default function DevTools({
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 
+  console.log("Rendering DevTools")
+
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
