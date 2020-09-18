@@ -27,6 +27,7 @@ export default function StoreInspector(props: {|
 
   useEffect(() => {
     const refreshEvents = () => {
+      console.log("storeinspector refreshing due to storeDataReceived flag")
       forceUpdate({});
     };
     store.addListener('storeDataReceived', refreshEvents);

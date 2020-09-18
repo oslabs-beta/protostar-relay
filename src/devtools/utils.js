@@ -36,3 +36,15 @@ export function deepCopyFunction(inObject: any) {
     return outObject;
   }
 }
+
+export function debounce(func, wait) {
+  let timeout = null;
+  return function () {
+    const newfunc = () => {
+      timeout = null;
+      func.apply(this, arguments)
+    }
+    clearTimeout(timeout)
+    timeout = setTimeout(newfunc, wait);
+  }
+}

@@ -32,9 +32,11 @@
 //***** TIMELINE *****
 
 .slider-textcolor {
-  color: #5E72E4;
+  color: #060606;
   font-weight: bold;
+  margin: 20px 0;
 }
+
 #container {
   padding: 10px;
 }
@@ -83,6 +85,12 @@
 }
 .input-range {
   margin: 35px 0px;
+}
+.tabs.is-toggle li.is-active a {
+  background-color: #00d1b2;
+  border-color: #00d1b2;
+  color: #fff;
+  z-index: 1;
 }
 .input-range__slider {
   appearance: none;
