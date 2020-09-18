@@ -1,0 +1,3 @@
+[submodule "relay-examples"]
+	path = relay-examples
+	url = https://github.com/relayjs/relay-examples.git
