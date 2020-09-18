@@ -15,4 +15,4 @@ yarn-error.log
 .idea
 *.pem
 dist
-package-lock
+package-lock.json

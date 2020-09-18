@@ -1,0 +1,5 @@
+services:
+  - docker
+dist: xenial
+script:
+  - docker-compose up --abort-on-container-exit

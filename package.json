@@ -16,7 +16,8 @@
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "test": "jest --config ./__test__/jest.config.json",
     "relay": "relay-compiler",
-    "watch:chrome:frontend": "cross-env NODE_ENV=development node ./shells/browser/chrome/watch"
+    "watch:chrome:frontend": "cross-env NODE_ENV=development node ./shells/browser/chrome/watch",
+    "docker-test": "docker-compose up"
   },
   "devEngines": {
     "node": "10.x || 11.x"
