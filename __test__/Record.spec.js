@@ -9,10 +9,10 @@ import Record from '../src/devtools/view/Components/Record';
 
 configure({ adapter: new Adapter() });
 
-describe('Record', () => {
+xdescribe('Record', () => {
   let wrapper;
-  let children;
-  const props = {
+  let children; //alternative to .next, not always required.
+  const props = { //hardcode in what to pass into component
     "hi": true,
     "nested": { "this": "that" }
   }
@@ -22,7 +22,7 @@ describe('Record', () => {
     children = wrapper.children()
   });
 
-  it('Renders a <div> tag with a className of "records"', () => {
+  it('Renders a <div> tag with a className of "records"', () => { //we are using methods from enzyme library so look at the docs
     expect(wrapper.type()).toEqual('div');
     expect(wrapper.hasClass('records')).toEqual(true);
   });

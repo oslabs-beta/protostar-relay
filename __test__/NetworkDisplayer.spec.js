@@ -6,7 +6,7 @@ import NetworkDisplayer from '../src/devtools/view/NetworkDisplayer';
 
 configure({ adapter: new Adapter() });
 
-describe('NetworkDisplayer', () => {
+xdescribe('NetworkDisplayer', () => {
   let wrapper;
   const props = {}
 

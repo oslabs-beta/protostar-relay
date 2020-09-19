@@ -6,7 +6,7 @@ import StoreDisplayer from '../src/devtools/view/StoreDisplayer';
 
 configure({ adapter: new Adapter() });
 
-describe('StoreDisplayer', () => {
+xdescribe('StoreDisplayer', () => {
   let wrapper;
   const props = {}
 
