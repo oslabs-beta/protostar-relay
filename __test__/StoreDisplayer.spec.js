@@ -9,40 +9,15 @@ configure({ adapter: new Adapter() });
 describe('StoreDisplayer', () => {
 
   let wrapper;
-  const updateRecords = jest.fn();
-  const setState = jest.fn();
-  const useStateSpy = jest.spyOn(React, 'useState')
-  useStateSpy.mockImplementation((init) => [init, setState]);
   const store = { "hi": "there" }
 
   beforeAll(() => {
     wrapper = shallow(<StoreDisplayer store={store} />);
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it("Does stuff", () => {
-    updateRecords("")
-    expect(setState).toHaveBeenCalledWith({});
-  })
-  describe('updateRecords', () => {
-    //check output type
-    //if store is undefined then setRecordsList not invoked
-    //will filter store by type and id
-
-  })
-
-  describe('generateComponentsList', () => {
-
-  })
-
-  describe('Rendered components', () => {
-    let wrapper;
-    const props = {}
-
-
+  it("Has a reset button", () => {
+    wrapper.find('button').simulate('click');
+    expect(wrapper.find('Record').props()).toEqual(store)
   })
 
 });
