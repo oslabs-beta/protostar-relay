@@ -1,4 +1,4 @@
-![{ proto* }](./assets/protologo.png)
+![{ proto* }](~/assets/protologo.png)
 
 <div align="center">
 <h1>Proto Relay</h1>
