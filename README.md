@@ -1,17 +1,15 @@
-- insert logo here
+![](./assets/protologo.gif)
 
-# protostar
-The repo formally known as {proto*}
-- insert brief description here
+# Proto Relay
+Proto Relay is a Chrome extension devtool for React Relay based off the official devtool. It is designed to be light-weight, performant, and easy-to-use. 
 
 ## Chrome Web Store
-From the Chrome Web Store: [click here]().
+Get it on the Chrome Extension Store: [click here]().
 
 ## Features
-MVP Features
- [x] Preview Relay store content from the Chrome devtools panel
- [x] View store content over time with included snapshots
- [ ] View store mutations and network queries
+- [x] Preview Relay store content from the Chrome devtools panel
+- [x] View store content over time with included snapshots
+- [x] View store mutations and network queries
 
 ## File Structure
 
@@ -38,7 +36,7 @@ npm run build
 
 
 ## Authors
- [Aryeh Kobrinsky](https://github.com/akobrinsky)
- [Liz Lotto](https://github.com/elizlotto)
- [Marc Burnie](https://github.com/marcburnie)
- [Qwen Ballard](https://github.com/qwenballard)
+[Aryeh Kobrinsky](https://github.com/akobrinsky)
+[Liz Lotto](https://github.com/elizlotto)
+[Marc Burnie](https://github.com/marcburnie)
+[Qwen Ballard](https://github.com/qwenballard)
