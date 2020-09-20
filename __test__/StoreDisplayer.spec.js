@@ -6,16 +6,18 @@ import StoreDisplayer from '../src/devtools/view/StoreDisplayer';
 
 configure({ adapter: new Adapter() });
 
-xdescribe('StoreDisplayer', () => {
+describe('StoreDisplayer', () => {
+
   let wrapper;
-  const props = {}
+  const store = { "hi": "there" }
 
   beforeAll(() => {
-    wrapper = shallow(<StoreDisplayer {...props} />);
+    wrapper = shallow(<StoreDisplayer store={store} />);
   });
 
-  it("My Test Case", () => {
-    expect(true).toEqual(true);
-  });
+  it("Has a reset button", () => {
+    wrapper.find('button').simulate('click');
+    expect(wrapper.find('Record').props()).toEqual(store)
+  })
 
 });
