@@ -19,7 +19,7 @@ Get it on the Chrome Extension Store: [click here]().
 
 ## Installation
 
-```javascript
+```node
 # Yarn
 yarn npm install
 yarn run build
