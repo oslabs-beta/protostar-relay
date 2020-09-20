@@ -9,9 +9,9 @@ From the Chrome Web Store: [click here]().
 
 ## Features
 MVP Features
-[x] Preview Relay store content from the Chrome devtools panel
-[x] View store content over time with included snapshots
-[ ] View store mutations and network queries
+ [x] Preview Relay store content from the Chrome devtools panel
+ [x] View store content over time with included snapshots
+ [ ] View store mutations and network queries
 
 ## File Structure
 
@@ -38,7 +38,7 @@ npm run build
 
 
 ## Authors
-[Aryeh Kobrinsky](https://github.com/akobrinsky)
-[Liz Lotto](https://github.com/elizlotto)
-[Marc Burnie](https://github.com/marcburnie)
-[Qwen Ballard](https://github.com/qwenballard)
+ [Aryeh Kobrinsky](https://github.com/akobrinsky)
+ [Liz Lotto](https://github.com/elizlotto)
+ [Marc Burnie](https://github.com/marcburnie)
+ [Qwen Ballard](https://github.com/qwenballard)
