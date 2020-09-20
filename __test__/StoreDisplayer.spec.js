@@ -7,15 +7,42 @@ import StoreDisplayer from '../src/devtools/view/StoreDisplayer';
 configure({ adapter: new Adapter() });
 
 describe('StoreDisplayer', () => {
+
   let wrapper;
-  const props = {}
+  const updateRecords = jest.fn();
+  const setState = jest.fn();
+  const useStateSpy = jest.spyOn(React, 'useState')
+  useStateSpy.mockImplementation((init) => [init, setState]);
+  const store = { "hi": "there" }
 
   beforeAll(() => {
-    wrapper = shallow(<StoreDisplayer {...props} />);
+    wrapper = shallow(<StoreDisplayer store={store} />);
   });
 
-  it("My Test Case", () => {
-    expect(true).toEqual(true);
+  afterEach(() => {
+    jest.clearAllMocks();
   });
+
+  it("Does stuff", () => {
+    updateRecords("")
+    expect(setState).toHaveBeenCalledWith({});
+  })
+  describe('updateRecords', () => {
+    //check output type
+    //if store is undefined then setRecordsList not invoked
+    //will filter store by type and id
+
+  })
+
+  describe('generateComponentsList', () => {
+
+  })
+
+  describe('Rendered components', () => {
+    let wrapper;
+    const props = {}
+
+
+  })
 
 });

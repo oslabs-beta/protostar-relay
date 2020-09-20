@@ -1,37 +1,53 @@
 {
   "manifest_version": 2,
-  "name": "Relay Developer Tools",
-  "description": "Adds Relay debugging tools to the Chrome Developer Tools.",
-  "version": "0.9.8",
-  "version_name": "0.9.8",
-  "update_url": "https://our.intern.facebook.com/intern/browser_extensions/chrome/update.xml",
-
+  "name": "Proto Relay",
+  "description": "Adds Relay debugging tools to the Chrome DevTool panel",
+  "version": "1.0.0",
+  "version_name": "1.0.0",
+  "update_url": "https://github.com/oslabs-beta/protostar-relay",
   "minimum_chrome_version": "78",
-
+  "icons": {
+    "16": "assets/proto16.png",
+    "32": "assets/proto32.png",
+    "48": "assets/proto48.png",
+    "128": "assets/proto128.png"
+  },
   "browser_action": {
+    "default_icon": {
+      "16": "assets/proto16.png",
+      "32": "assets/proto32.png",
+      "48": "assets/proto48.png",
+      "128": "assets/proto128.png"
+    },
     "default_popup": "popups/disabled.html"
   },
-
   "devtools_page": "main.html",
-
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "web_accessible_resources": [
     "main.html",
     "build/backend.js",
     "build/renderer.js"
   ],
-
   "background": {
-    "scripts": ["build/background.js"],
+    "scripts": [
+      "build/background.js"
+    ],
     "persistent": false
   },
-
-  "permissions": ["file:///*", "http://*/*", "https://*/*", "webNavigation"],
-
+  "permissions": [
+    "file:///*",
+    "http://*/*",
+    "https://*/*",
+    "webNavigation"
+  ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["build/injectGlobalHook.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/injectGlobalHook.js"
+      ],
       "run_at": "document_start"
     }
   ]
