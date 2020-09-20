@@ -1,6 +1,8 @@
-![](./assets/protologo.gif)
+![{ proto* }](./assets/protologo.png)
 
-# Proto Relay
+<div align="center">
+<h1>Proto Relay</h1>
+
 Proto Relay is a Chrome extension devtool for React Relay based off the official devtool. It is designed to be light-weight, performant, and easy-to-use. 
 
 ## Chrome Web Store
@@ -35,8 +37,9 @@ npm run build
 ## Demo
 
 
-## Authors
-[Aryeh Kobrinsky](https://github.com/akobrinsky)
-[Liz Lotto](https://github.com/elizlotto)
-[Marc Burnie](https://github.com/marcburnie)
+## Contributors
+
+[Aryeh Kobrinsky](https://github.com/akobrinsky), 
+[Liz Lotto](https://github.com/elizlotto), 
+[Marc Burnie](https://github.com/marcburnie), 
 [Qwen Ballard](https://github.com/qwenballard)
