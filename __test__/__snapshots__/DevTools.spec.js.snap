@@ -1,0 +1,314 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DevTools Renders correctly 1`] = `
+Array [
+  <div
+    className="navigation"
+  >
+    <form
+      className="env-select"
+    >
+      <select
+        className="env-select"
+        onChange={[Function]}
+      >
+        <option
+          value={1}
+        >
+          first
+        </option>
+        <option
+          value={2}
+        >
+          second
+        </option>
+        <option
+          value={3}
+        >
+          third
+        </option>
+      </select>
+    </form>
+    <div
+      className="tabs is-toggle"
+    >
+      <ul>
+        <li
+          className="is-active"
+        >
+          <a
+            id="storeSelector"
+            onClick={[Function]}
+          >
+            <span
+              className="icon is-small"
+            >
+              <i
+                className="fas fa-database"
+              />
+            </span>
+            <span>
+              Store
+            </span>
+          </a>
+        </li>
+        <li
+          className={false}
+        >
+          <a
+            id="networkSelector"
+            onClick={[Function]}
+          >
+            <span
+              className="icon is-small"
+            >
+              <i
+                className="fas fa-network-wired"
+              />
+            </span>
+            <span>
+              Network
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>,
+  <div
+    className="columns"
+  >
+    <div
+      className="column"
+    >
+      <div
+        className="display-box"
+      >
+        <div
+          className="snapshot-wrapper is-flex"
+        >
+          <input
+            className="input is-small snapshot-btn is-primary"
+            onChange={[Function]}
+            placeholder="take a store snapshot"
+            type="text"
+            value=""
+          />
+          <button
+            className="button is-small is-link"
+            onClick={[Function]}
+          >
+            Snapshot
+          </button>
+        </div>
+      </div>
+      <div
+        className="snapshots"
+      >
+        <h2
+          className="slider-textcolor"
+        >
+          Store Timeline
+        </h2>
+        <div
+          aria-disabled={false}
+          className="input-range"
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}
+        >
+          <span
+            className="input-range__label input-range__label--min"
+          >
+            <span
+              className="input-range__label-container"
+            >
+              0
+            </span>
+          </span>
+          <div
+            className="input-range__track input-range__track--background"
+            onMouseDown={[Function]}
+            onTouchStart={[Function]}
+          >
+            <div
+              className="input-range__track input-range__track--active"
+              style={
+                Object {
+                  "left": "0%",
+                  "width": "0%",
+                }
+              }
+            />
+            <span
+              className="input-range__slider-container"
+              style={
+                Object {
+                  "left": "0%",
+                  "position": "absolute",
+                }
+              }
+            >
+              <span
+                className="input-range__label input-range__label--value"
+              >
+                <span
+                  className="input-range__label-container"
+                >
+                  0
+                </span>
+              </span>
+              <div
+                aria-valuemax={1}
+                aria-valuemin={0}
+                aria-valuenow={0}
+                className="input-range__slider"
+                draggable="false"
+                onKeyDown={[Function]}
+                onMouseDown={[Function]}
+                onTouchStart={[Function]}
+                role="slider"
+                tabIndex="0"
+              />
+            </span>
+          </div>
+          <span
+            className="input-range__label input-range__label--max"
+          >
+            <span
+              className="input-range__label-container"
+            >
+              1
+            </span>
+          </span>
+        </div>
+        <div
+          className="snapshot-nav"
+        >
+          <button
+            class="button is-small"
+            onClick={[Function]}
+          >
+            Backward
+          </button>
+          <button
+            class="button is-small"
+            onClick={[Function]}
+          >
+            Current
+          </button>
+          <button
+            class="button is-small"
+            onClick={[Function]}
+          >
+            Forward
+          </button>
+        </div>
+        <div
+          className="snapshot-info"
+        />
+      </div>
+    </div>
+    <div
+      className="column"
+    >
+      <p
+        class="control has-icons-left"
+      >
+        <input
+          className="input is-small is-primary"
+          onChange={[Function]}
+          placeholder="Search"
+          type="text"
+        />
+        <button
+          className="button is-small is-link"
+          onClick={[Function]}
+        >
+          Reset
+        </button>
+        <span
+          class="icon is-left"
+        >
+          <i
+            class="fas fa-search"
+          />
+        </span>
+      </p>
+      <aside
+        className="menu"
+      >
+        <p
+          className="menu-label"
+        >
+          Record List
+        </p>
+        <ul
+          className="menu-list"
+        />
+      </aside>
+    </div>
+    <div
+      className="column"
+    >
+      <div
+        className="display-box"
+      >
+        <div
+          className="records"
+        />
+      </div>
+    </div>
+  </div>,
+  <div
+    className="is-hidden"
+  >
+    <div
+      className="column is-one-third"
+    >
+      <p
+        class="control has-icons-left"
+      >
+        <input
+          className="input is-small is-primary"
+          onChange={[Function]}
+          placeholder="Search"
+          type="text"
+        />
+        <button
+          className="button is-small is-link"
+          onClick={[Function]}
+        >
+          Reset
+        </button>
+        <span
+          class="icon is-left"
+        >
+          <i
+            class="fas fa-search"
+          />
+        </span>
+      </p>
+      <aside
+        className="menu"
+      >
+        <p
+          className="menu-label"
+        >
+          Event List
+        </p>
+        <ul
+          className="menu-list"
+        />
+      </aside>
+    </div>
+    <div
+      className="column"
+    >
+      <div
+        className="display-box"
+      />
+    </div>
+  </div>,
+]
+`;

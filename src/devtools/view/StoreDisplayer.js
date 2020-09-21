@@ -40,13 +40,13 @@ const StoreDisplayer = ({ store }) => {
     updateRecords("");
   }, [store]);
 
-    //handle menu click events
-     function handleMenuClick(e, selection) {
-      //set new selection
-      setSelection(selection);
-      //update display with current selection
-      updateRecords(selection);
-    }
+  //handle menu click events
+  function handleMenuClick(e, selection) {
+    //set new selection
+    setSelection(selection);
+    //update display with current selection
+    updateRecords(selection);
+  }
 
   //shows you the entire store
   function handleReset(e) {
@@ -71,8 +71,6 @@ const StoreDisplayer = ({ store }) => {
   const typeList = [];
 
   function generateComponentsList() {
-    console.log("recordsList", recordsList)
-    console.log("store from generateComponentsList", store)
 
     //create menu list of all types
     const menuList = {}
@@ -90,7 +88,7 @@ const StoreDisplayer = ({ store }) => {
         .filter(id => new RegExp(searchResults, "i").test(JSON.stringify(recordsList[id])))
         .map(id => {
           return (
-            <li>
+            <li key={id}>
               <a id={"id-" + id} className={(selection === ("id-" + id)) && "is-active"} onClick={(e) => { handleMenuClick(e, ("id-" + id)) }}>{id}</a>
             </li>
           )
@@ -98,7 +96,7 @@ const StoreDisplayer = ({ store }) => {
       //pushes the new type element with child ids to the typeList component array
       if (idList.length !== 0) {
         typeList.push(
-          <li>
+          <li key={type}>
             <a id={"type-" + type} className={(selection === ("type-" + type)) && "is-active"} onClick={(e) => { handleMenuClick(e, ("type-" + type)) }}>
               {type}
             </a>

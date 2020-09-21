@@ -43,8 +43,8 @@ describe('StoreTimeline', () => {
     wrapper = shallow(<StoreTimeline {...props} />);
   });
 
-  it("Has a StoreDisplayer component", () => {
-
+  it("Renders a StoreDisplayer component", () => {
+    expect(wrapper.find('StoreDisplayer').length).toEqual(1)
   })
 
   it("Passes the store as a prop to StoreDisplayer", () => {
