@@ -148,8 +148,8 @@ const StoreTimeline = ({ currentEnvID }) => {
       <StoreDisplayer
         store={
           !timeline[currentEnvID] ||
-          !timeline[currentEnvID][snapshotIndex] ||
-          snapshotIndex === timeline[currentEnvID].length
+            !timeline[currentEnvID][snapshotIndex] ||
+            snapshotIndex === timeline[currentEnvID].length
             ? liveStore
             : timeline[currentEnvID][snapshotIndex].storage
         }

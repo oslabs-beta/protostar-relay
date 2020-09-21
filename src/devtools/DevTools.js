@@ -127,9 +127,6 @@ export default function DevTools({
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 
-  console.log("Rendering DevTools")
-  console.log("currentEnvID", currentEnvID)
-
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
@@ -146,7 +143,7 @@ export default function DevTools({
           <div className="tabs is-toggle">
             <ul>
               <li className={selector === "Store" && "is-active"}>
-                <a onClick={(e) => handleTabClick(e, "Store")}>
+                <a id="storeSelector" onClick={(e) => handleTabClick(e, "Store")}>
                   <span className="icon is-small">
                     <i className="fas fa-database"></i>
                   </span>
@@ -154,7 +151,7 @@ export default function DevTools({
                 </a>
               </li>
               <li className={selector === "Network" && "is-active"}>
-                <a
+                <a id="networkSelector"
                   onClick={(e) => {
                     handleTabClick(e, "Network");
                   }}
