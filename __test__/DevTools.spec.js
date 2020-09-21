@@ -86,4 +86,9 @@ describe('DevTools', () => {
     expect(wrapper.find('StoreTimeline').parent().hasClass("is-hidden")).toEqual(false);
     expect(wrapper.find('NetworkDisplayer').parent().hasClass("is-hidden")).toEqual(true);
   })
+
+  it('Renders correctly', () => {
+    const tree = renderer.create(<DevTools {...props} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  })
 });
