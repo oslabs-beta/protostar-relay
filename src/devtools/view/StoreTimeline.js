@@ -89,7 +89,7 @@ const StoreTimeline = ({ currentEnvID }) => {
 
   return (
     <React.Fragment>
-      <div className="column">
+      <div className="column is-full-mobile is-one-quarter-desktop">
         <div className="display-box">
           <div className="snapshot-wrapper is-flex">
             <input
@@ -107,8 +107,7 @@ const StoreTimeline = ({ currentEnvID }) => {
             </button>
           </div>
         </div>
-        <div className="snapshots">
-          <h2 className="slider-textcolor">Store Timeline</h2>
+        <div className="snapshots is-flex-mobile">
           <InputRange
             maxValue={
               timeline[currentEnvID] ? timeline[currentEnvID].length : 0
@@ -117,29 +116,33 @@ const StoreTimeline = ({ currentEnvID }) => {
             value={snapshotIndex}
             onChange={(value) => setSnapshotIndex(value)}
           />
-          <div className="snapshot-nav">
+          <div className="snapshot-nav has-text-centered has-text-right-mobile">
             <button
-              class="button is-small"
+              class="button is-small is-info is-light"
               onClick={() => {
                 if (snapshotIndex !== 0) setSnapshotIndex(snapshotIndex - 1);
               }}
             >
-              Backward
+              <span className="icon is-medium">
+                <i className="fas fa-fast-backward"></i>
+              </span>
             </button>
             <button
-              class="button is-small"
+              class="button is-small is-info is-light"
               onClick={() => setSnapshotIndex(timeline[currentEnvID].length)}
             >
               Current
             </button>
             <button
-              class="button is-small"
+              class="button is-small is-info is-light"
               onClick={() => {
                 if (snapshotIndex !== timeline[currentEnvID].length)
                   setSnapshotIndex(snapshotIndex + 1);
               }}
             >
-              Forward
+              <span className="icon is-medium">
+                <i className="fas fa-fast-forward"></i>
+              </span>
             </button>
           </div>
           <div className="snapshot-info"></div>

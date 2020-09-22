@@ -18,27 +18,36 @@
 .snapshot-nav button {
   margin-right: 12px;
 }
+
+#container {
+  padding: 10px 0 0 10px;
+}
+.navigation {
+  padding: 0 0 10px 0;
+}
+.tabs {
+  margin-left: 10px;
+}
+button.button.is-small.is-link {
+  margin-left: 10px;
+}
+.column {
+  border-right: 1px solid #e4e0e0;
+  height: 90vh;
+}
+.scrollable {
+  overflow: scroll;
+}
+
+
 //***********************************
 //**********    STORE    ************
 //***********************************
-
-.column {
-  height: 100vh;
-  border: 1px grey solid;
-  width: 33%;
-  overflow-y: scroll;
-}
-
-//***** TIMELINE *****
 
 .slider-textcolor {
   color: #060606;
   font-weight: bold;
   margin: 20px 0;
-}
-
-#container {
-  padding: 10px;
 }
 
 //***** MENU *****
@@ -50,7 +59,9 @@
   width: 100%;
   font-size: 10px;
 }
-
+.menu-list a {
+  word-break: break-all;
+}
 .records {
   width: 100%;
   margin-left: 2em;
@@ -194,23 +205,19 @@
   margin-left: 0em;
 }
 
-//STORE DISPLAY
-.display-box {
-  border-radius: 5px;
-  width: 100%;
-  font-size: 10px;
+@media screen and (max-width: 768px) {
+  .column {
+    height: auto;
+  }
+  .snapshots {
+    align-items: center;
+  }
+  .snapshot-nav {
+    margin-top: 0;
+    width: 40%;
+  }
+  .input-range {
+    height: 1rem;
+    width: 75%;
+  }
 }
-
-.key {
-  font-weight: bold;
-  word-wrap: break-word;
-}
-
-.value {
-  word-wrap: break-word;
-}
-
-//***********************************
-//**********   NETWORK   ************
-//***********************************
-
