@@ -93,9 +93,7 @@ export default function DevTools({
     store.getEnvironmentIDs()
   );
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
-
   const [selector, setSelector] = useState("Store");
-
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
 

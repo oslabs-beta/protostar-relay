@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import InputRange from "react-input-range";
 import { BridgeContext, StoreContext } from "../context";
 import StoreDisplayer from "./StoreDisplayer";
+import SnapshotLinks from "./Components/SnapshotLinks";
 // import { detailedDiff } from 'deep-object-diff';
 
 const StoreTimeline = ({ currentEnvID }) => {
@@ -11,11 +12,12 @@ const StoreTimeline = ({ currentEnvID }) => {
   const [snapshotIndex, setSnapshotIndex] = useState(0);
   const [timelineLabel, setTimelineLabel] = useState("");
   const [liveStore, setLiveStore] = useState({});
+
   const [timeline, setTimeline] = useState({
     [currentEnvID]: [
       {
         label: "at startup",
-        date: Date.now(),
+        date: new Date(),
         storage: liveStore,
       },
     ],
@@ -24,7 +26,7 @@ const StoreTimeline = ({ currentEnvID }) => {
   const handleClick = (e) => {
     e.preventDefault();
     const timelineInsert = {};
-    const timeStamp = Date.now();
+    const timeStamp = new Date();
     timelineInsert.label = timelineLabel;
     timelineInsert.date = timeStamp;
     timelineInsert.storage = liveStore;
@@ -32,6 +34,10 @@ const StoreTimeline = ({ currentEnvID }) => {
     setTimeline({ ...timeline, [currentEnvID]: newTimeline });
     setTimelineLabel("");
     setSnapshotIndex(newTimeline.length);
+  };
+
+  const handleSnapshot = (index) => {
+    setSnapshotIndex(index);
   };
 
   const updateStoreHelper = (storeObj) => {
@@ -72,7 +78,7 @@ const StoreTimeline = ({ currentEnvID }) => {
         [currentEnvID]: [
           {
             label: "current",
-            date: Date.now(),
+            date: new Date(),
             storage: allRecords,
           },
         ],
@@ -145,7 +151,9 @@ const StoreTimeline = ({ currentEnvID }) => {
               </span>
             </button>
           </div>
-          <div className="snapshot-info"></div>
+          <div className="snapshot-info mt-3 is-size-7">
+              <SnapshotLinks currentEnvID={currentEnvID} handleSnapshot={handleSnapshot} timeline={timeline}/>
+          </div>
         </div>
       </div>
       <StoreDisplayer
