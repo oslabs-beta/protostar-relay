@@ -113,7 +113,7 @@ const StoreTimeline = ({ currentEnvID }) => {
           </div>
         </div>
         <div className="snapshots columns is-multiline">
-          <div className="timeline-nav column is-full-desktop is-flex-mobile">
+          <div className="timeline-nav column is-full-desktop is-flex-mobile" id="timeline-mini-col">
             <InputRange
               maxValue={
                 timeline[currentEnvID] ? timeline[currentEnvID].length : 0
@@ -152,7 +152,7 @@ const StoreTimeline = ({ currentEnvID }) => {
               </button>
             </div>
           </div>
-          <div className="snapshot-info is-size-7 column is-full-desktop pt-0">
+          <div className="snapshot-info is-size-7 column is-full-desktop pt-0" id="snapshot-info-col">
               <SnapshotLinks currentEnvID={currentEnvID} handleSnapshot={handleSnapshot} timeline={timeline}/>
           </div>
         </div>
