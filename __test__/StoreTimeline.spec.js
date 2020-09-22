@@ -9,46 +9,15 @@ configure({ adapter: new Adapter() });
 describe('StoreTimeline', () => {
   let wrapper;
   const props = {
-    store: {
-      '1': {
-        '__id': '1',
-        '__typename': 'User',
-        'name': 'Marc'
-      },
-      '2': {
-        '__id': '2',
-        '__typename': 'User',
-        'name': 'Aryeh'
-      },
-      '3': {
-        '__id': '3',
-        '__typename': 'User',
-        'name': 'Liz'
-      },
-      '4': {
-        '__id': '4',
-        '__typename': 'User',
-        'name': 'Qwen'
-      },
-      '5': {
-        '__id': '5',
-        '__typename': 'Post',
-        'text': 'Hi'
-      },
-
-    }
+    currentEnvID: 1,
   }
 
   beforeAll(() => {
     wrapper = shallow(<StoreTimeline {...props} />);
   });
 
-  it("Renders a StoreDisplayer component", () => {
-    expect(wrapper.find('StoreDisplayer').length).toEqual(1)
-  })
-
-  it("Passes the store as a prop to StoreDisplayer", () => {
-
+  it("Renders a StoreDisplayer component and passes store as a prop", () => {
+    expect(wrapper.find('StoreDisplayer').length).toEqual(1);
   })
 
   it("Passes the store based on the currentEnvID", () => {
