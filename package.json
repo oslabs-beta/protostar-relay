@@ -14,7 +14,7 @@
     "start:core:backend": "cd ./packages/relay-devtools-core && yarn start:backend",
     "start:prod": "cd ./shells/dev && cross-env NODE_ENV=production cross-env TARGET=local webpack-dev-server --open",
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "test": "jest --config ./__test__/jest.config.json",
+    "test": "jest --config ./__tests__/jest.config.json",
     "install-app": "npm i --prefix ./relay-examples/todo/",
     "start-test-app": "npm start --prefix ./relay-examples/todo/",
     "relay": "relay-compiler",

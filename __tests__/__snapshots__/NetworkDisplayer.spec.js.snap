@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NetworkDisplayer Renders correctly 1`] = `
+Array [
+  <div
+    className="column is-one-third"
+  >
+    <p
+      class="control has-icons-left"
+    >
+      <input
+        className="input is-small is-primary"
+        onChange={[Function]}
+        placeholder="Search"
+        type="text"
+      />
+      <button
+        className="button is-small is-link"
+        onClick={[Function]}
+      >
+        Reset
+      </button>
+      <span
+        class="icon is-left"
+      >
+        <i
+          class="fas fa-search"
+        />
+      </span>
+    </p>
+    <aside
+      className="menu"
+    >
+      <p
+        className="menu-label"
+      >
+        Event List
+      </p>
+      <ul
+        className="menu-list"
+      />
+    </aside>
+  </div>,
+  <div
+    className="column"
+  >
+    <div
+      className="display-box"
+    />
+  </div>,
+]
+`;

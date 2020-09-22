@@ -63,12 +63,7 @@ const StoreDisplayer = ({ store }) => {
   }, 300)
   function handleSearch(e) {
     //debounce search
-    console.log("target", e.target.value)
-    // setSelection("");
-    // updateRecords("");
-    // setSearchResults(e.target.value)
     debounced(e.target.value)
-    console.log("searchResults", searchResults)
   }
 
 

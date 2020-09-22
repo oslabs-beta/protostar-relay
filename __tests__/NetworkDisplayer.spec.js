@@ -18,4 +18,13 @@ describe('NetworkDisplayer', () => {
     expect(true).toEqual(true);
   });
 
+  it("My Test Case", () => {
+    expect(wrapper.find("Record").length).toEqual(0)
+  });
+
+  it('Renders correctly', () => {
+    const tree = renderer.create(<NetworkDisplayer {...props} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  })
+
 });
