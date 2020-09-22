@@ -89,7 +89,7 @@ describe('DevTools', () => {
   })
 
   it('Renders correctly', () => {
-    const date = new Date('December 19, 1985 9:03:00 GMT-05:00');
+    const date = new Date(Date.UTC(2020));
     global.Date = jest.fn(() => date);
     const tree = renderer.create(<DevTools {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
