@@ -93,9 +93,7 @@ export default function DevTools({
     store.getEnvironmentIDs()
   );
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
-
   const [selector, setSelector] = useState("Store");
-
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
 
@@ -130,8 +128,8 @@ export default function DevTools({
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-        <div className="navigation">
-          <form className="env-select">
+        <div className="navigation is-flex">
+          <form className="env-select select is-small">
             <select className="env-select" onChange={handleChange}>
               {environmentIDs.map(id => {
                 return (
@@ -140,7 +138,7 @@ export default function DevTools({
               })}
             </select>
           </form>
-          <div className="tabs is-toggle">
+          <div className="tabs is-toggle is-small">
             <ul>
               <li className={selector === "Store" && "is-active"}>
                 <a id="storeSelector" onClick={(e) => handleTabClick(e, "Store")}>
@@ -165,10 +163,10 @@ export default function DevTools({
             </ul>
           </div>
         </div>
-        <div className={selector === "Store" ? "columns" : "is-hidden"}>
+        <div className={selector === "Store" ? "columns mb-0 is-multiline is-mobile" : "is-hidden"}>
           <StoreTimeline currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer} />
         </div>
-        <div className={selector === "Network" ? "columns" : "is-hidden"}>
+        <div className={selector === "Network" ? "columns mb-0 is-multiline is-mobile" : "is-hidden"}>
           <NetworkDisplayer />
         </div>
       </StoreContext.Provider>
