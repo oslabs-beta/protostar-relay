@@ -114,8 +114,8 @@ const StoreDisplayer = ({ store }) => {
 
   return (
     <React.Fragment>
-      <div className="column">
-        <p class="control has-icons-left">
+      <div className="column is-half-mobile scrollable">
+        <p class="control has-icons-left is-flex">
           <input className="input is-small is-primary" type="text" placeholder="Search" onChange={(e) => { handleSearch(e) }}></input>
           <button
             className="button is-small is-link"
@@ -138,7 +138,7 @@ const StoreDisplayer = ({ store }) => {
           </ul>
         </aside>
       </div>
-      <div className="column">
+      <div className="column is-half-mobile scrollable">
         <div className="display-box">
           <Record {...recordsList} />
         </div>

@@ -9,10 +9,35 @@ configure({ adapter: new Adapter() });
 
 describe('StoreTimeline', () => {
   let wrapper;
-  let parent;
-  const props = { //perhaps change this prop at some point
-    "hi": true,
-    "nested": { "this": "that" }
+  const props = {
+    store: {
+      '1': {
+        '__id': '1',
+        '__typename': 'User',
+        'name': 'Marc'
+      },
+      '2': {
+        '__id': '2',
+        '__typename': 'User',
+        'name': 'Aryeh'
+      },
+      '3': {
+        '__id': '3',
+        '__typename': 'User',
+        'name': 'Liz'
+      },
+      '4': {
+        '__id': '4',
+        '__typename': 'User',
+        'name': 'Qwen'
+      },
+      '5': {
+        '__id': '5',
+        '__typename': 'Post',
+        'text': 'Hi'
+      },
+
+    }
   }
 
   beforeAll(() => {
@@ -20,32 +45,60 @@ describe('StoreTimeline', () => {
     parent = wrapper.children().first()
   });
 
-  it('Renders a <div> tag with a className of "column"', () => {
-    // expect(children.length).toEqual(2); 
-    // expect(children.first().type()).toEqual('div'); // <-- referring to nested div tags
-    expect(parent.hasClass('column')).toEqual(true);
-    // expect(children.last().type()).toEqual('div'); // <-- function storeDisplayer
-    // expect(children.hasClass('column')).toEqual(true);
-  });
+  xit("Has a StoreDisplayer component", () => {
 
-  // it('Has two children with <div> tag className of "display-box" and "snapshots"', () => {
-  //   expect(children.length).toEqual(2);
-  //   expect(wrapper.children.type()).toEqual('div');
-  //   expect(wrapper.find(`.column`).children.first().hasClass('display-box')).toEqual(true);
-  //   expect(wrapper.find(`.column`).children.last().hasClass('snapshots')).toEqual(true);
-  // });
+  })
 
-  // it('Has')
+  xit("Passes the store as a prop to StoreDisplayer", () => {
 
-  // it('Has one child <div> tag with a className of "snapshot-wrapper" with a  ', () => {
-  //   expect(children.length).toEqual(2);
-  //   expect(children.first().hasClass('objectProperty')).toEqual(true);
-  //   expect(children.last().hasClass('nestedObject')).toEqual(true);
-  // })
+  })
 
+  xit("Passes the store based on the currentEnvID", () => {
+
+  })
+
+
+  describe("Snapshots", () => {
+
+    xit("Takes a snapshot at startup", () => {
+
+    })
+
+    xit("Has a snapshot button that takes and saves a snapshot", () => {
+
+    })
+
+    xit("Defaults to displaying the latest store value when a snapshot is taken", () => {
+
+    })
+
+    xit("Remembers snapshots when switching between environments", () => {
+
+    })
+
+    xit("Has a snapshot text input", () => {
+
+    })
+
+    xit("Has a previous buttons to move to the previous snapshot", () => {
+
+    })
+
+    xit("Has a next button to move to the previous snapshot", () => {
+
+    })
+
+    xit("Has a current button that shows the current store value", () => {
+
+    })
+
+    xit("Has a slider that updates when a new snapshot is taken and when switching between environments", () => {
+
+    })
+  })
+
+  it('Renders correctly', () => {
+    const tree = renderer.create(<StoreTimeline {...props} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  })
 });
-
-// it('Renders a <div> tag with a className of "records"', () => { //we are using methods from enzyme library so look at the docs
-//   expect(wrapper.type()).toEqual('div');
-//   expect(wrapper.hasClass('records')).toEqual(true);
-// });
