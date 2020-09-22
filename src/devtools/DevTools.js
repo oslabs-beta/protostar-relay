@@ -163,10 +163,10 @@ export default function DevTools({
             </ul>
           </div>
         </div>
-        <div className={selector === "Store" ? "columns is-multiline is-mobile" : "is-hidden"}>
+        <div className={selector === "Store" ? "columns mb-0 is-multiline is-mobile" : "is-hidden"}>
           <StoreTimeline currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer} />
         </div>
-        <div className={selector === "Network" ? "columns is-multiline is-mobile" : "is-hidden"}>
+        <div className={selector === "Network" ? "columns mb-0 is-multiline is-mobile" : "is-hidden"}>
           <NetworkDisplayer />
         </div>
       </StoreContext.Provider>

@@ -8,7 +8,6 @@ import SnapshotLinks from "./Components/SnapshotLinks";
 const StoreTimeline = ({ currentEnvID }) => {
   const store = useContext(StoreContext);
   const bridge = useContext(BridgeContext);
-  const [, forceUpdate] = useState({});
   const [snapshotIndex, setSnapshotIndex] = useState(0);
   const [timelineLabel, setTimelineLabel] = useState("");
   const [liveStore, setLiveStore] = useState({});
@@ -113,45 +112,47 @@ const StoreTimeline = ({ currentEnvID }) => {
             </button>
           </div>
         </div>
-        <div className="snapshots is-flex-mobile">
-          <InputRange
-            maxValue={
-              timeline[currentEnvID] ? timeline[currentEnvID].length : 0
-            }
-            minValue={0}
-            value={snapshotIndex}
-            onChange={(value) => setSnapshotIndex(value)}
-          />
-          <div className="snapshot-nav has-text-centered has-text-right-mobile">
-            <button
-              class="button is-small is-info is-light"
-              onClick={() => {
-                if (snapshotIndex !== 0) setSnapshotIndex(snapshotIndex - 1);
-              }}
-            >
-              <span className="icon is-medium">
-                <i className="fas fa-fast-backward"></i>
-              </span>
-            </button>
-            <button
-              class="button is-small is-info is-light"
-              onClick={() => setSnapshotIndex(timeline[currentEnvID].length)}
-            >
-              Current
-            </button>
-            <button
-              class="button is-small is-info is-light"
-              onClick={() => {
-                if (snapshotIndex !== timeline[currentEnvID].length)
-                  setSnapshotIndex(snapshotIndex + 1);
-              }}
-            >
-              <span className="icon is-medium">
-                <i className="fas fa-fast-forward"></i>
-              </span>
-            </button>
+        <div className="snapshots columns is-multiline">
+          <div className="timeline-nav column is-full-desktop is-flex-mobile">
+            <InputRange
+              maxValue={
+                timeline[currentEnvID] ? timeline[currentEnvID].length : 0
+              }
+              minValue={0}
+              value={snapshotIndex}
+              onChange={(value) => setSnapshotIndex(value)}
+            />
+            <div className="snapshot-nav has-text-centered has-text-right-mobile">
+              <button
+                class="button is-small is-info is-light"
+                onClick={() => {
+                  if (snapshotIndex !== 0) setSnapshotIndex(snapshotIndex - 1);
+                }}
+              >
+                <span className="icon is-medium">
+                  <i className="fas fa-fast-backward"></i>
+                </span>
+              </button>
+              <button
+                class="button is-small is-info is-light"
+                onClick={() => setSnapshotIndex(timeline[currentEnvID].length)}
+              >
+                Current
+              </button>
+              <button
+                class="button is-small is-info is-light"
+                onClick={() => {
+                  if (snapshotIndex !== timeline[currentEnvID].length)
+                    setSnapshotIndex(snapshotIndex + 1);
+                }}
+              >
+                <span className="icon is-medium">
+                  <i className="fas fa-fast-forward"></i>
+                </span>
+              </button>
+            </div>
           </div>
-          <div className="snapshot-info mt-3 is-size-7">
+          <div className="snapshot-info is-size-7 column is-full-desktop pt-0">
               <SnapshotLinks currentEnvID={currentEnvID} handleSnapshot={handleSnapshot} timeline={timeline}/>
           </div>
         </div>

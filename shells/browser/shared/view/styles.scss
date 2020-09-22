@@ -205,19 +205,29 @@ button.button.is-small.is-link {
   margin-left: 0em;
 }
 
+.snapshots .column {
+  height: auto;
+}
+
 @media screen and (max-width: 768px) {
   .column {
     height: auto;
   }
+  .column.is-half-mobile {
+    padding-top: 0;
+  }
   .snapshots {
-    align-items: center;
+    .column {
+      align-items: center;
+      height: auto;
+    }
   }
   .snapshot-nav {
     margin-top: 0;
     width: 40%;
   }
   .input-range {
-    height: 1rem;
-    width: 75%;
+    width: 70%;
+    margin: 25px 0;
   }
 }
