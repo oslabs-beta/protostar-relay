@@ -3,10 +3,10 @@
 exports[`StoreDisplayer Renders correctly 1`] = `
 Array [
   <div
-    className="column"
+    className="column is-half-mobile scrollable"
   >
     <p
-      class="control has-icons-left"
+      class="control has-icons-left is-flex"
     >
       <input
         className="input is-small is-primary"
@@ -110,7 +110,7 @@ Array [
     </aside>
   </div>,
   <div
-    className="column"
+    className="column is-half-mobile scrollable"
   >
     <div
       className="display-box"

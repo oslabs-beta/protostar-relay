@@ -67,8 +67,11 @@ describe('StoreTimeline', () => {
   // })
 
   it('Renders correctly', () => {
+    const date = new Date('2020');
+    global.Date = jest.fn(() => date);
     const tree = renderer.create(<StoreTimeline {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
+    jest.clearAllMocks()
   })
 
 });
