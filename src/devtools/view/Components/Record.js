@@ -1,5 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
-// import beautify from 'json-beautify'; <-- needs to be uninstalled
+import React from "react";
 
 function Record(props) {
   /* Maps through array and recursively calls component if the props[value] is an object, 

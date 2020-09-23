@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState } from "react";
 
 const SnapshotLinks = ({ timeline, currentEnvID, handleSnapshot }) => {
   const [active, setActive] = useState(null);
-
+  // Create links with date and label of snapshot; rendered in the left snapshot column using Bulma menu-list. Active state is used to toggle active link.
   return (
     <div>
       <aside className="menu">

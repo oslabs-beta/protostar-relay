@@ -4,9 +4,11 @@ import Record from './Components/Record';
 import { execute } from "graphql";
 import { debounce } from '../utils'
 
+//iterates over each event and joins events based on transactionID and sorts by type
 const combineEvents = (events) => {
   const combinedEvents = {};
   const eventTypes = {};
+  //join events by transactionID
   events.forEach(event => {
     const tempObj = {};
     if (event.name === "execute.start") {
@@ -17,7 +19,7 @@ const combineEvents = (events) => {
     } else if (event.name === "execute.next") {
       tempObj.response = event.response
     } else if (event.name === "execute.complete") {
-      tempObj.complete = true
+      // tempObj.complete = true
     }
     combinedEvents[event.transactionID] ? combinedEvents[event.transactionID] = Object.assign(combinedEvents[event.transactionID], tempObj) : combinedEvents[event.transactionID] = tempObj;
   })
@@ -31,6 +33,8 @@ const combineEvents = (events) => {
   return eventTypes;
 }
 
+
+
 const NetworkDisplayer = ({currentEnvID}) => {
   const [selection, setSelection] = useState("");
   const [events, setEvents] = useState([]);
@@ -38,8 +42,8 @@ const NetworkDisplayer = ({currentEnvID}) => {
   const store = useContext(StoreContext);
 
   useEffect(() => {
+    //on mutation all store events are pulled and processed with events state updated
     const onMutated = () => {
-      console.log("mutation triggered onMutated in Network Displayer")
       setEvents(combineEvents(store._environmentEventsMap.get(currentEnvID) || []));
     };
     store.addListener('mutated', onMutated);
@@ -57,7 +61,7 @@ const NetworkDisplayer = ({currentEnvID}) => {
 
   //shows you the entire network
   function handleReset(e) {
-    //remove selecti on;
+    //remove selection;
     setSelection("");
   };
 
@@ -102,8 +106,6 @@ const NetworkDisplayer = ({currentEnvID}) => {
       </li>
     );
   }
-
-  console.log("Rendering NetworkDisplayer")
 
   return (
     <React.Fragment>
