@@ -15,7 +15,7 @@ Array [
         type="text"
       />
       <button
-        className="button is-small is-link"
+        className="button is-small is-link my-2"
         onClick={[Function]}
       >
         Reset

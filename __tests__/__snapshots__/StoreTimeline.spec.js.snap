@@ -31,6 +31,7 @@ Array [
     >
       <div
         className="timeline-nav column is-full-desktop is-flex-mobile"
+        id="timeline-mini-col"
       >
         <div
           aria-disabled={false}
@@ -142,6 +143,7 @@ Array [
       </div>
       <div
         className="snapshot-info is-size-7 column is-full-desktop pt-0"
+        id="snapshot-info-col"
       >
         <div>
           <aside
