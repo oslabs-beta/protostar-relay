@@ -3,10 +3,10 @@
 exports[`DevTools Renders correctly 1`] = `
 Array [
   <div
-    className="navigation is-flex"
+    className="navigation"
   >
     <form
-      className="env-select select is-small"
+      className="env-select select is-small is-pulled-left"
     >
       <select
         className="env-select"
@@ -30,7 +30,7 @@ Array [
       </select>
     </form>
     <div
-      className="tabs is-toggle is-small"
+      className="tabs is-toggle is-small is-pulled-left"
     >
       <ul>
         <li
@@ -72,6 +72,18 @@ Array [
           </a>
         </li>
       </ul>
+    </div>
+    <div
+      className="logo is-pulled-right"
+    >
+      <a
+        href="https://github.com/oslabs-beta/protostar-relay"
+        target="_blank"
+      >
+        <img
+          src="../../assets/protorelay.png"
+        />
+      </a>
     </div>
   </div>,
   <div
