@@ -2,6 +2,7 @@ import React from 'react';
 import { configure, shallow, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
+
 import StoreTimeline from '../src/devtools/view/StoreTimeline';
 
 configure({ adapter: new Adapter() });
@@ -41,65 +42,63 @@ describe('StoreTimeline', () => {
 
   beforeAll(() => {
     wrapper = shallow(<StoreTimeline {...props} />);
+    parent = wrapper.children().first()
   });
 
-  it("Has a StoreDisplayer component", () => {
+  xit("Has a StoreDisplayer component", () => {
 
   })
 
-  it("Passes the store as a prop to StoreDisplayer", () => {
+  xit("Passes the store as a prop to StoreDisplayer", () => {
 
   })
 
-  it("Passes the store based on the currentEnvID", () => {
+  xit("Passes the store based on the currentEnvID", () => {
 
   })
 
 
   describe("Snapshots", () => {
 
-    it("Takes a snapshot at startup", () => {
+    xit("Takes a snapshot at startup", () => {
 
     })
 
-    it("Has a snapshot button that takes and saves a snapshot", () => {
+    xit("Has a snapshot button that takes and saves a snapshot", () => {
 
     })
 
-    it("Defaults to displaying the latest store value when a snapshot is taken", () => {
+    xit("Defaults to displaying the latest store value when a snapshot is taken", () => {
 
     })
 
-    it("Remembers snapshots when switching between environments", () => {
+    xit("Remembers snapshots when switching between environments", () => {
 
     })
 
-    it("Has a snapshot text input", () => {
+    xit("Has a snapshot text input", () => {
 
     })
 
-    it("Has a previous buttons to move to the previous snapshot", () => {
+    xit("Has a previous buttons to move to the previous snapshot", () => {
 
     })
 
-    it("Has a next button to move to the previous snapshot", () => {
+    xit("Has a next button to move to the previous snapshot", () => {
 
     })
 
-    it("Has a current button that shows the current store value", () => {
+    xit("Has a current button that shows the current store value", () => {
 
     })
 
-    it("Has a slider that updates when a new snapshot is taken and when switching between environments", () => {
+    xit("Has a slider that updates when a new snapshot is taken and when switching between environments", () => {
 
     })
-
-
   })
 
   it('Renders correctly', () => {
     const tree = renderer.create(<StoreTimeline {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   })
-
 });
