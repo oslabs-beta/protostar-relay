@@ -33,7 +33,44 @@ const combineEvents = (events) => {
   return eventTypes;
 }
 
+//generates a list of elements for the menu and the events listing
+const generateElementList = (events, searchResults, selection, handleMenuClick) => {
+    const eventMenu = [];
+  const eventsList = [];
 
+  //for each event - add to menu list
+  for (let type in events) {
+
+    //creates an array of menu items for all events belonging to a given type
+    const typeList = [];
+    for (let id in events[type]) {
+      //filter out results based on search input
+      if (new RegExp(searchResults, "i").test(JSON.stringify(events[type][id]))) {
+        typeList.push(
+          <li>
+            <a id={id} className={(selection === (id)) && "is-active"} onClick={(e) => { handleMenuClick(e, id) }}>{events[type][id].request.name}</a>
+          </li>)
+        //creates an array of elements for all events
+        eventsList.push(
+          <div id={id} className={`${(selection !== id && selection !== type && selection !== "") ? "is-hidden" : "record-line"}`}>
+            <Record {...events[type][id]} />
+          </div>
+        );
+      }
+    }
+
+    //pushes the new type element with child events to the typeList component array
+    eventMenu.push(
+      <li>
+        <a id={type} className={(selection === type) && "is-active"} onClick={(e) => { handleMenuClick(e, type) }}>
+          {type}
+        </a>
+        <ul>{typeList}</ul>
+      </li>
+    );
+  }
+  return { eventMenu, eventsList };
+}
 
 const NetworkDisplayer = ({currentEnvID}) => {
   const [selection, setSelection] = useState("");
@@ -72,40 +109,8 @@ const NetworkDisplayer = ({currentEnvID}) => {
     debounced(e.target.value)
   }
 
-  const eventMenu = [];
-  const eventsList = [];
-
-  //for each event - add to menu list
-  for (let type in events) {
-
-    //creates an array of menu items for all events belonging to a given type
-    const typeList = [];
-    for (let id in events[type]) {
-      //filter out results based on search input
-      if (new RegExp(searchResults, "i").test(JSON.stringify(events[type][id]))) {
-        typeList.push(
-          <li>
-            <a id={id} className={(selection === (id)) && "is-active"} onClick={(e) => { handleMenuClick(e, id) }}>{events[type][id].request.name}</a>
-          </li>)
-        //creates an array of elements for all events
-        eventsList.push(
-          <div id={id} className={`${(selection !== id && selection !== type && selection !== "") ? "is-hidden" : "record-line"}`}>
-            <Record {...events[type][id]} />
-          </div>
-        );
-      }
-    }
-
-    //pushes the new type element with child events to the typeList component array
-    eventMenu.push(
-      <li>
-        <a id={type} className={(selection === type) && "is-active"} onClick={(e) => { handleMenuClick(e, type) }}>
-          {type}
-        </a>
-        <ul>{typeList}</ul>
-      </li>
-    );
-  }
+  //generate menu list and events list
+  const {eventMenu, eventsList} = generateElementList(events, searchResults, selection, handleMenuClick)
 
   return (
     <React.Fragment>
