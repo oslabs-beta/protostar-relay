@@ -37,11 +37,17 @@ npm run build
       
 
 ## How to Use
-- gif of navigating to a relay page and opening proto*
-- gif of typing in the search box, resetting everything
-- gif of clicking on artworks below
-- gif of interacting with snapshot and store timeline
-- gif of navigating between store and network
+<img width="100%" src='./assets/protorelaystore.gif'></img>
+- Example of how to access proto* and interact with the relay store.
+
+<img width="100%" src='./assets/searchbar.gif'></img>
+- Example of typing in the search box and resetting the store.
+
+<img width="100%" src='./assets/snapshot.gif'></img>
+- Example of interacting with snapshot feature and store timeline.
+
+<img width="100%" src='./assets/network.gif'></img>
+- Example of navigating between the store and network.
 
 ## Contributing
 Protostar-relay is currently in beta release. We encourage you to submit issues for any bugs or ideas for enhancements. Also feel free to fork this repo and submit pull requests to contribute as well. Below are some features we would like to add as we iterate on this project:
