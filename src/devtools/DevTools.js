@@ -11,7 +11,7 @@
 // This makes overridding the styles simpler.
 
 import React, { useState, useCallback, useEffect } from "react";
-import { FrontendBridge } from "src/bridge";
+import type { FrontendBridge } from "src/bridge";
 import Store from "./store";
 import { BridgeContext, StoreContext } from "./context";
 import NetworkDisplayer from "./view/NetworkDisplayer";
