@@ -14,12 +14,21 @@
     "start:core:backend": "cd ./packages/relay-devtools-core && yarn start:backend",
     "start:prod": "cd ./shells/dev && cross-env NODE_ENV=production cross-env TARGET=local webpack-dev-server --open",
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "test": "cross-env TZ=\"UTC\" jest --config ./__tests__/jest.config.json",
+    "test": "cross-env TZ=\"UTC\" jest",
     "install-app": "npm i --prefix ./relay-examples/todo/",
     "start-test-app": "npm start --prefix ./relay-examples/todo/",
     "relay": "relay-compiler",
     "watch:chrome:frontend": "cross-env NODE_ENV=development node ./shells/browser/chrome/watch",
     "docker-test": "docker-compose up"
+  },
+  "jest": {
+    "verbose": true,
+    "testRegex": "((\\.|/*.)(spec))\\.js?$",
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/__tests__/__mocks__/styleMock.js"
+    },
+    "timers": "fake",
+    "globalSetup": "<rootDir>/__tests__/global-setup.js"
   },
   "devEngines": {
     "node": "10.x || 11.x"
