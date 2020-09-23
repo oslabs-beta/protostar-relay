@@ -9,23 +9,13 @@
 
 // Reach styles need to come before any component styles.
 // This makes overridding the styles simpler.
-import "@reach/menu-button/styles.css";
-import "@reach/tooltip/styles.css";
 
 import React, { useState, useCallback, useEffect } from "react";
-import type { FrontendBridge } from "src/bridge";
+import { FrontendBridge } from "src/bridge";
 import Store from "./store";
 import { BridgeContext, StoreContext } from "./context";
-
-import StoreDisplayer from "./view/StoreDisplayer";
 import NetworkDisplayer from "./view/NetworkDisplayer";
 import StoreTimeline from "./view/StoreTimeline";
-// import ComponentsRenderer from './ComponentsRenderer';
-// import Network from './Network/Network';
-// import StoreInspector from './StoreInspector/StoreInspector';
-// import TabBar from './TabBar';
-// import { SettingsContextController } from './Settings/SettingsContext';
-// import { ModalDialogContextController } from './ModalDialog';
 
 // export type TabID = 'network' | 'settings' | 'store-inspector';
 export type ViewElementSource = (id: number) => void;
@@ -71,13 +61,10 @@ const tabs = [networkTab, storeInspectorTab];
 
 export default function DevTools({
   bridge,
-  // defaultTab = 'store-inspector',
   rootContainer,
   networkPortalContainer,
   storeInspectorPortalContainer,
-  // overrideTab,
   settingsPortalContainer,
-  // showTabBar = false,
   store,
   viewElementSourceFunction,
   viewElementSourceRequiresFileLocation = false,
@@ -90,7 +77,6 @@ export default function DevTools({
 
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
-
     if (currentEnvID === undefined) {
       const firstKey = ids[0];
       setCurrentEnvID(firstKey);
@@ -114,11 +100,13 @@ export default function DevTools({
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 
+  console.log("currentenvid before render", currentEnvID)
+
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-        <div className="navigation is-flex">
-          <form className="env-select select is-small">
+        <div className="navigation">
+          <form className="env-select select is-small is-pulled-left">
             <select className="env-select" onChange={handleChange}>
               {environmentIDs.map((id) => {
                 return (
@@ -129,7 +117,7 @@ export default function DevTools({
               })}
             </select>
           </form>
-          <div className="tabs is-toggle is-small">
+          <div className="tabs is-toggle is-small is-pulled-left">
             <ul>
               <li className={selector === "Store" && "is-active"}>
                 <a
@@ -157,6 +145,9 @@ export default function DevTools({
               </li>
             </ul>
           </div>
+          <div className="logo is-pulled-right">
+            <a href="https://github.com/oslabs-beta/protostar-relay" target="_blank"><img src="../../assets/protorelay.png"></img></a>
+          </div>
         </div>
         <div
           className={
@@ -165,10 +156,10 @@ export default function DevTools({
               : "is-hidden"
           }
         >
-          <StoreTimeline
+          {currentEnvID && <StoreTimeline
             currentEnvID={currentEnvID}
             portalContainer={storeInspectorPortalContainer}
-          />
+          />}
         </div>
         <div
           className={
@@ -177,7 +168,7 @@ export default function DevTools({
               : "is-hidden"
           }
         >
-          <NetworkDisplayer currentEnvID={currentEnvID} />
+          {currentEnvID && <NetworkDisplayer currentEnvID={currentEnvID} />}
         </div>
       </StoreContext.Provider>
     </BridgeContext.Provider>

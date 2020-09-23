@@ -44,7 +44,6 @@ function generateComponentsList(
       ? menuList[record.__typename].push(record.__id)
       : (menuList[record.__typename] = [record.__id]);
   }
-  console.log("1")
   //loop through each type and generate menu item
 
   for (let type in menuList) {
@@ -87,7 +86,6 @@ function generateComponentsList(
       );
     }
   }
-
   return typeList;
 }
 

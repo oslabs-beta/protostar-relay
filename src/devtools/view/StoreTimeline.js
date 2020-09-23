@@ -86,6 +86,8 @@ const StoreTimeline = ({ currentEnvID }) => {
     }
   }, [currentEnvID]);
 
+  console.log("showing livestore", !timeline[currentEnvID] || !timeline[currentEnvID][snapshotIndex] || snapshotIndex === timeline[currentEnvID].length)
+
   return (
     <React.Fragment>
       <div className="column is-full-mobile is-one-quarter-desktop">
