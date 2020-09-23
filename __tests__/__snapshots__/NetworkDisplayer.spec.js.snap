@@ -3,13 +3,13 @@
 exports[`NetworkDisplayer Renders correctly 1`] = `
 Array [
   <div
-    className="column is-one-third"
+    className="column is-one-third scrollable"
   >
     <p
-      class="control has-icons-left"
+      class="control has-icons-left is-flex ml-2"
     >
       <input
-        className="input is-small is-primary"
+        className="input is-small is-primary mt-2"
         onChange={[Function]}
         placeholder="Search"
         type="text"
@@ -21,7 +21,7 @@ Array [
         Reset
       </button>
       <span
-        class="icon is-left"
+        class="icon is-left mt-2"
       >
         <i
           class="fas fa-search"
@@ -32,7 +32,7 @@ Array [
       className="menu"
     >
       <p
-        className="menu-label"
+        className="menu-label ml-2"
       >
         Event List
       </p>
@@ -42,7 +42,7 @@ Array [
     </aside>
   </div>,
   <div
-    className="column"
+    className="column scrollable"
   >
     <div
       className="display-box"
