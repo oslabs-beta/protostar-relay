@@ -78,7 +78,6 @@ constructor(bridge: FrontendBridge) {
 }
 
 getAllEventsArray(): $ReadOnlyArray < LogEvent > {
-  console.log('wow geteventsarray')
 
     const allEvents = [];
   this._environmentAllEvents.forEach((value, _) => allEvents.push(...value));
@@ -88,8 +87,6 @@ getAllEventsArray(): $ReadOnlyArray < LogEvent > {
 setAllEventsMap(environmentID: number, events: Array<LogEvent>) {
   this._environmentAllEvents.set(environmentID, events);
   this.emit('allEventsReceived');
-  console.log('hi events')
-
 }
 
   getAllEventsMap(): Map < number, Array < LogEvent >> {
@@ -97,14 +94,10 @@ setAllEventsMap(environmentID: number, events: Array<LogEvent>) {
 }
 
   getEvents(environmentID: number): ?$ReadOnlyArray < LogEvent > {
-  console.log('wow getevents')
-
     return this._environmentAllEvents.get(environmentID);
 }
 
   getAllEnvironmentEvents(): $ReadOnlyArray < LogEvent > {
-  console.log('wow getallenvevents')
-
     const allEnvironmentEvents = [];
   this._environmentEventsMap.forEach((value, _) =>
     allEnvironmentEvents.push(...value)
@@ -134,19 +127,16 @@ setAllEventsMap(environmentID: number, events: Array<LogEvent>) {
 }
 
   getRecords(environmentID: number): ?StoreRecords {
-  console.log('getrecords from storejs')
     return this._environmentStoreData.get(environmentID);
 }
 
   getRecordIDs(environmentID: number): ?$ReadOnlyArray < string > {
-  console.log('wow getrecordids')
 
     const storeRecords = this._environmentStoreData.get(environmentID);
   return storeRecords ? Object.keys(storeRecords) : null;
 }
 
   removeRecord(environmentID: number, recordID: string) {
-  console.log('wow removedreocrd')
 
     const storeRecords = this._environmentStoreData.get(environmentID);
   if(storeRecords != null) {
@@ -155,7 +145,6 @@ setAllEventsMap(environmentID: number, events: Array<LogEvent>) {
   }
 
 getAllRecords(): ?$ReadOnlyArray < StoreRecords > {
-  console.log('wow getallrecords')
     return Array.from(this._environmentStoreData.values());
 }
 
@@ -164,7 +153,6 @@ getOptimisticUpdates(environmentID: number): ?StoreRecords {
 }
 
 mergeRecords(id: number, newRecords: ?StoreRecords) {
-  console.log('merging records')
   if (newRecords == null) {
     return;
   }
@@ -241,7 +229,6 @@ mergeOptimisticRecords(id: number, newRecords: ?StoreRecords) {
 }
 
 onBridgeStoreSnapshot = (data: Array<StoreData>) => {
-  console.log('onBridgeStoreSnapshot... in store')
   for (const { id, records } of data) {
     this._environmentStoreData.set(id, records);
     this.emit('storeDataReceived');
@@ -249,7 +236,6 @@ onBridgeStoreSnapshot = (data: Array<StoreData>) => {
 };
 
 setStoreEvents = (id: number, data: LogEvent) => {
-  console.log('setstoreevents in store js... ', id, data.name)
   switch (data.name) {
     case 'store.publish':
       this.mergeRecords(id, data.source);
@@ -270,7 +256,6 @@ setStoreEvents = (id: number, data: LogEvent) => {
 };
 
 setEnvironmentEvents = (id: number, data: LogEvent) => {
-  console.log('wow setevnevents in storejs')
 
   const arr = this._environmentEventsMap.get(id);
   if (arr) {
@@ -280,13 +265,11 @@ setEnvironmentEvents = (id: number, data: LogEvent) => {
   }
   this.emit('mutated');
   if (data.name === 'execute.complete') {
-    console.log('wow mutation is complete!!!')
     this.emit('mutationComplete')
   }
 };
 
 appendInformationToRequest = (id: number, data: LogEvent) => {
-  console.log('appendinfotorequest')
   switch (data.name) {
     case 'execute.start':
       const requestArr = this._recordedRequests.get(id);
@@ -318,19 +301,15 @@ appendInformationToRequest = (id: number, data: LogEvent) => {
 };
 
 startRecording = () => {
-  console.log('recoring')
   this._isRecording = true;
   this.clearAllEvents();
 };
 
 stopRecording = () => {
-  console.log('wow stop recordign')
-
   this._isRecording = false;
 };
 
 onBridgeEvents = (events: Array<EventData>) => {
-  console.log('onbrdigeevents', events)
   for (const { id, data, eventType } of events) {
     if (this._isRecording) {
       const allEvents = this._environmentAllEvents.get(id);
@@ -368,13 +347,11 @@ onBridgeEvents = (events: Array<EventData>) => {
       } else {
         this._environmentAllEvents.set(id, [data]);
       }
-      console.log('hi bob')
       this.emit('allEventsReceived');
     }
     if (eventType === 'store') {
       this.setStoreEvents(id, data);
     } else if (eventType === 'environment') {
-      console.log('line 370')
       this.setEnvironmentEvents(id, data);
     }
   }

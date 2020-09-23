@@ -93,7 +93,9 @@ export default function DevTools({
     store.getEnvironmentIDs()
   );
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
+
   const [selector, setSelector] = useState("Store");
+
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
 
@@ -105,7 +107,7 @@ export default function DevTools({
   }, [store, currentEnvID]);
 
   useEffect(() => {
-    setEnv();
+    // setEnv();
     const testRefresh = () => {
       console.log('hi marc... shuttin \'er down')
     }
@@ -122,6 +124,7 @@ export default function DevTools({
   }
 
   const handleChange = useCallback(e => {
+    console.log(e.target.value)
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 
@@ -167,7 +170,7 @@ export default function DevTools({
           <StoreTimeline currentEnvID={currentEnvID} portalContainer={storeInspectorPortalContainer} />
         </div>
         <div className={selector === "Network" ? "columns mb-0 is-multiline is-mobile" : "is-hidden"}>
-          <NetworkDisplayer />
+          <NetworkDisplayer currentEnvID={currentEnvID}/>
         </div>
       </StoreContext.Provider>
     </BridgeContext.Provider >
