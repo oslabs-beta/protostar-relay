@@ -4,9 +4,11 @@ import Record from './Components/Record';
 import { execute } from "graphql";
 import { debounce } from '../utils'
 
+//iterates over each event and joins events based on transactionID and sorts by type
 const combineEvents = (events) => {
   const combinedEvents = {};
   const eventTypes = {};
+  //join events by transactionID
   events.forEach(event => {
     const tempObj = {};
     if (event.name === "execute.start") {
@@ -17,7 +19,7 @@ const combineEvents = (events) => {
     } else if (event.name === "execute.next") {
       tempObj.response = event.response
     } else if (event.name === "execute.complete") {
-      tempObj.complete = true
+      // tempObj.complete = true
     }
     combinedEvents[event.transactionID] ? combinedEvents[event.transactionID] = Object.assign(combinedEvents[event.transactionID], tempObj) : combinedEvents[event.transactionID] = tempObj;
   })
@@ -31,44 +33,9 @@ const combineEvents = (events) => {
   return eventTypes;
 }
 
-const NetworkDisplayer = (props) => {
-  const [selection, setSelection] = useState("");
-  const [events, setEvents] = useState([]);
-  const [searchResults, setSearchResults] = useState("");
-  const store = useContext(StoreContext);
-
-  useEffect(() => {
-    const onMutated = () => {
-      console.log("mutation triggered onMutated in Network Displayer")
-      setEvents(combineEvents(store._environmentEventsMap.get(1) || []));
-    };
-    store.addListener('mutated', onMutated);
-
-    return () => {
-      store.removeListener('mutated', onMutated);
-    };
-  }, [store]);
-
-  //handle type menu click events
-  function handleMenuClick(e, id) {
-    //set new selection
-    setSelection(id);
-  }
-
-  //shows you the entire network
-  function handleReset(e) {
-    //remove selecti on;
-    setSelection("");
-  };
-
-  //updates search results
-  const debounced = debounce((val) => setSearchResults(val), 300)
-  function handleSearch(e) {
-    //debounce search
-    debounced(e.target.value)
-  }
-
-  const eventMenu = [];
+//generates a list of elements for the menu and the events listing
+const generateElementList = (events, searchResults, selection, handleMenuClick) => {
+    const eventMenu = [];
   const eventsList = [];
 
   //for each event - add to menu list
@@ -102,8 +69,48 @@ const NetworkDisplayer = (props) => {
       </li>
     );
   }
+  return { eventMenu, eventsList };
+}
 
-  console.log("Rendering NetworkDisplayer")
+const NetworkDisplayer = ({currentEnvID}) => {
+  const [selection, setSelection] = useState("");
+  const [events, setEvents] = useState([]);
+  const [searchResults, setSearchResults] = useState("");
+  const store = useContext(StoreContext);
+
+  useEffect(() => {
+    //on mutation all store events are pulled and processed with events state updated
+    const onMutated = () => {
+      setEvents(combineEvents(store._environmentEventsMap.get(currentEnvID) || []));
+    };
+    store.addListener('mutated', onMutated);
+
+    return () => {
+      store.removeListener('mutated', onMutated);
+    };
+  }, [store]);
+
+  //handle type menu click events
+  function handleMenuClick(e, id) {
+    //set new selection
+    setSelection(id);
+  }
+
+  //shows you the entire network
+  function handleReset(e) {
+    //remove selection;
+    setSelection("");
+  };
+
+  //updates search results
+  const debounced = debounce((val) => setSearchResults(val), 300)
+  function handleSearch(e) {
+    //debounce search
+    debounced(e.target.value)
+  }
+
+  //generate menu list and events list
+  const {eventMenu, eventsList} = generateElementList(events, searchResults, selection, handleMenuClick)
 
   return (
     <React.Fragment>

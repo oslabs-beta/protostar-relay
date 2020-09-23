@@ -23,10 +23,11 @@
   padding: 10px 0 0 10px;
 }
 .navigation {
-  padding: 0 0 25px 0;
+  padding: 0;
+  overflow: auto;
 }
-.tabs {
-  margin-left: 10px;
+.navigation .tabs {
+  margin: 0 .75em;
 }
 button.button.is-small.is-link {
   margin-left: 10px;
@@ -91,6 +92,10 @@ button.button.is-small.is-link {
 .key {
   font-weight: bold;
   word-wrap: break-word;
+}
+
+.logo img {
+  height: 30px;
 }
 
 .value {

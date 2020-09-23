@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import InputRange from "react-input-range";
 import { BridgeContext, StoreContext } from "../context";
 import StoreDisplayer from "./StoreDisplayer";
 import SnapshotLinks from "./Components/SnapshotLinks";
-// import { detailedDiff } from 'deep-object-diff';
 
 const StoreTimeline = ({ currentEnvID }) => {
   const store = useContext(StoreContext);
@@ -11,7 +10,7 @@ const StoreTimeline = ({ currentEnvID }) => {
   const [snapshotIndex, setSnapshotIndex] = useState(0);
   const [timelineLabel, setTimelineLabel] = useState("");
   const [liveStore, setLiveStore] = useState({});
-
+  // Each envId has an array of orbject built up for loading snapshots via the handleClick
   const [timeline, setTimeline] = useState({
     [currentEnvID]: [
       {
@@ -22,6 +21,7 @@ const StoreTimeline = ({ currentEnvID }) => {
     ],
   });
 
+  // build snapshot object and insert into timeline
   const handleClick = (e) => {
     e.preventDefault();
     const timelineInsert = {};
@@ -42,18 +42,15 @@ const StoreTimeline = ({ currentEnvID }) => {
   const updateStoreHelper = (storeObj) => {
     setLiveStore(storeObj);
   };
-  // testing sans set timeout... maybe put back
+
+  // triggering refresh of store on completed mutation
   React.useEffect(() => {
     const refreshLiveStore = () => {
-      console.log("mutation triggered refr");
       bridge.send("refreshStore", currentEnvID);
     };
     const refreshEvents = () => {
-      console.log("storeinspector refreshing due to storeDataReceived flag");
       const allRecords = store.getRecords(currentEnvID);
       updateStoreHelper(allRecords);
-      console.log("REFRESH INVOKED! currentEnvID:", currentEnvID);
-      // forceUpdate({});
     };
 
     store.addListener("storeDataReceived", refreshEvents);
@@ -89,8 +86,7 @@ const StoreTimeline = ({ currentEnvID }) => {
     }
   }, [currentEnvID]);
 
-  console.log("Rendering StoreTimeline");
-  console.log("livestore", liveStore);
+  console.log("showing livestore", !timeline[currentEnvID] || !timeline[currentEnvID][snapshotIndex] || snapshotIndex === timeline[currentEnvID].length)
 
   return (
     <React.Fragment>
@@ -152,16 +148,25 @@ const StoreTimeline = ({ currentEnvID }) => {
               </button>
             </div>
           </div>
-          <div className="snapshot-info is-size-7 column is-full-desktop pt-0" id="snapshot-info-col">
-              <SnapshotLinks currentEnvID={currentEnvID} handleSnapshot={handleSnapshot} timeline={timeline}/>
+          <div
+            className="snapshot-info is-size-7 column is-full-desktop pt-0"
+            id="snapshot-info-col"
+          >
+            {timeline[currentEnvID] && (
+              <SnapshotLinks
+                currentEnvID={currentEnvID}
+                handleSnapshot={handleSnapshot}
+                timeline={timeline}
+              />
+            )}
           </div>
         </div>
       </div>
       <StoreDisplayer
         store={
           !timeline[currentEnvID] ||
-            !timeline[currentEnvID][snapshotIndex] ||
-            snapshotIndex === timeline[currentEnvID].length
+          !timeline[currentEnvID][snapshotIndex] ||
+          snapshotIndex === timeline[currentEnvID].length
             ? liveStore
             : timeline[currentEnvID][snapshotIndex].storage
         }
