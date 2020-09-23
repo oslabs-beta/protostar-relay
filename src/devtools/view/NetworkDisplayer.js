@@ -107,9 +107,9 @@ const NetworkDisplayer = (props) => {
 
   return (
     <React.Fragment>
-      <div className="column is-one-third">
-        <p class="control has-icons-left">
-          <input className="input is-small is-primary" type="text" placeholder="Search" onChange={(e) => { handleSearch(e) }}></input>
+      <div className="column is-one-third scrollable">
+        <p class="control has-icons-left is-flex ml-2">
+          <input className="input is-small is-primary mt-2" type="text" placeholder="Search" onChange={(e) => { handleSearch(e) }}></input>
           <button
             className="button is-small is-link my-2"
             onClick={(e) => {
@@ -118,18 +118,18 @@ const NetworkDisplayer = (props) => {
           >
             Reset
         </button>
-          <span class="icon is-left">
+          <span class="icon is-left mt-2">
             <i class="fas fa-search"></i>
           </span>
         </p>
         <aside className="menu">
-          <p className="menu-label">Event List</p>
+          <p className="menu-label ml-2">Event List</p>
           <ul className="menu-list">
             {eventMenu}
           </ul>
         </aside>
       </div>
-      <div className="column">
+      <div className="column scrollable">
         <div className="display-box">{eventsList}</div>
       </div>
     </React.Fragment>

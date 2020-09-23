@@ -127,7 +127,7 @@ const StoreDisplayer = ({ store }) => {
           </span>
         </p>
         <aside className="menu">
-          <p className="menu-label">
+          <p className="menu-label mt-1">
             Record List
                 </p>
           <ul className="menu-list">

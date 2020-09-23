@@ -96,7 +96,7 @@ const StoreTimeline = ({ currentEnvID }) => {
     <React.Fragment>
       <div className="column is-full-mobile is-one-quarter-desktop">
         <div className="display-box">
-          <div className="snapshot-wrapper is-flex">
+          <div className="snapshot-wrapper is-flex ml-2">
             <input
               type="text"
               className="input is-small snapshot-btn is-primary"
