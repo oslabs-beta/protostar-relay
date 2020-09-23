@@ -31,7 +31,7 @@ const combineEvents = (events) => {
   return eventTypes;
 }
 
-const NetworkDisplayer = (props) => {
+const NetworkDisplayer = ({currentEnvID}) => {
   const [selection, setSelection] = useState("");
   const [events, setEvents] = useState([]);
   const [searchResults, setSearchResults] = useState("");
@@ -40,7 +40,7 @@ const NetworkDisplayer = (props) => {
   useEffect(() => {
     const onMutated = () => {
       console.log("mutation triggered onMutated in Network Displayer")
-      setEvents(combineEvents(store._environmentEventsMap.get(1) || []));
+      setEvents(combineEvents(store._environmentEventsMap.get(currentEnvID) || []));
     };
     store.addListener('mutated', onMutated);
 

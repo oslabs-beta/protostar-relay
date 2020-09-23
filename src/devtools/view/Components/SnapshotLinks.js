@@ -11,8 +11,7 @@ const SnapshotLinks = ({timeline, currentEnvID, handleSnapshot}) => {
         (item, i) => <li onClick={() => {
           handleSnapshot(i); 
           setActive(i);
-        }}><a href="#" key={i} className={active === i && 'is-active'}>{item.date.toLocaleTimeString()}: {item.label}</a></li>
-        )}
+        }}><a href="#" key={i} className={active === i && 'is-active'}>{item.date.toLocaleTimeString()}: {item.label}</a></li>)}
             </ul>
           </aside>
         </div>

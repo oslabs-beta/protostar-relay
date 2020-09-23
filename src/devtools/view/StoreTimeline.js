@@ -49,11 +49,8 @@ const StoreTimeline = ({ currentEnvID }) => {
       bridge.send("refreshStore", currentEnvID);
     };
     const refreshEvents = () => {
-      console.log("storeinspector refreshing due to storeDataReceived flag");
       const allRecords = store.getRecords(currentEnvID);
       updateStoreHelper(allRecords);
-      console.log("REFRESH INVOKED! currentEnvID:", currentEnvID);
-      // forceUpdate({});
     };
 
     store.addListener("storeDataReceived", refreshEvents);
@@ -89,8 +86,7 @@ const StoreTimeline = ({ currentEnvID }) => {
     }
   }, [currentEnvID]);
 
-  console.log("Rendering StoreTimeline");
-  console.log("livestore", liveStore);
+  // console.log("livestore", liveStore);
 
   return (
     <React.Fragment>
@@ -153,7 +149,7 @@ const StoreTimeline = ({ currentEnvID }) => {
             </div>
           </div>
           <div className="snapshot-info is-size-7 column is-full-desktop pt-0">
-              <SnapshotLinks currentEnvID={currentEnvID} handleSnapshot={handleSnapshot} timeline={timeline}/>
+              {timeline[currentEnvID] && <SnapshotLinks currentEnvID={currentEnvID} handleSnapshot={handleSnapshot} timeline={timeline}/>}
           </div>
         </div>
       </div>
