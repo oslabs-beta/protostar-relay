@@ -1,0 +1,350 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DevTools Renders correctly 1`] = `
+Array [
+  <div
+    className="navigation is-flex"
+  >
+    <form
+      className="env-select select is-small"
+    >
+      <select
+        className="env-select"
+        onChange={[Function]}
+      >
+        <option
+          value={1}
+        >
+          first
+        </option>
+        <option
+          value={2}
+        >
+          second
+        </option>
+        <option
+          value={3}
+        >
+          third
+        </option>
+      </select>
+    </form>
+    <div
+      className="tabs is-toggle is-small"
+    >
+      <ul>
+        <li
+          className="is-active"
+        >
+          <a
+            id="storeSelector"
+            onClick={[Function]}
+          >
+            <span
+              className="icon is-small"
+            >
+              <i
+                className="fas fa-database"
+              />
+            </span>
+            <span>
+              Store
+            </span>
+          </a>
+        </li>
+        <li
+          className={false}
+        >
+          <a
+            id="networkSelector"
+            onClick={[Function]}
+          >
+            <span
+              className="icon is-small"
+            >
+              <i
+                className="fas fa-network-wired"
+              />
+            </span>
+            <span>
+              Network
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>,
+  <div
+    className="columns mb-0 is-multiline is-mobile"
+  >
+    <div
+      className="column is-full-mobile is-one-quarter-desktop"
+    >
+      <div
+        className="display-box"
+      >
+        <div
+          className="snapshot-wrapper is-flex"
+        >
+          <input
+            className="input is-small snapshot-btn is-primary"
+            onChange={[Function]}
+            placeholder="take a store snapshot"
+            type="text"
+            value=""
+          />
+          <button
+            className="button is-small is-link"
+            onClick={[Function]}
+          >
+            Snapshot
+          </button>
+        </div>
+      </div>
+      <div
+        className="snapshots columns is-multiline"
+      >
+        <div
+          className="timeline-nav column is-full-desktop is-flex-mobile"
+          id="timeline-mini-col"
+        >
+          <div
+            aria-disabled={false}
+            className="input-range"
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onTouchStart={[Function]}
+          >
+            <span
+              className="input-range__label input-range__label--min"
+            >
+              <span
+                className="input-range__label-container"
+              >
+                0
+              </span>
+            </span>
+            <div
+              className="input-range__track input-range__track--background"
+              onMouseDown={[Function]}
+              onTouchStart={[Function]}
+            >
+              <div
+                className="input-range__track input-range__track--active"
+                style={
+                  Object {
+                    "left": "0%",
+                    "width": "0%",
+                  }
+                }
+              />
+              <span
+                className="input-range__slider-container"
+                style={
+                  Object {
+                    "left": "0%",
+                    "position": "absolute",
+                  }
+                }
+              >
+                <span
+                  className="input-range__label input-range__label--value"
+                >
+                  <span
+                    className="input-range__label-container"
+                  >
+                    0
+                  </span>
+                </span>
+                <div
+                  aria-valuemax={1}
+                  aria-valuemin={0}
+                  aria-valuenow={0}
+                  className="input-range__slider"
+                  draggable="false"
+                  onKeyDown={[Function]}
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                  role="slider"
+                  tabIndex="0"
+                />
+              </span>
+            </div>
+            <span
+              className="input-range__label input-range__label--max"
+            >
+              <span
+                className="input-range__label-container"
+              >
+                1
+              </span>
+            </span>
+          </div>
+          <div
+            className="snapshot-nav has-text-centered has-text-right-mobile"
+          >
+            <button
+              class="button is-small is-info is-light"
+              onClick={[Function]}
+            >
+              <span
+                className="icon is-medium"
+              >
+                <i
+                  className="fas fa-fast-backward"
+                />
+              </span>
+            </button>
+            <button
+              class="button is-small is-info is-light"
+              onClick={[Function]}
+            >
+              Current
+            </button>
+            <button
+              class="button is-small is-info is-light"
+              onClick={[Function]}
+            >
+              <span
+                className="icon is-medium"
+              >
+                <i
+                  className="fas fa-fast-forward"
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+        <div
+          className="snapshot-info is-size-7 column is-full-desktop pt-0"
+          id="snapshot-info-col"
+        >
+          <div>
+            <aside
+              className="menu"
+            >
+              <ul
+                className="menu-list"
+              >
+                <li
+                  onClick={[Function]}
+                >
+                  <a
+                    className={false}
+                    href="#"
+                  >
+                    12:00:00 AM
+                    : 
+                    at startup
+                  </a>
+                </li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="column is-half-mobile scrollable"
+    >
+      <p
+        class="control has-icons-left is-flex"
+      >
+        <input
+          className="input is-small is-primary"
+          onChange={[Function]}
+          placeholder="Search"
+          type="text"
+        />
+        <button
+          className="button is-small is-link"
+          onClick={[Function]}
+        >
+          Reset
+        </button>
+        <span
+          class="icon is-left"
+        >
+          <i
+            class="fas fa-search"
+          />
+        </span>
+      </p>
+      <aside
+        className="menu"
+      >
+        <p
+          className="menu-label"
+        >
+          Record List
+        </p>
+        <ul
+          className="menu-list"
+        />
+      </aside>
+    </div>
+    <div
+      className="column is-half-mobile scrollable"
+    >
+      <div
+        className="display-box"
+      >
+        <div
+          className="records"
+        />
+      </div>
+    </div>
+  </div>,
+  <div
+    className="is-hidden"
+  >
+    <div
+      className="column is-one-third"
+    >
+      <p
+        class="control has-icons-left"
+      >
+        <input
+          className="input is-small is-primary"
+          onChange={[Function]}
+          placeholder="Search"
+          type="text"
+        />
+        <button
+          className="button is-small is-link my-2"
+          onClick={[Function]}
+        >
+          Reset
+        </button>
+        <span
+          class="icon is-left"
+        >
+          <i
+            class="fas fa-search"
+          />
+        </span>
+      </p>
+      <aside
+        className="menu"
+      >
+        <p
+          className="menu-label"
+        >
+          Event List
+        </p>
+        <ul
+          className="menu-list"
+        />
+      </aside>
+    </div>
+    <div
+      className="column"
+    >
+      <div
+        className="display-box"
+      />
+    </div>
+  </div>,
+]
+`;

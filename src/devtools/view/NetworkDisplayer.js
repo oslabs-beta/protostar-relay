@@ -111,7 +111,7 @@ const NetworkDisplayer = ({currentEnvID}) => {
         <p class="control has-icons-left">
           <input className="input is-small is-primary" type="text" placeholder="Search" onChange={(e) => { handleSearch(e) }}></input>
           <button
-            className="button is-small is-link"
+            className="button is-small is-link my-2"
             onClick={(e) => {
               handleReset(e);
             }}

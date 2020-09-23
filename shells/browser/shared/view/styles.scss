@@ -23,7 +23,7 @@
   padding: 10px 0 0 10px;
 }
 .navigation {
-  padding: 0 0 10px 0;
+  padding: 0 0 25px 0;
 }
 .tabs {
   margin-left: 10px;
@@ -35,6 +35,15 @@ button.button.is-small.is-link {
   border-right: 1px solid #e4e0e0;
   height: 90vh;
 }
+
+#timeline-mini-col {
+  border-right: none !important;
+}
+
+#snapshot-info-col {
+  border-right: none !important;
+}
+
 .scrollable {
   overflow: scroll;
 }
