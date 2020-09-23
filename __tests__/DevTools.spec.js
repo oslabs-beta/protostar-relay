@@ -8,6 +8,7 @@ configure({ adapter: new Adapter() });
 
 describe('DevTools', () => {
   let wrapper;
+  const RealDate = Date;
   const names = { 1: "first", 2: "second", 3: "third" }
   const props = {
     store: {
@@ -88,7 +89,10 @@ describe('DevTools', () => {
   })
 
   it('Renders correctly', () => {
+    const date = new Date(Date.UTC(2020));
+    global.Date = jest.fn(() => date);
     const tree = renderer.create(<DevTools {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
+    jest.clearAllMocks();
   })
 });

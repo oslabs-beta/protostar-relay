@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StoreDisplayer Renders correctly 1`] = `
+Array [
+  <div
+    className="column is-half-mobile scrollable"
+  >
+    <p
+      class="control has-icons-left is-flex"
+    >
+      <input
+        className="input is-small is-primary"
+        onChange={[Function]}
+        placeholder="Search"
+        type="text"
+      />
+      <button
+        className="button is-small is-link"
+        onClick={[Function]}
+      >
+        Reset
+      </button>
+      <span
+        class="icon is-left"
+      >
+        <i
+          class="fas fa-search"
+        />
+      </span>
+    </p>
+    <aside
+      className="menu"
+    >
+      <p
+        className="menu-label"
+      >
+        Record List
+      </p>
+      <ul
+        className="menu-list"
+      >
+        <li>
+          <a
+            className={false}
+            id="type-User"
+            onClick={[Function]}
+          >
+            User
+          </a>
+          <ul>
+            <li>
+              <a
+                className={false}
+                id="id-1"
+                onClick={[Function]}
+              >
+                1
+              </a>
+            </li>
+            <li>
+              <a
+                className={false}
+                id="id-2"
+                onClick={[Function]}
+              >
+                2
+              </a>
+            </li>
+            <li>
+              <a
+                className={false}
+                id="id-3"
+                onClick={[Function]}
+              >
+                3
+              </a>
+            </li>
+            <li>
+              <a
+                className={false}
+                id="id-4"
+                onClick={[Function]}
+              >
+                4
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a
+            className={false}
+            id="type-Post"
+            onClick={[Function]}
+          >
+            Post
+          </a>
+          <ul>
+            <li>
+              <a
+                className={false}
+                id="id-5"
+                onClick={[Function]}
+              >
+                5
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+  </div>,
+  <div
+    className="column is-half-mobile scrollable"
+  >
+    <div
+      className="display-box"
+    >
+      <div
+        className="records"
+      />
+    </div>
+  </div>,
+]
+`;

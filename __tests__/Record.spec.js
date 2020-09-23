@@ -9,7 +9,7 @@ import Record from '../src/devtools/view/Components/Record';
 
 configure({ adapter: new Adapter() });
 
-xdescribe('Record', () => {
+describe('Record', () => {
   let wrapper;
   let children; //alternative to .next, not always required.
   const props = { //hardcode in what to pass into component

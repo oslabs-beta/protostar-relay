@@ -43,7 +43,7 @@ const StoreTimeline = ({ currentEnvID }) => {
     setLiveStore(storeObj);
   };
   // testing sans set timeout... maybe put back
-  useEffect(() => {
+  React.useEffect(() => {
     const refreshLiveStore = () => {
       console.log("mutation triggered refr");
       bridge.send("refreshStore", currentEnvID);
@@ -67,7 +67,7 @@ const StoreTimeline = ({ currentEnvID }) => {
     };
   }, [store]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const allRecords = store.getRecords(currentEnvID);
     setLiveStore(allRecords);
 
