@@ -6,9 +6,6 @@
 <h1>Proto Relay</h1>
 Proto Relay is a Chrome extension devtool for React Relay based off the official devtool. It is designed to be light-weight, performant, and easy-to-use. 
 
-# Table of Contents
-  - insert table of contents later 
-
 ## Features
 - [x] Preview Relay store content from the Chrome devtools panel
 - [x] View store content over time with included snapshots
@@ -19,8 +16,8 @@ Proto Relay is a Chrome extension devtool for React Relay based off the official
 2. Install dependencies and run a build using either the 'Yarn' or 'NPM' commands below:
 ```node
 # Yarn
-yarn npm install
-yarn run build
+yarn install
+yarn build
 
 # NPM
 npm run install
