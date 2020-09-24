@@ -92,7 +92,7 @@ const StoreTimeline = ({ currentEnvID }) => {
     <React.Fragment>
       <div className="column is-full-mobile is-one-quarter-desktop">
         <div className="display-box">
-          <div className="snapshot-wrapper is-flex">
+          <div className="snapshot-wrapper is-flex ml-2">
             <input
               type="text"
               className="input is-small snapshot-btn is-primary"
@@ -108,11 +108,8 @@ const StoreTimeline = ({ currentEnvID }) => {
             </button>
           </div>
         </div>
-        <div className="snapshots columns is-multiline">
-          <div
-            className="timeline-nav column is-full-desktop is-flex-mobile"
-            id="timeline-mini-col"
-          >
+        <div className="snapshots">
+          <div className="timeline-nav column is-full-desktop is-flex-mobile" id="timeline-mini-col">
             <InputRange
               maxValue={
                 timeline[currentEnvID] ? timeline[currentEnvID].length : 0

@@ -161,8 +161,12 @@ const StoreDisplayer = ({ store }) => {
           </span>
         </p>
         <aside className="menu">
-          <p className="menu-label">Record List</p>
-          <ul className="menu-list">{typeList}</ul>
+          <p className="menu-label mt-1">
+            Record List
+                </p>
+          <ul className="menu-list">
+            {typeList}
+          </ul>
         </aside>
       </div>
       <div className="column is-half-mobile scrollable">

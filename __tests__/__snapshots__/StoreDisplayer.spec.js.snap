@@ -32,7 +32,7 @@ Array [
       className="menu"
     >
       <p
-        className="menu-label"
+        className="menu-label mt-1"
       >
         Record List
       </p>

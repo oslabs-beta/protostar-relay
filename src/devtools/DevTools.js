@@ -164,7 +164,7 @@ export default function DevTools({
         <div
           className={
             selector === "Network"
-              ? "columns mb-0 is-multiline is-mobile"
+              ? "columns mb-0 is-mobile"
               : "is-hidden"
           }
         >
