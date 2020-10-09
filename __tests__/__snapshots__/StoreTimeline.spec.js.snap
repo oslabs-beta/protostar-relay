@@ -9,7 +9,7 @@ Array [
       className="display-box"
     >
       <div
-        className="snapshot-wrapper is-flex"
+        className="snapshot-wrapper is-flex ml-2"
       >
         <input
           className="input is-small snapshot-btn is-primary"
@@ -27,7 +27,7 @@ Array [
       </div>
     </div>
     <div
-      className="snapshots columns is-multiline"
+      className="snapshots"
     >
       <div
         className="timeline-nav column is-full-desktop is-flex-mobile"
@@ -200,7 +200,7 @@ Array [
       className="menu"
     >
       <p
-        className="menu-label"
+        className="menu-label mt-1"
       >
         Record List
       </p>

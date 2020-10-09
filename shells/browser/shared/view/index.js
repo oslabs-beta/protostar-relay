@@ -1,10 +1,10 @@
 /** @format */
 
-import React from "react";
-import { render } from "react-dom";
+import React from 'react';
+import { render } from 'react-dom';
 
-import App from "./App.jsx";
-import styles from "./styles.scss";
+import App from './App.jsx';
+import styles from './styles.scss';
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -32,5 +32,4 @@ window.injectStyles = getLinkTags => {
   }
 };
 
-
-render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById('root'));

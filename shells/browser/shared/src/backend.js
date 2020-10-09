@@ -12,10 +12,7 @@
 // This is to avoid issues like: https://github.com/facebook/react-devtools/issues/1039
 
 function welcome(event) {
-  if (
-    event.source !== window ||
-    event.data.source !== 'relay-devtools-content-script'
-  ) {
+  if (event.source !== window || event.data.source !== 'relay-devtools-content-script') {
     return;
   }
 
@@ -53,12 +50,12 @@ function setup(hook) {
       window.postMessage(
         {
           source: 'relay-devtools-bridge',
-          payload: { event, payload: JSON.parse(JSON.stringify(payload)) },
+          payload: { event, payload: JSON.parse(JSON.stringify(payload)) }
         },
         '*',
         transferable
       );
-    },
+    }
   });
 
   const agent = new Agent(bridge);

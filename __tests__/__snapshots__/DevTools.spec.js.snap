@@ -3,10 +3,10 @@
 exports[`DevTools Renders correctly 1`] = `
 Array [
   <div
-    className="navigation is-flex"
+    className="navigation"
   >
     <form
-      className="env-select select is-small"
+      className="env-select select is-small is-pulled-left"
     >
       <select
         className="env-select"
@@ -30,7 +30,7 @@ Array [
       </select>
     </form>
     <div
-      className="tabs is-toggle is-small"
+      className="tabs is-toggle is-small is-pulled-left"
     >
       <ul>
         <li
@@ -73,6 +73,18 @@ Array [
         </li>
       </ul>
     </div>
+    <div
+      className="logo is-pulled-right"
+    >
+      <a
+        href="https://github.com/oslabs-beta/protostar-relay"
+        target="_blank"
+      >
+        <img
+          src="../../assets/protorelay.png"
+        />
+      </a>
+    </div>
   </div>,
   <div
     className="columns mb-0 is-multiline is-mobile"
@@ -84,7 +96,7 @@ Array [
         className="display-box"
       >
         <div
-          className="snapshot-wrapper is-flex"
+          className="snapshot-wrapper is-flex ml-2"
         >
           <input
             className="input is-small snapshot-btn is-primary"
@@ -102,7 +114,7 @@ Array [
         </div>
       </div>
       <div
-        className="snapshots columns is-multiline"
+        className="snapshots"
       >
         <div
           className="timeline-nav column is-full-desktop is-flex-mobile"
@@ -275,7 +287,7 @@ Array [
         className="menu"
       >
         <p
-          className="menu-label"
+          className="menu-label mt-1"
         >
           Record List
         </p>
@@ -300,13 +312,13 @@ Array [
     className="is-hidden"
   >
     <div
-      className="column is-one-third"
+      className="column is-one-third scrollable"
     >
       <p
-        class="control has-icons-left"
+        class="control has-icons-left is-flex ml-2"
       >
         <input
-          className="input is-small is-primary"
+          className="input is-small is-primary mt-2"
           onChange={[Function]}
           placeholder="Search"
           type="text"
@@ -318,7 +330,7 @@ Array [
           Reset
         </button>
         <span
-          class="icon is-left"
+          class="icon is-left mt-2"
         >
           <i
             class="fas fa-search"
@@ -329,7 +341,7 @@ Array [
         className="menu"
       >
         <p
-          className="menu-label"
+          className="menu-label ml-2"
         >
           Event List
         </p>
@@ -339,7 +351,7 @@ Array [
       </aside>
     </div>
     <div
-      className="column"
+      className="column scrollable"
     >
       <div
         className="display-box"

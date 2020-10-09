@@ -45,7 +45,7 @@ function createPanelIfReactLoaded() {
 
       function initBridgeAndStore() {
         const port = chrome.runtime.connect({
-          name: '' + tabId,
+          name: '' + tabId
         });
         // Looks like `port.onDisconnect` does not trigger on in-tab navigation like new URL or back/forward navigation,
         // so it makes no sense to handle it here.
@@ -62,7 +62,7 @@ function createPanelIfReactLoaded() {
           },
           send(event: string, payload: any, transferable?: Array<any>) {
             port.postMessage({ event, payload }, transferable);
-          },
+          }
         });
 
         store = new Store(bridge);
@@ -71,13 +71,10 @@ function createPanelIfReactLoaded() {
         // Otherwise the Store may miss important initial tree op codes.
         inject(chrome.runtime.getURL('build/backend.js'));
 
-        const viewElementSourceFunction = createViewElementSource(
-          bridge,
-          store
-        );
+        const viewElementSourceFunction = createViewElementSource(bridge, store);
 
         render = () => {
-          console.log("Rendering...")
+          console.log('Rendering...');
           if (root) {
             root.render(
               createElement(DevTools, {
@@ -85,7 +82,7 @@ function createPanelIfReactLoaded() {
                 // showTabBar: true,
                 store,
                 // viewElementSourceFunction,
-                rootContainer: currentPanel.container,
+                rootContainer: currentPanel.container
               })
             );
           }
@@ -140,17 +137,15 @@ function createPanelIfReactLoaded() {
       chrome.devtools.network.onNavigated.removeListener(checkPageForReact);
 
       // Shutdown bridge before a new page is loaded.
-      chrome.webNavigation.onBeforeNavigate.addListener(
-        function onBeforeNavigate(details) {
-          // Ignore navigation events from other tabs (or from within frames).
-          if (details.tabId !== tabId || details.frameId !== 0) {
-            return;
-          }
-
-          // `bridge.shutdown()` will remove all listeners we added, so we don't have to.
-          bridge.shutdown();
+      chrome.webNavigation.onBeforeNavigate.addListener(function onBeforeNavigate(details) {
+        // Ignore navigation events from other tabs (or from within frames).
+        if (details.tabId !== tabId || details.frameId !== 0) {
+          return;
         }
-      );
+
+        // `bridge.shutdown()` will remove all listeners we added, so we don't have to.
+        bridge.shutdown();
+      });
 
       // Re-initialize DevTools panel when a new page is loaded.
       chrome.devtools.network.onNavigated.addListener(function onNavigated() {

@@ -16,8 +16,8 @@ describe('Bridge', () => {
 
   it('should shutdown properly', () => {
     const wall = {
-      listen: jest.fn(() => () => { }),
-      send: jest.fn(),
+      listen: jest.fn(() => () => {}),
+      send: jest.fn()
     };
     const bridge = new Bridge(wall);
 

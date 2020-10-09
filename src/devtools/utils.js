@@ -8,7 +8,7 @@
  */
 
 export function deepCopyFunction(inObject: any) {
-  if (typeof inObject !== "object" || inObject === null) {
+  if (typeof inObject !== 'object' || inObject === null) {
     return inObject;
   }
 
@@ -29,7 +29,7 @@ export function deepCopyFunction(inObject: any) {
     const outObject = {};
     for (const key in inObject) {
       const value = inObject[key];
-      if (typeof key === "string" && key != null) {
+      if (typeof key === 'string' && key != null) {
         outObject[key] = deepCopyFunction(value);
       }
     }
@@ -39,12 +39,12 @@ export function deepCopyFunction(inObject: any) {
 
 export function debounce(func, wait) {
   let timeout = null;
-  return function () {
+  return function() {
     const newfunc = () => {
       timeout = null;
-      func.apply(this, arguments)
-    }
-    clearTimeout(timeout)
+      func.apply(this, arguments);
+    };
+    clearTimeout(timeout);
     timeout = setTimeout(newfunc, wait);
-  }
+  };
 }

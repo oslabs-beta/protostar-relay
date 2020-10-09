@@ -7,11 +7,7 @@
  * @flow
  */
 
-import type {
-  DevToolsHook,
-  RelayEnvironment,
-  EnvironmentWrapper,
-} from './types';
+import type { DevToolsHook, RelayEnvironment, EnvironmentWrapper } from './types';
 
 export function attach(
   hook: DevToolsHook,
@@ -32,7 +28,7 @@ export function attach(
       hook.emit('environment.event', {
         id: rendererID,
         data: event,
-        eventType: 'environment',
+        eventType: 'environment'
       });
     }
   };
@@ -51,7 +47,7 @@ export function attach(
         hook.emit('environment.event', {
           id: rendererID,
           data: event,
-          eventType: 'store',
+          eventType: 'store'
         });
         break;
       case 'store.notify.complete':
@@ -59,14 +55,14 @@ export function attach(
         hook.emit('environment.event', {
           id: rendererID,
           data: event,
-          eventType: 'store',
+          eventType: 'store'
         });
         break;
       default:
         hook.emit('environment.event', {
           id: rendererID,
           data: event,
-          eventType: 'store',
+          eventType: 'store'
         });
         break;
     }
@@ -83,7 +79,7 @@ export function attach(
     hook.emit('environment.store', {
       name: 'refresh.store',
       id: rendererID,
-      records,
+      records
     });
   }
 
@@ -95,7 +91,7 @@ export function attach(
           id: rendererID,
           envName: environment.configName,
           data: pendingEvent,
-          eventType: 'environment',
+          eventType: 'environment'
         });
       });
       pendingEventsQueue = null;
@@ -106,7 +102,6 @@ export function attach(
   return {
     cleanup,
     sendStoreRecords,
-    flushInitialOperations,
+    flushInitialOperations
   };
 }
-

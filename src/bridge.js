@@ -15,25 +15,22 @@ const BATCH_DURATION = 100;
 
 type Message = {|
   event: string,
-  payload: any,
+  payload: any
 |};
 
 type BackendEvents = {|
   events: [Array<EventData>],
   shutdown: [],
   environmentInitialized: [Array<EnvironmentInfo>],
-  storeRecords: [Array<StoreData>],
+  storeRecords: [Array<StoreData>]
 |};
 
 type FrontendEvents = {|
-  refreshStore: [number],
+  refreshStore: [number]
 |};
-class Bridge<
-  OutgoingEvents: Object,
-  IncomingEvents: Object
-> extends EventEmitter<{|
+class Bridge<OutgoingEvents: Object, IncomingEvents: Object> extends EventEmitter<{|
   ...IncomingEvents,
-  ...OutgoingEvents,
+  ...OutgoingEvents
 |}> {
   _isShutdown: boolean = false;
   _messageQueue: Array<any> = [];
@@ -54,9 +51,7 @@ class Bridge<
 
   send(event: string, payload: any, transferable?: Array<any>) {
     if (this._isShutdown) {
-      console.warn(
-        `Cannot send message "${event}" through a Bridge that has been shutdown.`
-      );
+      console.warn(`Cannot send message "${event}" through a Bridge that has been shutdown.`);
       return;
     }
 

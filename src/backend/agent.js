@@ -14,12 +14,12 @@ import type { EnvironmentID, EnvironmentWrapper } from './types';
 
 export default class Agent extends EventEmitter<{|
   shutdown: [],
-  refreshStore: [],
+  refreshStore: []
 |}> {
   _bridge: BackendBridge;
   _recordChangeDescriptions: boolean = false;
   _environmentWrappers: {
-    [key: EnvironmentID]: EnvironmentWrapper,
+    [key: EnvironmentID]: EnvironmentWrapper
   } = {};
 
   constructor(bridge: BackendBridge) {
@@ -32,7 +32,7 @@ export default class Agent extends EventEmitter<{|
   }
 
   get environmentWrappers(): {
-    [key: EnvironmentID]: EnvironmentWrapper,
+    [key: EnvironmentID]: EnvironmentWrapper
   } {
     return this._environmentWrappers;
   }
@@ -51,10 +51,7 @@ export default class Agent extends EventEmitter<{|
     this._bridge.send('environmentInitialized', [data]);
   };
 
-  setEnvironmentWrapper = (
-    id: number,
-    environmentWrapper: EnvironmentWrapper
-  ) => {
+  setEnvironmentWrapper = (id: number, environmentWrapper: EnvironmentWrapper) => {
     this._environmentWrappers[id] = environmentWrapper;
   };
 

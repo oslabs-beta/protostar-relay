@@ -12,25 +12,25 @@ export type EnvironmentID = number;
 export type RelayRecordSource = {
   getRecordIDs: () => string,
   get: (id: string) => any,
-  toJSON: () => any,
+  toJSON: () => any
 };
 
 export type RelayStore = {
   getSource: () => RelayRecordSource,
-  __log: (event: Object) => void,
+  __log: (event: Object) => void
 };
 
 export type RelayEnvironment = {
   execute: (options: any) => any,
   configName: ?string,
   getStore: () => RelayStore,
-  __log: (event: Object) => void,
+  __log: (event: Object) => void
 };
 
 export type EnvironmentWrapper = {
   flushInitialOperations: () => void,
   sendStoreRecords: () => void,
-  cleanup: () => void,
+  cleanup: () => void
 };
 
 export type Handler = (data: any) => void;
@@ -45,5 +45,5 @@ export type DevToolsHook = {
   on: (event: string, handler: Handler) => void,
   off: (event: string, handler: Handler) => void,
   // reactDevtoolsAgent?: ?Object,
-  sub: (event: string, handler: Handler) => () => void,
+  sub: (event: string, handler: Handler) => () => void
 };
