@@ -240,3 +240,31 @@ button.button.is-small.is-link {
     margin: 25px 0;
   }
 }
+
+
+//768 - 1020 beside snapshots get rid of columns and multi-line// added
+
+//issue now between 712ish 988
+// @media screen and (min-width: 769px) and (max-width: 1020px) {
+//   .column {
+//     height: auto;
+//   }
+//   .column.is-half-mobile {
+//     padding-top: 0;
+//   }
+//   .snapshots {
+//     .column {
+//       align-items: center;
+//       height: auto;
+//     }
+//   }
+//   .snapshot-nav {
+//     margin-top: 0;
+//     width: 100%;
+//   }
+//   .input-range {
+//     width: 70%;
+//     margin: 25px 0;
+//   }
+// }
+

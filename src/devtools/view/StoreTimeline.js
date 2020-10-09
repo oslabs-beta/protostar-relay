@@ -112,7 +112,7 @@ const StoreTimeline = ({ currentEnvID }) => {
             </button>
           </div>
         </div>
-        <div className="snapshots columns is-multiline">
+        <div className="snapshots">
           <div className="timeline-nav column is-full-desktop is-flex-mobile" id="timeline-mini-col">
             <InputRange
               maxValue={
