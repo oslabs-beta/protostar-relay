@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import Record from "./Components/Record";
-import { debounce } from "../utils";
+import React, { useState } from 'react';
+import Record from './Components/Record';
+import { debounce } from '../utils';
 
 //update record list to current selection
 function updateRecords(store, selection) {
   if (store) {
-    if (selection === "") {
+    if (selection === '') {
       return store;
       //id selected - filter out everything except selected id
-    } else if (selection[0] === "i") {
+    } else if (selection[0] === 'i') {
       const id = selection.slice(3);
       return Object.keys(store).reduce((newRL, key) => {
         if (store[key].__id === id) newRL[key] = store[key];
@@ -26,14 +26,7 @@ function updateRecords(store, selection) {
 }
 
 //generate list of menu elements
-function generateComponentsList(
-  store,
-  searchResults,
-  recordsList,
-  selection,
-  handleMenuClick
-) {
-
+function generateComponentsList(store, searchResults, recordsList, selection, handleMenuClick) {
   //create menu list of all types
   const menuList = {};
   const typeList = [];
@@ -50,17 +43,15 @@ function generateComponentsList(
     //creates an array of elements for all ids belonging to a given type
 
     const idList = menuList[type]
-      .filter((id) =>
-        new RegExp(searchResults, "i").test(JSON.stringify(recordsList[id]))
-      )
-      .map((id) => {
+      .filter(id => new RegExp(searchResults, 'i').test(JSON.stringify(recordsList[id])))
+      .map(id => {
         return (
           <li key={id}>
             <a
-              id={"id-" + id}
-              className={selection === "id-" + id && "is-active"}
+              id={'id-' + id}
+              className={selection === 'id-' + id && 'is-active'}
               onClick={() => {
-                handleMenuClick("id-" + id);
+                handleMenuClick('id-' + id);
               }}
             >
               {id}
@@ -73,10 +64,10 @@ function generateComponentsList(
       typeList.push(
         <li key={type}>
           <a
-            id={"type-" + type}
-            className={selection === "type-" + type && "is-active"}
+            id={'type-' + type}
+            className={selection === 'type-' + type && 'is-active'}
             onClick={() => {
-              handleMenuClick("type-" + type);
+              handleMenuClick('type-' + type);
             }}
           >
             {type}
@@ -91,8 +82,8 @@ function generateComponentsList(
 
 const StoreDisplayer = ({ store }) => {
   const [recordsList, setRecordsList] = useState({});
-  const [selection, setSelection] = useState("");
-  const [searchResults, setSearchResults] = useState("");
+  const [selection, setSelection] = useState('');
+  const [searchResults, setSearchResults] = useState('');
 
   React.useEffect(() => {
     //initialize store
@@ -110,14 +101,14 @@ const StoreDisplayer = ({ store }) => {
   //shows you the entire store
   function handleReset(e) {
     //remove selection
-    setSelection("");
+    setSelection('');
     //reset back to original store
     setRecordsList(store);
   }
 
   //updates search results
-  const debounced = debounce((val) => {
-    setSelection("");
+  const debounced = debounce(val => {
+    setSelection('');
     setRecordsList(store);
     setSearchResults(val);
   }, 300);
@@ -128,13 +119,10 @@ const StoreDisplayer = ({ store }) => {
   //generates the menu element list
 
   //verify recordsList is not undefined and then generate list of components
-  const typeList = (recordsList === undefined ? [] : generateComponentsList(
-      store,
-      searchResults,
-      recordsList,
-      selection,
-      handleMenuClick
-    ));
+  const typeList =
+    recordsList === undefined
+      ? []
+      : generateComponentsList(store, searchResults, recordsList, selection, handleMenuClick);
 
   return (
     <React.Fragment>
@@ -144,13 +132,13 @@ const StoreDisplayer = ({ store }) => {
             className="input is-small is-primary"
             type="text"
             placeholder="Search"
-            onChange={(e) => {
+            onChange={e => {
               handleSearch(e);
             }}
           ></input>
           <button
             className="button is-small is-link"
-            onClick={(e) => {
+            onClick={e => {
               handleReset(e);
             }}
           >
@@ -161,12 +149,8 @@ const StoreDisplayer = ({ store }) => {
           </span>
         </p>
         <aside className="menu">
-          <p className="menu-label mt-1">
-            Record List
-                </p>
-          <ul className="menu-list">
-            {typeList}
-          </ul>
+          <p className="menu-label mt-1">Record List</p>
+          <ul className="menu-list">{typeList}</ul>
         </aside>
       </div>
       <div className="column is-half-mobile scrollable">

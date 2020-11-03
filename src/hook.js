@@ -79,7 +79,7 @@ export function installHook(target: any): DevToolsHook | null {
     // inject,
     on,
     off,
-    sub,
+    sub
   };
 
   Object.defineProperty(
@@ -92,7 +92,7 @@ export function installHook(target: any): DevToolsHook | null {
       enumerable: false,
       get() {
         return hook;
-      },
+      }
     }: Object)
   );
 

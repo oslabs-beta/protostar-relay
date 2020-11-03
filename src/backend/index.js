@@ -7,20 +7,12 @@
  * @flow
  */
 
-import type {
-  DevToolsHook,
-  RelayEnvironment,
-  EnvironmentWrapper,
-} from './types';
+import type { DevToolsHook, RelayEnvironment, EnvironmentWrapper } from './types';
 import type Agent from './agent';
 
 import { attach } from './EnvironmentWrapper';
 
-export function initBackend(
-  hook: DevToolsHook,
-  agent: Agent,
-  global: Object
-): () => void {
+export function initBackend(hook: DevToolsHook, agent: Agent, global: Object): () => void {
   const subs = [
     hook.sub('environment.event', data => {
       agent.onEnvironmentEvent(data);
@@ -33,22 +25,22 @@ export function initBackend(
       ({
         id,
         environment,
-        environmentWrapper,
+        environmentWrapper
       }: {
         id: number,
         environment: RelayEnvironment,
-        environmentWrapper: EnvironmentWrapper,
+        environmentWrapper: EnvironmentWrapper
       }) => {
         agent.setEnvironmentWrapper(id, environmentWrapper);
         agent.onEnvironmentInitialized({
           id: id,
-          environmentName: environment.configName,
+          environmentName: environment.configName
         });
         // Now that the Store and the renderer interface are connected,
         // it's time to flush the pending operation codes to the frontend.
         environmentWrapper.flushInitialOperations();
       }
-    ),
+    )
   ];
 
   const attachEnvironment = (id: number, environment: RelayEnvironment) => {
@@ -64,7 +56,7 @@ export function initBackend(
     hook.emit('environment-attached', {
       id,
       environment,
-      environmentWrapper,
+      environmentWrapper
     });
   };
 

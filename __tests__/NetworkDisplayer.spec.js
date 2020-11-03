@@ -8,23 +8,22 @@ configure({ adapter: new Adapter() });
 
 describe('NetworkDisplayer', () => {
   let wrapper;
-  const props = {}
+  const props = {};
 
   beforeAll(() => {
     wrapper = shallow(<NetworkDisplayer {...props} />);
   });
 
-  it("My Test Case", () => {
+  it('My Test Case', () => {
     expect(true).toEqual(true);
   });
 
-  it("My Test Case", () => {
-    expect(wrapper.find("Record").length).toEqual(0)
+  it('My Test Case', () => {
+    expect(wrapper.find('Record').length).toEqual(0);
   });
 
   it('Renders correctly', () => {
     const tree = renderer.create(<NetworkDisplayer {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
-  })
-
+  });
 });

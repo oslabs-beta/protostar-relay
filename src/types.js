@@ -10,7 +10,7 @@
 export type Wall = {|
   // `listen` returns the "unlisten" function.
   listen: (fn: Function) => Function,
-  send: (event: string, payload: any, transferable?: Array<any>) => void,
+  send: (event: string, payload: any, transferable?: Array<any>) => void
 |};
 
 export type Record = { [key: string]: mixed, ... };
@@ -29,88 +29,88 @@ export type LogEvent =
       // RenderPolicy from relay-experimental
       +renderPolicy: string,
       +hasFullQuery: boolean,
-      +shouldFetch: boolean,
+      +shouldFetch: boolean
     |}
   | {|
       +name: 'store.publish',
       +source: any,
-      +optimistic: boolean,
+      +optimistic: boolean
     |}
   | {|
       +name: 'store.gc',
       references: Array<DataID>,
-      gcRecords: StoreRecords,
+      gcRecords: StoreRecords
     |}
   | {|
-      +name: 'store.restore',
+      +name: 'store.restore'
     |}
   | {|
-      +name: 'store.snapshot',
+      +name: 'store.snapshot'
     |}
   | {|
-      +name: 'store.notify.start',
+      +name: 'store.notify.start'
     |}
   | {|
       +name: 'store.notify.complete',
       +updatedRecordIDs: UpdatedRecords,
       +invalidatedRecordIDs: Array<DataID>,
       updatedRecords: StoreRecords,
-      invalidatedRecords: StoreRecords,
+      invalidatedRecords: StoreRecords
     |}
   | {|
       +name: 'execute.info',
       +transactionID: number,
       +info: mixed,
       params: $FlowFixMe,
-      variables: $FlowFixMe,
+      variables: $FlowFixMe
     |}
   | {|
       +name: 'execute.start',
       +transactionID: number,
       +params: $FlowFixMe,
-      +variables: $FlowFixMe,
+      +variables: $FlowFixMe
     |}
   | {|
       +name: 'execute.next',
       +transactionID: number,
       +response: $FlowFixMe,
       params: $FlowFixMe,
-      variables: $FlowFixMe,
+      variables: $FlowFixMe
     |}
   | {|
       +name: 'execute.error',
       +transactionID: number,
       +error: Error,
       params: $FlowFixMe,
-      variables: $FlowFixMe,
+      variables: $FlowFixMe
     |}
   | {|
       +name: 'execute.complete',
       +transactionID: number,
       params: $FlowFixMe,
-      variables: $FlowFixMe,
+      variables: $FlowFixMe
     |}
   | {|
       +name: 'execute.unsubscribe',
       +transactionID: number,
       params: $FlowFixMe,
-      variables: $FlowFixMe,
+      variables: $FlowFixMe
     |};
 
 export type EventData = {|
   +id: number,
   +data: LogEvent,
   +source: StoreRecords,
-  +eventType: string,
+  +eventType: string
 |};
 
 export type StoreData = {|
   +name: string,
   +id: number,
-  +records: StoreRecords,
+  +records: StoreRecords
 |};
 
 export type EnvironmentInfo = {|
   +id: number,
-  +environmentName: string,
+  +environmentName: string
 |};

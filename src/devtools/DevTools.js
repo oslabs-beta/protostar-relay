@@ -10,12 +10,12 @@
 // Reach styles need to come before any component styles.
 // This makes overridding the styles simpler.
 
-import React, { useState, useCallback, useEffect } from "react";
-import type { FrontendBridge } from "src/bridge";
-import Store from "./store";
-import { BridgeContext, StoreContext } from "./context";
-import NetworkDisplayer from "./view/NetworkDisplayer";
-import StoreTimeline from "./view/StoreTimeline";
+import React, { useState, useCallback, useEffect } from 'react';
+import type { FrontendBridge } from 'src/bridge';
+import Store from './store';
+import { BridgeContext, StoreContext } from './context';
+import NetworkDisplayer from './view/NetworkDisplayer';
+import StoreTimeline from './view/StoreTimeline';
 
 // export type TabID = 'network' | 'settings' | 'store-inspector';
 export type ViewElementSource = (id: number) => void;
@@ -41,20 +41,20 @@ export type Props = {|
   rootContainer?: Element,
   // networkPortalContainer?: Element,
   settingsPortalContainer?: Element,
-  storeInspectorPortalContainer?: Element,
+  storeInspectorPortalContainer?: Element
 |};
 
 const networkTab = {
-  id: ("network": TabID),
-  icon: "network",
-  label: "Network",
-  title: "Relay Network",
+  id: ('network': TabID),
+  icon: 'network',
+  label: 'Network',
+  title: 'Relay Network'
 };
 const storeInspectorTab = {
-  id: ("store-inspector": TabID),
-  icon: "store-inspector",
-  label: "Store",
-  title: "Relay Store",
+  id: ('store-inspector': TabID),
+  icon: 'store-inspector',
+  label: 'Store',
+  title: 'Relay Store'
 };
 
 const tabs = [networkTab, storeInspectorTab];
@@ -67,13 +67,11 @@ export default function DevTools({
   settingsPortalContainer,
   store,
   viewElementSourceFunction,
-  viewElementSourceRequiresFileLocation = false,
+  viewElementSourceRequiresFileLocation = false
 }: Props) {
-  const [environmentIDs, setEnvironmentIDs] = useState(
-    store.getEnvironmentIDs()
-  );
+  const [environmentIDs, setEnvironmentIDs] = useState(store.getEnvironmentIDs());
   const [currentEnvID, setCurrentEnvID] = useState(environmentIDs[0]);
-  const [selector, setSelector] = useState("Store");
+  const [selector, setSelector] = useState('Store');
 
   const setEnv = useCallback(() => {
     const ids = store.getEnvironmentIDs();
@@ -85,10 +83,10 @@ export default function DevTools({
   }, [store, currentEnvID]);
 
   useEffect(() => {
-    setEnv()
-    store.addListener("environmentInitialized", setEnv);
+    setEnv();
+    store.addListener('environmentInitialized', setEnv);
     return () => {
-      store.removeListener("environmentInitialized", setEnv);
+      store.removeListener('environmentInitialized', setEnv);
     };
   }, [store, setEnv]);
 
@@ -96,11 +94,11 @@ export default function DevTools({
     setSelector(tab);
   }
 
-  const handleChange = useCallback((e) => {
+  const handleChange = useCallback(e => {
     setCurrentEnvID(parseInt(e.target.value));
   }, []);
 
-  console.log("currentenvid before render", currentEnvID)
+  console.log('currentenvid before render', currentEnvID);
 
   return (
     <BridgeContext.Provider value={bridge}>
@@ -108,7 +106,7 @@ export default function DevTools({
         <div className="navigation">
           <form className="env-select select is-small is-pulled-left">
             <select className="env-select" onChange={handleChange}>
-              {environmentIDs.map((id) => {
+              {environmentIDs.map(id => {
                 return (
                   <option key={id} value={id}>
                     {store.getEnvironmentName(id) || id}
@@ -119,22 +117,19 @@ export default function DevTools({
           </form>
           <div className="tabs is-toggle is-small is-pulled-left">
             <ul>
-              <li className={selector === "Store" && "is-active"}>
-                <a
-                  id="storeSelector"
-                  onClick={(e) => handleTabClick(e, "Store")}
-                >
+              <li className={selector === 'Store' && 'is-active'}>
+                <a id="storeSelector" onClick={e => handleTabClick(e, 'Store')}>
                   <span className="icon is-small">
                     <i className="fas fa-database"></i>
                   </span>
                   <span>Store</span>
                 </a>
               </li>
-              <li className={selector === "Network" && "is-active"}>
+              <li className={selector === 'Network' && 'is-active'}>
                 <a
                   id="networkSelector"
-                  onClick={(e) => {
-                    handleTabClick(e, "Network");
+                  onClick={e => {
+                    handleTabClick(e, 'Network');
                   }}
                 >
                   <span className="icon is-small">
@@ -146,28 +141,20 @@ export default function DevTools({
             </ul>
           </div>
           <div className="logo is-pulled-right">
-            <a href="https://github.com/oslabs-beta/protostar-relay" target="_blank"><img src="../../assets/protorelay.png"></img></a>
+            <a href="https://github.com/oslabs-beta/protostar-relay" target="_blank">
+              <img src="../../assets/protorelay.png"></img>
+            </a>
           </div>
         </div>
-        <div
-          className={
-            selector === "Store"
-              ? "columns mb-0 is-multiline is-mobile"
-              : "is-hidden"
-          }
-        >
-          {currentEnvID && <StoreTimeline
-            currentEnvID={currentEnvID}
-            portalContainer={storeInspectorPortalContainer}
-          />}
+        <div className={selector === 'Store' ? 'columns mb-0 is-multiline is-mobile' : 'is-hidden'}>
+          {currentEnvID && (
+            <StoreTimeline
+              currentEnvID={currentEnvID}
+              portalContainer={storeInspectorPortalContainer}
+            />
+          )}
         </div>
-        <div
-          className={
-            selector === "Network"
-              ? "columns mb-0 is-mobile"
-              : "is-hidden"
-          }
-        >
+        <div className={selector === 'Network' ? 'columns mb-0 is-mobile' : 'is-hidden'}>
           {currentEnvID && <NetworkDisplayer currentEnvID={currentEnvID} />}
         </div>
       </StoreContext.Provider>

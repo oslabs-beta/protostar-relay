@@ -18,8 +18,8 @@ describe('Store', () => {
 
   it('should delete individual records correctly', () => {
     const wall = {
-      listen: jest.fn(() => () => { }),
-      send: jest.fn(),
+      listen: jest.fn(() => () => {}),
+      send: jest.fn()
     };
     const bridge = new Bridge(wall);
     const store = new Store(bridge);
@@ -28,36 +28,36 @@ describe('Store', () => {
       Bob: {
         __id: 'Bob',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Lisa: {
         __id: 'Lisa',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
 
     expect(store.getRecords(1)).toEqual({
       Bob: {
         __id: 'Bob',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Lisa: {
         __id: 'Lisa',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
 
     store.removeRecord(1, 'Lisa');
@@ -67,15 +67,15 @@ describe('Store', () => {
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
   });
 
   it('should merge records correctly', () => {
     const wall = {
-      listen: jest.fn(() => () => { }),
-      send: jest.fn(),
+      listen: jest.fn(() => () => {}),
+      send: jest.fn()
     };
     const bridge = new Bridge(wall);
     const store = new Store(bridge);
@@ -84,31 +84,31 @@ describe('Store', () => {
     store.mergeRecords(1, { user: { __id: 'user', __typename: 'User' } });
 
     expect(store.getRecords(1)).toEqual({
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     // Testing case when newRecords is null/undefined and we don't change anything
     store.mergeRecords(1, null);
 
     expect(store.getRecords(1)).toEqual({
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     store.mergeRecords(1, undefined);
 
     expect(store.getRecords(1)).toEqual({
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     // Testing multiple environments
     store.mergeRecords(2, { user: { __id: 'user', __typename: 'User' } });
 
     expect(store.getRecords(1)).toEqual({
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     expect(store.getRecords(2)).toEqual({
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     // Testing multiple records
@@ -116,17 +116,17 @@ describe('Store', () => {
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'some_url',
-      },
+        profile_pic: 'some_url'
+      }
     });
 
     expect(store.getRecords(1)).toEqual({
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'some_url',
+        profile_pic: 'some_url'
       },
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     //Testing overwriting a record
@@ -134,85 +134,85 @@ describe('Store', () => {
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
-      },
+        profile_pic: 'a_different_url'
+      }
     });
 
     expect(store.getRecords(1)).toEqual({
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     store.mergeRecords(1, {
       Bob: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Lisa: {
         __id: 'Lisa',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
 
     expect(store.getRecords(1)).toEqual({
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Bob: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Lisa: {
         __id: 'Lisa',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
 
     expect(store.getRecords(2)).toEqual({
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     store.mergeRecords(1, {
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        nickname: 'Zuck',
+        nickname: 'Zuck'
       },
       Bob: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Lisa: {
         __id: 'Lisa',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
 
     expect(store.getRecords(1)).toEqual({
@@ -220,27 +220,27 @@ describe('Store', () => {
         __id: 'Jonathan',
         __typename: 'User',
         profile_pic: 'a_different_url',
-        nickname: 'Zuck',
+        nickname: 'Zuck'
       },
       Bob: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Lisa: {
         __id: 'Lisa',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
 
     expect(store.getRecords(2)).toEqual({
-      user: { __id: 'user', __typename: 'User' },
+      user: { __id: 'user', __typename: 'User' }
     });
 
     // Deleting records
@@ -250,8 +250,8 @@ describe('Store', () => {
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
 
     expect(store.getRecords(1)).toEqual({
@@ -259,20 +259,20 @@ describe('Store', () => {
         __id: 'Jonathan',
         __typename: 'User',
         profile_pic: 'a_different_url',
-        nickname: 'Zuck',
+        nickname: 'Zuck'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
   });
 
   it('should merge optimistic updates correctly', () => {
     const wall = {
-      listen: jest.fn(() => () => { }),
-      send: jest.fn(),
+      listen: jest.fn(() => () => {}),
+      send: jest.fn()
     };
     const bridge = new Bridge(wall);
     const store = new Store(bridge);
@@ -284,10 +284,9 @@ describe('Store', () => {
         'unread_count(bookmark_render_location:"COMET_LEFT_NAV")': 0,
         'unread_count(bookmark_render_location:"COMET_TOP_TAB")': 0,
         'unread_count_string(bookmark_render_location:"COMET_LEFT_NAV")': null,
-        __id:
-          'Ym9va21hcms6MTAwMDAxNzg1MzU1MDU0OjY0NDcxNTQ0NTY1MDkyNDoyNTAxMDA4NjU3MDg1NDU60g==',
-        __typename: 'Bookmark',
-      },
+        __id: 'Ym9va21hcms6MTAwMDAxNzg1MzU1MDU0OjY0NDcxNTQ0NTY1MDkyNDoyNTAxMDA4NjU3MDg1NDU60g==',
+        __typename: 'Bookmark'
+      }
     });
 
     expect(store.getOptimisticUpdates(1)).toEqual({
@@ -295,10 +294,9 @@ describe('Store', () => {
         'unread_count(bookmark_render_location:"COMET_LEFT_NAV")': 0,
         'unread_count(bookmark_render_location:"COMET_TOP_TAB")': 0,
         'unread_count_string(bookmark_render_location:"COMET_LEFT_NAV")': null,
-        __id:
-          'Ym9va21hcms6MTAwMDAxNzg1MzU1MDU0OjY0NDcxNTQ0NTY1MDkyNDoyNTAxMDA4NjU3MDg1NDU60g==',
-        __typename: 'Bookmark',
-      },
+        __id: 'Ym9va21hcms6MTAwMDAxNzg1MzU1MDU0OjY0NDcxNTQ0NTY1MDkyNDoyNTAxMDA4NjU3MDg1NDU60g==',
+        __typename: 'Bookmark'
+      }
     });
 
     // Testing case when newRecords is null/undefined and we don't change anything
@@ -310,10 +308,9 @@ describe('Store', () => {
         'unread_count(bookmark_render_location:"COMET_LEFT_NAV")': 0,
         'unread_count(bookmark_render_location:"COMET_TOP_TAB")': 0,
         'unread_count_string(bookmark_render_location:"COMET_LEFT_NAV")': null,
-        __id:
-          'Ym9va21hcms6MTAwMDAxNzg1MzU1MDU0OjY0NDcxNTQ0NTY1MDkyNDoyNTAxMDA4NjU3MDg1NDU60g==',
-        __typename: 'Bookmark',
-      },
+        __id: 'Ym9va21hcms6MTAwMDAxNzg1MzU1MDU0OjY0NDcxNTQ0NTY1MDkyNDoyNTAxMDA4NjU3MDg1NDU60g==',
+        __typename: 'Bookmark'
+      }
     });
 
     store.mergeOptimisticRecords(1, undefined);
@@ -324,10 +321,9 @@ describe('Store', () => {
         'unread_count(bookmark_render_location:"COMET_LEFT_NAV")': 0,
         'unread_count(bookmark_render_location:"COMET_TOP_TAB")': 0,
         'unread_count_string(bookmark_render_location:"COMET_LEFT_NAV")': null,
-        __id:
-          'Ym9va21hcms6MTAwMDAxNzg1MzU1MDU0OjY0NDcxNTQ0NTY1MDkyNDoyNTAxMDA4NjU3MDg1NDU60g==',
-        __typename: 'Bookmark',
-      },
+        __id: 'Ym9va21hcms6MTAwMDAxNzg1MzU1MDU0OjY0NDcxNTQ0NTY1MDkyNDoyNTAxMDA4NjU3MDg1NDU60g==',
+        __typename: 'Bookmark'
+      }
     });
 
     // Removing all optimistic updates
@@ -343,13 +339,13 @@ describe('Store', () => {
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'some_url',
+        profile_pic: 'some_url'
       },
       Lilly: {
         __id: 'Lilly',
         __typename: 'User',
-        profile_pic: 'url',
-      },
+        profile_pic: 'url'
+      }
     });
     jest.runAllTimers();
 
@@ -357,13 +353,13 @@ describe('Store', () => {
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'some_url',
+        profile_pic: 'some_url'
       },
       Lilly: {
         __id: 'Lilly',
         __typename: 'User',
-        profile_pic: 'url',
-      },
+        profile_pic: 'url'
+      }
     });
 
     //Testing overwriting a record
@@ -371,8 +367,8 @@ describe('Store', () => {
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
-      },
+        profile_pic: 'a_different_url'
+      }
     });
     jest.runAllTimers();
 
@@ -380,31 +376,31 @@ describe('Store', () => {
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Lilly: {
         __id: 'Lilly',
         __typename: 'User',
-        profile_pic: 'url',
-      },
+        profile_pic: 'url'
+      }
     });
 
     store.mergeOptimisticRecords(1, {
       Jonathan: {
         __id: 'Jonathan',
         __typename: 'User',
-        nickname: 'Zuck',
+        nickname: 'Zuck'
       },
       Bob: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
     jest.runAllTimers();
 
@@ -413,23 +409,23 @@ describe('Store', () => {
         __id: 'Jonathan',
         __typename: 'User',
         profile_pic: 'a_different_url',
-        nickname: 'Zuck',
+        nickname: 'Zuck'
       },
       Bob: {
         __id: 'Jonathan',
         __typename: 'User',
-        profile_pic: 'a_different_url',
+        profile_pic: 'a_different_url'
       },
       Lilly: {
         __id: 'Lilly',
         __typename: 'User',
-        profile_pic: 'url',
+        profile_pic: 'url'
       },
       user: {
         __id: 'user',
         __typename: 'User',
-        profile_pic: 'new_url',
-      },
+        profile_pic: 'new_url'
+      }
     });
   });
 });

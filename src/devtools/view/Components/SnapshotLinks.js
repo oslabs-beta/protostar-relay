@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const SnapshotLinks = ({ timeline, currentEnvID, handleSnapshot }) => {
   const [active, setActive] = useState(null);
@@ -7,16 +7,23 @@ const SnapshotLinks = ({ timeline, currentEnvID, handleSnapshot }) => {
     <div>
       <aside className="menu">
         <ul className="menu-list">
-          {timeline[currentEnvID].map(
-            (item, i) => <li key={i} onClick={() => {
-              handleSnapshot(i);
-              setActive(i);
-            }}><a href="#" key={i} className={active === i && 'is-active'}>{item.date.toLocaleTimeString()}: {item.label}</a></li>
-          )}
+          {timeline[currentEnvID].map((item, i) => (
+            <li
+              key={i}
+              onClick={() => {
+                handleSnapshot(i);
+                setActive(i);
+              }}
+            >
+              <a href="#" key={i} className={active === i && 'is-active'}>
+                {item.date.toLocaleTimeString()}: {item.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </aside>
     </div>
-  )
+  );
 };
 
 export default SnapshotLinks;

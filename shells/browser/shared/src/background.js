@@ -26,7 +26,7 @@ chrome.runtime.onConnect.addListener(function(port) {
   if (!ports[tab]) {
     ports[tab] = {
       devtools: null,
-      'content-script': null,
+      'content-script': null
     };
   }
   ports[tab][name] = port;
@@ -41,11 +41,7 @@ function isNumeric(str: string): boolean {
 }
 
 function installContentScript(tabId: number) {
-  chrome.tabs.executeScript(
-    tabId,
-    { file: '/build/contentScript.js' },
-    function() {}
-  );
+  chrome.tabs.executeScript(tabId, { file: '/build/contentScript.js' }, function() {});
 }
 
 function doublePipe(one, two) {

@@ -9,21 +9,19 @@ configure({ adapter: new Adapter() });
 describe('StoreTimeline', () => {
   let wrapper;
   const props = {
-    currentEnvID: 1,
-  }
-
+    currentEnvID: 1
+  };
 
   beforeEach(() => {
     wrapper = shallow(<StoreTimeline {...props} />);
   });
 
-  it("Renders a StoreDisplayer component and passes store as a prop", () => {
+  it('Renders a StoreDisplayer component and passes store as a prop', () => {
     expect(wrapper.find('StoreDisplayer').length).toEqual(1);
-  })
+  });
 
   // it("Passes the store based on the currentEnvID", () => {
   // })
-
 
   // describe("Snapshots", () => {
 
@@ -63,7 +61,6 @@ describe('StoreTimeline', () => {
 
   //   })
 
-
   // })
 
   it('Renders correctly', () => {
@@ -71,7 +68,6 @@ describe('StoreTimeline', () => {
     global.Date = jest.fn(() => date);
     const tree = renderer.create(<StoreTimeline {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
-    jest.clearAllMocks()
-  })
-
+    jest.clearAllMocks();
+  });
 });

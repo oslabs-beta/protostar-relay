@@ -5,13 +5,9 @@ function EnvironmentSelector(props) {
 
   return (
     <form className="env-select">
-      <select name="environment">
-        {dropdownEnv}
-      </select>
+      <select name="environment">{dropdownEnv}</select>
     </form>
-  )
+  );
 }
-
-
 
 export default EnvironmentSelector;

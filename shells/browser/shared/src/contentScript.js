@@ -16,7 +16,7 @@ function sayHelloToBackend() {
   window.postMessage(
     {
       source: 'relay-devtools-content-script',
-      hello: true,
+      hello: true
     },
     '*'
   );
@@ -26,18 +26,14 @@ function handleMessageFromDevtools(message) {
   window.postMessage(
     {
       source: 'relay-devtools-content-script',
-      payload: message,
+      payload: message
     },
     '*'
   );
 }
 
 function handleMessageFromPage(evt) {
-  if (
-    evt.source === window &&
-    evt.data &&
-    evt.data.source === 'relay-devtools-bridge'
-  ) {
+  if (evt.source === window && evt.data && evt.data.source === 'relay-devtools-bridge') {
     backendInitialized = true;
 
     port.postMessage(evt.data.payload);
@@ -54,8 +50,8 @@ function handleDisconnect() {
       source: 'relay-devtools-content-script',
       payload: {
         type: 'event',
-        event: 'shutdown',
-      },
+        event: 'shutdown'
+      }
     },
     '*'
   );
@@ -63,7 +59,7 @@ function handleDisconnect() {
 
 // proxy from main page to devtools (via the background page)
 var port = chrome.runtime.connect({
-  name: 'content-script',
+  name: 'content-script'
 });
 port.onMessage.addListener(handleMessageFromDevtools);
 port.onDisconnect.addListener(handleDisconnect);

@@ -33,9 +33,7 @@ function getInternalDevToolsFeedbackGroup() {
 }
 
 function getVersionString() {
-  const packageVersion = JSON.parse(
-    readFileSync(resolve(__dirname, '../package.json'))
-  ).version;
+  const packageVersion = JSON.parse(readFileSync(resolve(__dirname, '../package.json'))).version;
 
   const commit = getCommit();
 
@@ -47,5 +45,5 @@ module.exports = {
   getGitHubIssuesURL,
   getGitHubURL,
   getInternalDevToolsFeedbackGroup,
-  getVersionString,
+  getVersionString
 };
